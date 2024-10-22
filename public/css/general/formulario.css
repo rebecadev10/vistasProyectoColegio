@@ -1,0 +1,142 @@
+/* Estilos generales para el formulario */
+.formulario-subir-noticia {
+    max-width: 500px;
+    width: 100%;
+    margin: 20px auto;
+    background-color: var(--blancoA);
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.formulario-subir-noticia__titulo {
+    font-size: 24px;
+    color: var(--azulOscuro);
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    
+}
+
+/* Estructura de los grupos del formulario */
+.formulario-subir-noticia__grupo {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario-subir-noticia__etiqueta {
+    font-size: var(--font-size-input-label);
+    color: var(--azulIndigo);
+    margin-bottom: 5px;
+    font-family: var(--montserrat);
+}
+
+/* Estilos para los inputs de texto y el área de texto */
+.formulario-subir-noticia__input,
+.formulario-subir-noticia__textarea {
+    padding: 10px;
+    border: 1px solid var(--grisClaro);
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--montserrat);
+    background-color: var(--blanco);
+}
+
+.formulario-subir-noticia__textarea {
+    resize: vertical;
+}
+
+/* Estilos para el campo de imagen */
+.formulario-subir-noticia__input-archivo {
+    border: none;
+    font-size: 14px;
+}
+
+/* Estilos para los botones */
+.formulario-subir-noticia__botones {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.formulario-subir-noticia__boton-enviar,
+.formulario-subir-noticia__boton-cancelar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size:16px ;
+    
+}
+
+.formulario-subir-noticia__boton-enviar {
+    background-color: var(--succes);
+    color: var(--blancoA);
+    transition: background-color 0.3s ease;
+}
+
+.formulario-subir-noticia__boton-enviar:hover {
+    background-color: var(--aguamarina);
+}
+
+.formulario-subir-noticia__boton-cancelar {
+    background-color: var(--cancel);
+    color: var(--blancoA);
+}
+
+.formulario-subir-noticia__boton-cancelar:hover {
+    background-color: var(--gris);
+}
+/* Estilo del contenedor para el input de archivo */
+.formulario-subir-noticia__input-archivo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Ocultar el input original de archivo */
+.formulario-subir-noticia__input-archivo {
+    position: absolute;
+    left: -9999px;
+}
+
+/* Estilo del botón personalizado para el input de archivo */
+.formulario-subir-noticia__input-archivo-boton {
+    background-color: var(--azulPastel);
+    color: var(--azulOscuro);
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.formulario-subir-noticia__input-archivo-boton:hover {
+    background-color: var(--aguamarina);
+}
+
+/* Estilo del texto que muestra el nombre del archivo seleccionado */
+.formulario-subir-noticia__archivo-nombre {
+    font-size: 16px;
+    color: var(--gris);
+    font-family: var(--montserrat);
+}
+
+/* Cuando el archivo es seleccionado, el texto cambia de color */
+.formulario-subir-noticia__archivo-nombre.seleccionado {
+    color: var(--azulIndigo);
+}
+.btn-login{
+    text-align: center;
+    color: var(--gris);
+}
+.link{
+    color: var(--azulOscuro);
+    padding-bottom: 3px;
+    text-decoration: underline;
+}

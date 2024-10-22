@@ -1,0 +1,115 @@
+/* Estilos generales para el nav */
+.navbar-content {
+    width: 100%;
+    background-color: var(--azulOscuro);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+  }
+  
+  .navbar {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    align-content: center;
+    background-color: var(--azulOscuro);
+    padding: 20px 20px;
+    width: 80%;
+  }
+  
+  .navbar-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .navbar-list__right {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+  }
+  
+  .navbar-list__link {
+    position: relative;
+    color: var(--blanco);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 12px;
+  }
+  
+  .navbar-list__link:hover {
+    color: var(--azulOscuro);
+    font-weight: bold;
+    background-color: var(--blanco);
+    border-radius: 12px;
+    transition: all ease-in-out;
+  }
+  
+  /* Estilos del dropdown */
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--azulOscuro);
+    padding: 10px 0;
+    min-width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown li {
+    width: 100%;
+  }
+  
+  .dropdown a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  .dropdown a:hover {
+    background-color: var(--blanco);
+    color: var(--azulOscuro);
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  /* Mostrar el dropdown al hacer hover */
+  .navbar-list__link:hover .dropdown {
+    display: block;
+  }
+  
+  /* Estilos responsivos */
+  @media screen and (max-width: 768px) {
+    .navbar {
+      width: 100%;
+      grid-template-columns: 1fr;
+    }
+  
+    .navbar-list {
+      flex-direction: column;
+    }
+  
+    .navbar-list__link {
+      text-align: left;
+      width: 100%;
+    }
+  
+    .dropdown {
+      position: static;
+      width: 100%;
+      margin-top: 5px;
+    }
+  
+    .dropdown a {
+      padding: 10px;
+      font-size: 16px;
+    }
+  }
+  

@@ -1,0 +1,23 @@
+@import url(reset.css);
+@import url(variables.css);
+
+body {
+  background-color: var(--fondo); /* Establece el color de fondo */
+  /* Centra la imagen horizontal y verticalmente */
+  color: var(--negro);
+  font-family: var(--montserrat);
+  overflow-x: hidden;
+  min-height: 100vh;
+  
+}
+
+.ocultar {
+  display: none;
+}
+.contenedor{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+}

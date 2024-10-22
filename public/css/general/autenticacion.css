@@ -1,0 +1,182 @@
+.contenedorAutenticacion {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    justify-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Estilo de area1 */
+.area1 {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--azulOscuro);
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.area1 img {
+    width: 80%;
+    object-fit: contain;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgb(255, 244, 244);
+}
+
+/* Estilo de area2 */
+.area2 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--azulPastel);
+}
+
+.area2 img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 20%;
+}
+
+/* Media query para pantallas móviles */
+@media (max-width: 768px) {
+    .contenedorAutenticacion {
+        grid-template-columns: 1fr; /* Colapsa a una sola columna en móviles */
+        
+    }
+
+    .area1 {
+        display: none; /* Oculta el área 1 en móviles */
+    }
+
+    .area2 {
+        width: 100%; /* Asegura que el área 2 ocupe el 100% del ancho */
+        height: 100%;
+        /* padding: 1rem; */
+    }
+}
+/* Estilos específicos para el formulario de recuperación de contraseña */
+.formulario-recuperar-contrasena {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--blanco); /* Asegúrate de tener esta variable en tu base CSS */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-recuperar-contrasena__titulo {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.formulario-recuperar-contrasena__grupo {
+    margin-bottom: 15px;
+}
+
+.formulario-recuperar-contrasena__etiqueta {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.formulario-recuperar-contrasena__input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.formulario-recuperar-contrasena__botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario-recuperar-contrasena__boton-enviar {
+    background-color: var(--azulOscuro);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-login {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.btn-login .link {
+    color: var(--azulOscuro);
+    text-decoration: none;
+    font-weight: bold;
+}
+/* Estilos específicos para el formulario de recuperación de contraseña */
+.formulario-recuperar-contrasena {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--blanco); /* Asegúrate de tener esta variable en tu base CSS */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-recuperar-contrasena__titulo {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.formulario-recuperar-contrasena__grupo {
+    margin-bottom: 15px;
+}
+
+.formulario-recuperar-contrasena__etiqueta {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.formulario-recuperar-contrasena__input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.formulario-recuperar-contrasena__botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario-recuperar-contrasena__boton-enviar {
+    background-color: var(--azulOscuro);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-login {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.btn-login .link {
+    color: var(--azulOscuro);
+    text-decoration: none;
+    font-weight: bold;
+}

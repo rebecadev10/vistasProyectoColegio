@@ -1,0 +1,116 @@
+
+/* Contenedor general de la gestión de noticias */
+.componente {
+    width: 100%;
+    height: 70vh;
+    margin: 10px;
+    background-color: var(--blancoA);
+    padding: 48px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Encabezado */
+.componente__encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Título de la sección */
+.componente__titulo {
+    font-size: 24px;
+    color: var(--color-secundario);
+    font-weight: bold;
+}
+
+/* Botón para subir nueva noticia */
+.componente__boton-subir {
+    background-color: var(--azulOscuro);
+    color: var(--blanco);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.componente__boton-subir:hover {
+    background-color: var(--azulPastel);
+    color: var(--azulOscuro);
+}
+
+/* Contenedor de la tabla de noticias */
+.componente__contenedor-tabla {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.componente__tabla {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Hace que las celdas de la tabla tengan un ancho fijo */
+    border-radius: 20px;
+}
+
+/* Encabezados de la tabla */
+.componente__encabezado-tabla {
+    text-align: center; /* Centra el contenido */
+    background-color: var(--azulPastel);
+    color: var(--azulOscuro);
+    padding: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    width: 20%; /* Asigna un ancho igual a cada columna, ajustable según preferencia */
+}
+
+/* Filas y celdas de la tabla */
+.componente__fila {
+    background-color: var(--blanco);
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.componente__fila--encabezado {
+    background-color: var(--color-principal);
+}
+
+.componente__celda {
+    padding: 15px;
+    font-size: 14px;
+    color: var(--color-secundario);
+    text-align: center; /* Centra el contenido */
+    width: 20%; /* Asigna el mismo ancho que los encabezados */
+}
+
+/* Imagen pequeña en la columna */
+.componente__imagen-pequena {
+    max-width: 80px;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Botón de editar */
+.componente__boton-editar {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--color-principal);
+    transition: color 0.3s ease;
+}
+
+.componente__boton-editar:hover {
+    color: var(--color-hover);
+}
+
+.componente__boton-editar i {
+    font-size: 18px;
+}

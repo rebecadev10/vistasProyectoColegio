@@ -1,0 +1,130 @@
+.gallery {
+    padding: 50px;
+    background-color: var(--azulCeleste);
+    text-align: center;
+    width: 100%;
+    height: 80vh;
+}
+
+.gallery h2 {
+    color: var(--azulOscuro);
+    font-size: 40px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 14px;
+}
+
+.gallery p {
+    margin-bottom: 36px;
+    color: var(--gris);
+    
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.gallery-images {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    height: 70%;
+}
+
+.gallery-images img {
+    width: calc(33.33% - 40px); /* Ajustamos para que haya 3 tarjetas por fila con espacio entre ellas */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(67, 67, 67, 0.786);
+}
+.content{
+    display: grid;
+    grid-template-columns:1fr 1fr ;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 'about about'
+    'mision vision';
+    gap: 20px;
+    
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+.about-us{
+    grid-area: about;
+}
+.mission{
+    grid-area: mision;
+    width: 80%;
+    background-color: var(--azulPastel);
+    box-shadow: 0 4px 10px rgba(67, 67, 67, 0.786);
+    border-radius: 10px;
+}
+.vision{
+    grid-area: vision;
+    width: 80%;
+    background-color: var(--azulPastel);
+    box-shadow: 0 4px 10px rgba(67, 67, 67, 0.786);
+    border-radius: 10px;
+}
+.mission h3,.vision h3{
+
+    text-align: center;
+    font-weight: 700;
+font-size: 28px;
+    padding-top:16px ;
+}
+
+.about-us p,.mission p,.vision p{
+    padding-left: 36px;
+    padding-right: 36px;
+    padding-bottom: 20px;
+    padding-top: 12px;
+    font-size: 18px;
+    text-align: justify;
+    line-height:1.6
+}
+.about-us,  .location, .contact {
+    padding: 50px;
+    text-align: justify;
+   
+}
+
+.about-us h2, .mission h2, .vision h2, .location h2, .contact h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+
+}
+
+.location iframe {
+    margin-top: 20px;
+    border: none;
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.contact label {
+    font-size: 18px;
+}
+
+.contact input, .contact textarea {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid var(--azulIndigo);
+    border-radius: 5px;
+}
+
+.contact .btn {
+    background-color: var(--azulIndigo);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

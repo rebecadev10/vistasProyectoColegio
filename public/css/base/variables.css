@@ -1,0 +1,36 @@
+:root {
+    --montserrat: "Roboto Condensed", sans-serif;
+    --oswald: "Bebas Neue", sans-serif;
+  
+    --font-weigth-input: 300;
+  
+    --font-size-logo: 28px;
+    --font-size-card-title: 28px;
+    --font-size-input-label: 18px;
+    --font-size-button: 22px;
+    --font-size-form-fieldset: 22px;
+    --font-size-table-header: 22px;
+    --font-size-modal-title: 28px;
+    --font-size-modal-button: 28px;
+  
+    --fondo: #fffef5;
+    --blanco: #f4f4f4;
+    --blancoA: #ffffff;
+    --negro: #050115dd;
+    --gris: #585858cd;
+    --grisClaro: #b6b6b6;
+    --grisPalido: rgba(255, 255, 255, 0.654);
+    --azulOscuro:#03045e;
+    --azulIndigo:#0077b6;
+    --aguamarina:#00b4d8;
+    --azulCeleste:#90E0ef;
+    --azulPastel:#CaF0F8;
+    --succes:#00c503;
+    --cancel:#ed0000;
+  }
+  
+  @media (min-width: 800px) {
+    :root {
+      --font-size-logo: 56px;
+    }
+  }
