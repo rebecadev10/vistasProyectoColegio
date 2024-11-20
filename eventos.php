@@ -1,6 +1,6 @@
 <?php include 'componentes/header.php' ?>
   <h2>Eventos</h2>
-  <div id="calendar"></div>
+  <div id="calendar" class="calendario"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -13,7 +13,8 @@
           left: 'prev,next today',
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
+        },buttonText: { // Personaliza los textos de los botones
+           today: 'Hoy', month: 'Mes', week: 'Semana', day: 'Día', list: 'Agenda' },
         events: [
           {
             title: 'Evento de ejemplo',

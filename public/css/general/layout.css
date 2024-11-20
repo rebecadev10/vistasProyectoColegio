@@ -28,5 +28,14 @@
 }
 #calendar {
     max-width: 900px;
-    margin: 40px auto;
+    margin: 90px auto;
+    z-index: 1;
+    position: static;
+  }
+  @media screen and (max-width: 768px) {
+    #calendar {
+        margin: 120px auto;
+        max-width: 700px;
+    }
+
   }
