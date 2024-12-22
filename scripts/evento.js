@@ -1,5 +1,6 @@
 function init(){
 	// // 
+	mostrarform(false);
 	listar();
 	// listarpagobol();
 
@@ -35,7 +36,9 @@ function guardaryeditar(e)
 	        //   bootbox.alert(datos);	          
 	        //   mostrarform(false);
 	        //   tabla.ajax.reload();
+			
             window.alert("Exito!");
+			window.location.href="eventoEditar.php"
 	    }
 
 	});
@@ -78,4 +81,134 @@ function listar(){
 			"order": [[ 0, "desc" ]]//Ordenar (columna,orden)
 		}).DataTable();
 	}
+	function mostrar(idEventos) {
+    // Carga la información desde tu controlador usando jQuery
+    $.post("controlador/evento.php?op=mostrar", { idEventos: idEventos }, function(data, status) {
+        try {
+            // Verifica si los datos recibidos son válidos y son JSON
+            console.log("Respuesta recibida:", data);
+            data = JSON.parse(data);
+			mostrarform(true);
+            if (data && data.idEventos) {
+                // Muestra la información en el formulario
+                $("#idEventos").val(data.idEventos);
+                $("#titulo").val(data.titulo);
+                $("#descripcion").val(data.descripcion);
+                    // Manejar el select dinámico
+				$('#departamento').val(data.idDepartamento);
+				$('#departamentoDescripcion').val(data.nombre); // Intenta seleccionar el valor directamente	
+                $("#fechaInicio").val(data.fechaInicio);
+                $("#horaInicio").val(data.horaInicio);
+                $("#fechaFin").val(data.fechaFin);
+                $("#horaFin").val(data.horaFin);
+				$("#imagenActual").attr("src", "data/" + data.nombreImagen);
+                $("#imagenActual").attr(data.imagen);
+
+              
+            } else {
+                console.error("Datos mal formateados o faltantes.");
+            }
+        } catch (e) {
+            console.error("Error al parsear JSON: ", e);
+        }
+    }).fail(function(xhr, status, error) {
+        console.error("Error al realizar la solicitud: ", error);
+    });
+}
+function mostrarform(flag)
+{
+	limpiar();
+	if (flag)
+	{
+		
+		$("#formularioregistros").show();
+		$("#listadoregistros").hide();
+		$("#encabezado").hide();
+	}
+	else
+	{
+		$("#listadoregistros").show();
+		$("#formularioregistros").hide();
+		$("#encabezado").show();
+		
+
+	}
+}
+function cancelarform()
+{
+	limpiar();
+	mostrarform(false);
+}
+function limpiar()
+{
+	$("#idEventos").val("");
+	$("#titulo").val("");
+	$("#descripcion").val("");
+	$('#departamento').val("");  
+	$("#fechaInicio").val("");
+	$("#horaInicio").val("");
+	$("#fechaFin").val("");
+	$("#horaFin").val("");
+	$("#imagen").val("");
+	
+}
+function desactivar(idEventos)
+{
+	Swal.fire({
+		title: '¿Está seguro de desactivar el evento?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Sí, desactivar',
+		cancelButtonText: 'Cancelar'
+	  }).then((result) => {
+		if (result.isConfirmed) {
+			$.post("controlador/evento.php?op=desactivar", {idEventos : idEventos}, function(e){
+        		// bootbox.alert(e);
+	            tabla.ajax.reload();
+        	});	
+		  // Aquí colocas el código para desactivar el usuario
+		  Swal.fire(
+			'Desactivado!',
+			'El evento ha sido desactivado.',
+			'success'
+		  )
+		}
+	  })
+	  
+	// bootbox.confirm("¿Está Seguro de desactivar el usuario?", function(result){
+	// 	if(result)
+    //     {
+        	
+    //     }
+	// })
+}
+
+//Función para activar registros
+function activar(idEventos)
+{
+	Swal.fire({
+		title: '¿Está seguro de activar el evento?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Sí, activar',
+		cancelButtonText: 'Cancelar'
+	  }).then((result) => {
+		if (result.isConfirmed) {
+			$.post("controlador/evento.php?op=activar", {idEventos : idEventos}, function(e){
+        		// bootbox.alert(e);
+	            tabla.ajax.reload();
+        	});	
+		  // Aquí colocas el código para desactivar el usuario
+		  Swal.fire(
+			'activado!',
+			'El evento ha sido activado.',
+			'success'
+		  )
+		}
+	  })
+	  
+
+}
+	
+	
 init();

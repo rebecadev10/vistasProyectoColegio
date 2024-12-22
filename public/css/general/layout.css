@@ -32,6 +32,25 @@
     z-index: 1;
     position: static;
   }
+  .btnEditar{
+    background: #ff8b06;
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+  }
+  .btnActivar{
+    background: #db0101;
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+  }
+  .btnDesactivar{
+    background: #479300;
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+  }
+  
   @media screen and (max-width: 768px) {
     #calendar {
         margin: 120px auto;

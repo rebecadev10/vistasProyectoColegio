@@ -140,3 +140,8 @@
     padding-bottom: 3px;
     text-decoration: underline;
 }
+.imgFormulario img{
+    width: 100%;
+    height: 30%;
+    object-fit: cover;
+}

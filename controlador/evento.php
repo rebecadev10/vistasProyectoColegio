@@ -46,15 +46,19 @@ switch ($_GET["op"]) {
         }
         break;
     case 'listar':
-            $rspta=$evento->listar();
+            $rspta=$evento->listarRegistros();
              //Vamos a declarar un array
              $data= Array();
     
              while ($reg=$rspta->fetch_object()){
                  $data[]=array(
-                     "0"=>'<a target="_blank" href="./formularioEvento.php?id='.$reg->idEventos.'"> <button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></button></a>',
+                    "0"=>($reg->estado)?'<button class="btnEditar" onclick="mostrar('.$reg->idEventos.')"><i class="fa fa-pencil"></i></button>'.
+		 					' <button class="btnActivar" onclick="desactivar('.$reg->idEventos.')"><i class="fa fa-close"></i></button>':
+		 					'<button class="btnEditar" onclick="mostrar('.$reg->idEventos.')"><i class="fa fa-pencil"></i></button>'.
+		 					' <button class="btnDesactivar" onclick="activar('.$reg->idEventos.')"><i class="fa fa-check"></i></button>',
+                    //  "0"=>' <button  onclick="mostrar('.$reg->idEventos.')"><i class="fa-solid fa-pen-to-square"></i></button>',
                     "1"=>$reg->titulo,
-                    "2"=>$reg->departamento, 	 
+                    "2"=>$reg->nombre, 	 
                     "3"=>$reg->fechaInicio,
                     "4"=>$reg->horaInicio,
                      
@@ -69,7 +73,30 @@ switch ($_GET["op"]) {
              echo json_encode($results);
     
         break;
-
+        case 'listarCalendario':
+            $rspta = $evento->listar();
+            // Declarar un array
+            $data = Array();
+            $rutaBase = "http://localhost/colegio/data/"; // URL base accesible desde el navegador
+            while ($reg = $rspta->fetch_object()) {
+                $data[] = array(
+                    "id" => $reg->idEventos,
+                    "title" => $reg->titulo,
+                    "start" => $reg->fechaInicio . 'T' . $reg->horaInicio,
+                    "end" => $reg->fechaFin . 'T' . $reg->horaFin,
+                    "department" => $reg->nombre,
+                    "image" =>$rutaBase. $reg->nombreImagen // Ajusta según el nombre del campo en tu base de datos
+                );
+            }
+            $results = array(
+                "sEcho" => 1, // Información para el DataTables
+                "iTotalRecords" => count($data), // Total de registros
+                "iTotalDisplayRecords" => count($data), // Total de registros a visualizar
+                "aaData" => $data
+            );
+            echo json_encode($results);
+            break;
+        
         case 'listarDepartamentos':
             $rspta = $evento->listarDepartamentos();
             
@@ -81,10 +108,23 @@ switch ($_GET["op"]) {
                 echo '<option value="">No se encontraron departamentos</option>';
             }
             break;
-        
+        case 'mostrar':
+            $rspta=$evento->mostrar($idEventos);
+                 //Codificar el resultado utilizando json
+            echo json_encode($rspta);   
+            break; 
+        case 'desactivar':
+            $rspta=$evento->desactivar($idEventos);
+            echo $rspta ? "Evento Desactivado" : "Evento no se puede desactivar";
+            break;
+            case 'activar':
+                $rspta=$evento->activar($idEventos);
+                echo $rspta ? "Evento Activado" : "Evento no se puede activar";
+                break;
     default:
         echo "Operación no válida.";
         break;
 }
 
 ?>
+
