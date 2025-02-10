@@ -210,5 +210,8 @@ function activar(idEventos)
 
 }
 	
-	
+function cancelar() {
+    window.location.href = "eventoEditar.php"; // Cambia "noticias.php" por la URL a la que deseas redirigir
+}
+
 init();

@@ -66,7 +66,7 @@
             <!-- Botones -->
             <div class="formulario-subir-noticia__grupo formulario-subir-evento__botones">
                 <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Guardar</button>
-                <button type="reset" class="formulario-subir-noticia__boton-cancelar">Cancelar</button>
+                <button type="reset" class="formulario-subir-noticia__boton-cancelar" onclick="cancelar()">Cancelar</button>
             </div>
         </form>
 

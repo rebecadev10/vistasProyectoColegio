@@ -1,55 +1,69 @@
-<?php include 'componentes/header.php'?>
+<?php include 'componentes/header.php'; ?>
 <div class="layout">
-  <div class="componente">
+  <div class="componente" id="encabezado">
     <div class="componente__encabezado">
-      <h2 class="componente__titulo">Noticias Subidas</h2>
-      <button class="componente__boton-subir"><a href="./formularioNoticias.php"> Publicar Nueva Noticia</a></button>
+      <h2 class="componente__titulo">Lista de Noticias</h2>
+      <button class="componente__boton-subir">
+        <a href="./formularioNoticias.php">Nueva Noticia</a>
+      </button>
     </div>
 
-    <div class="componente__contenedor-tabla">
-      <table class="componente__tabla">
-        <thead>
-          <tr class="componente__fila componente__fila--encabezado">
+    <div class="componente__contenedor-tabla" id="listadoregistros">
+      <table id="tbllistado" class=" componente__tabla" style="width:100%">
+        <thead style="width:100%">
+          <tr class=" componente__fila--encabezado">
             <th class="componente__encabezado-tabla">Opción</th>
             <th class="componente__encabezado-tabla">Título</th>
-            <th class="componente__encabezado-tabla">Descripción</th>
-            <th class="componente__encabezado-tabla">Fecha</th>
-            <th class="componente__encabezado-tabla">Imagen</th>
+            <th class="componente__encabezado-tabla">Descripcion</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Aquí se iteran las noticias para mostrar cada una -->
-          <tr class="componente__fila">
-            <td class="componente__celda">
-              <button class="componente__boton-editar">
-                <i class="fa fa-edit"></i> <!-- Icono de edición -->
-                <!-- aqui debes redireccionar al usuario al formualrio de editar enviando el id como parametro es decir algo asi formulario[id].php -->
-              </button>
-            </td>
-            <td class="componente__celda">Noticia 1</td>
-            <td class="componente__celda">Breve descripción de la noticia 1...</td>
-            <td class="componente__celda">2024-10-18</td>
-            <td class="componente__celda">
-              <img src="./public/img/contenido/1.jpeg" alt="Noticia 1" class="componente__imagen-pequena">
-            </td>
-          </tr>
-          <tr class="componente__fila">
-            <td class="componente__celda">
-              <button class="componente__boton-editar">
-                <i class="fa fa-edit"></i> <!-- Icono de edición -->
-              </button>
-            </td>
-            <td class="componente__celda">Noticia 2</td>
-            <td class="componente__celda">Breve descripción de la noticia 2...</td>
-            <td class="componente__celda">2024-10-15</td>
-            <td class="componente__celda">
-              <img src="./public/img/contenido/1.jpeg" alt="Noticia 2" class="componente__imagen-pequena">
-            </td>
-          </tr>
-          <!-- Más filas con noticias publicadas -->
+
+
         </tbody>
       </table>
     </div>
   </div>
+  <div class="formulario-subir-noticia" id="formularioregistros">
+    <h2 class="formulario-subir-noticia__titulo">Nueva Noticia</h2>
+
+    <div class="formulario-subir-noticia">
+      <h2 class="formulario-subir-noticia__titulo">Publicar Nueva Noticia</h2>
+
+      <form id="formulario" class="formulario-subir-noticia__formulario" enctype="multipart/form-data" method="POST">
+        <!-- Campo Título -->
+        <div class="formulario-subir-noticia__grupo">
+          <label for="titulo" class="formulario-subir-noticia__etiqueta">Título:</label>
+          <input type="hidden" id="idNoticias" name="idNoticias">
+          <input type="text" id="titulo" name="titulo" class="formulario-subir-noticia__input" required>
+        </div>
+
+        <!-- Campo Descripción -->
+        <div class="formulario-subir-noticia__grupo">
+          <label for="descripcion" class="formulario-subir-noticia__etiqueta">Descripción:</label>
+          <textarea id="descripcion" name="descripcion" class="formulario-subir-noticia__textarea" rows="5"
+            required></textarea>
+        </div>
+
+
+
+        <!-- Campo Imagen con estilo personalizado -->
+        <div class="formulario-subir-noticia__grupo">
+        <label for="imagen" class="formulario-subir-evento__etiqueta"> Imagen Actual:</label>
+        <img id="imagenActual" alt="" class="imgFormulario">
+      
+        </div>
+
+
+        <!-- Botones -->
+        <div class="formulario-subir-noticia__grupo formulario-subir-noticia__botones">
+          <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Guardar</button>
+          <button type="reset" class="formulario-subir-noticia__boton-cancelar"onclick="cancelarform()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-<?php require 'componentes/footer.php' ?>
+
+<?php require 'componentes/footer.php'; ?>
+<script type="text/javascript" src="scripts/noticia.js"></script>
