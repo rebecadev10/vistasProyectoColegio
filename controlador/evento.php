@@ -13,7 +13,7 @@ $fechaFin = isset($_POST["fechaFin"]) ? limpiarCadena($_POST["fechaFin"]) : "";
 $horaFin = isset($_POST["horaFin"]) ? limpiarCadena($_POST["horaFin"]) : "";
 
 // Directorio para guardar imágenes
-$directorio = "C:/xampp/htdocs/colegio/data/";
+$directorio = "C:/xampp/htdocs/colegio/data/eventos/";
 $rutaImagenBD = ""; // Variable para guardar la ruta en la BD
 
 switch ($_GET["op"]) {
@@ -21,9 +21,15 @@ switch ($_GET["op"]) {
         // Verificar si se subió una imagen
         if (isset($_FILES["imagen"]) && is_uploaded_file($_FILES["imagen"]["tmp_name"])) {
             $imagen = $_FILES["imagen"];
-            // Generar un nombre único para la imagen
-            $nombreImagen = uniqid() . "-" . basename($imagen["name"]);
-            $rutaImagen = $directorio . $nombreImagen;
+              // Limpiar el título (eliminar caracteres especiales y espacios)
+              $tituloLimpio = preg_replace("/[^a-zA-Z0-9]/", "_", trim($titulo));
+
+              // Obtener la extensión del archivo
+              $extension = pathinfo($imagen["name"], PATHINFO_EXTENSION);
+  
+              // Generar el nuevo nombre de la imagen con ID y título limpio
+              $nombreImagen = $idEventos . $tituloLimpio . "." . $extension;
+              $rutaImagen = $directorio . $nombreImagen;
 
             // Intentar mover el archivo al directorio
             if (move_uploaded_file($imagen["tmp_name"], $rutaImagen)) {
@@ -38,7 +44,7 @@ switch ($_GET["op"]) {
         }
 
         if (empty($idEventos)) {
-            $rspta = $evento->insertar($idEventos,$titulo,$descripcion,$nombreImagen,$departamento,$fechaInicio,$horaInicio,$fechaFin,$horaFin);
+            $rspta = $evento->insertar($idEventos,$titulo,$descripcion,$rutaImagenBD,$departamento,$fechaInicio,$horaInicio,$fechaFin,$horaFin);
             echo $rspta ? "Evento registrado" : "No se pudieron registrar todos los datos del evento";
         } else {
             $rspta = $evento->editar($idEventos, $titulo, $descripcion, $rutaImagenBD, $departamento, $fechaInicio, $horaInicio, $fechaFin, $horaFin);

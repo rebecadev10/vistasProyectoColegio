@@ -8,16 +8,24 @@ $titulo = isset($_POST["titulo"]) ? limpiarCadena($_POST["titulo"]) : "";
 $descripcion = isset($_POST["descripcion"]) ? limpiarCadena($_POST["descripcion"]) : "";
 
 // Directorio para guardar imágenes
-$directorio = "C:/xampp/htdocs/colegio/data/";
+$directorio = "C:/xampp/htdocs/colegio/data/noticias/";
 $rutaImagenBD = ""; // Variable para guardar la ruta en la BD
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
         // Verificar si se subió una imagen
+        // Verificar si se subió una imagen
         if (isset($_FILES["imagen"]) && is_uploaded_file($_FILES["imagen"]["tmp_name"])) {
             $imagen = $_FILES["imagen"];
-            // Generar un nombre único para la imagen
-            $nombreImagen = uniqid() . "-" . basename($imagen["name"]);
+
+            // Limpiar el título (eliminar caracteres especiales y espacios)
+            $tituloLimpio = preg_replace("/[^a-zA-Z0-9]/", "_", trim($titulo));
+
+            // Obtener la extensión del archivo
+            $extension = pathinfo($imagen["name"], PATHINFO_EXTENSION);
+
+            // Generar el nuevo nombre de la imagen con ID y título limpio
+            $nombreImagen = $idNoticias . $tituloLimpio . "." . $extension;
             $rutaImagen = $directorio . $nombreImagen;
 
             // Intentar mover el archivo al directorio
@@ -27,13 +35,15 @@ switch ($_GET["op"]) {
                 echo "Error al subir la imagen.";
                 exit();
             }
+
+
         } else {
             // Si no se sube una nueva imagen, mantener la actual (si aplica)
             $rutaImagenBD = isset($_POST["imagenProductoActual"]) ? limpiarCadena($_POST["imagenProductoActual"]) : "imgProductos/no-image.jpg";
         }
 
         if (empty($idNoticias)) {
-            $rspta = $noticia->insertar($idNoticias,$titulo,$descripcion,$nombreImagen);
+            $rspta = $noticia->insertar($idNoticias, $titulo, $descripcion, $rutaImagenBD);
             echo $rspta ? "noticia registrado" : "No se pudieron registrar todos los datos del noticia";
         } else {
             $rspta = $noticia->editar($idNoticias, $titulo, $descripcion, $rutaImagenBD);
@@ -41,80 +51,81 @@ switch ($_GET["op"]) {
         }
         break;
     case 'listar':
-            $rspta=$noticia->listar();
-             //Vamos a declarar un array
-             $data= Array();
-    
-             while ($reg=$rspta->fetch_object()){
-                 $data[]=array(
-                    "0"=>($reg->estado)?'<button class="btnEditar" onclick="mostrar('.$reg->idNoticias.')"><i class="fa fa-pencil"></i></button>'.
-                    ' <button class="btnActivar" onclick="desactivar('.$reg->idNoticias.')"><i class="fa fa-close"></i></button>':
-                    '<button class="btnEditar" onclick="mostrar('.$reg->idNoticias.')"><i class="fa fa-pencil"></i></button>'.
-                    ' <button class="btnDesactivar" onclick="activar('.$reg->idNoticias.')"><i class="fa fa-check"></i></button>',
-        
-                    
-                    "1"=>$reg->titulo,
-                    "2"=>$reg->descripcion,
-                    "3"=>$reg->nombreImagenN
-                     
-                     );
-             }
-             $results = array(
-                 "sEcho"=>1, //Información para el datatables
-                 "iTotalRecords"=>count($data), //enviamos el total registros al datatable
-                 "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
-                 "aaData"=>$data);
-             echo json_encode($results);
-    
+        $rspta = $noticia->listar();
+        //Vamos a declarar un array
+        $data = array();
+
+        while ($reg = $rspta->fetch_object()) {
+            $data[] = array(
+                "0" => ($reg->estado) ? '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
+                    ' <button class="btnActivar" onclick="desactivar(' . $reg->idNoticias . ')"><i class="fa fa-close"></i></button>' :
+                    '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
+                    ' <button class="btnDesactivar" onclick="activar(' . $reg->idNoticias . ')"><i class="fa fa-check"></i></button>',
+
+
+                "1" => $reg->titulo,
+                "2" => $reg->descripcion,
+                "3" => $reg->nombreImagenN
+
+            );
+        }
+        $results = array(
+            "sEcho" => 1, //Información para el datatables
+            "iTotalRecords" => count($data), //enviamos el total registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total registros a visualizar
+            "aaData" => $data
+        );
+        echo json_encode($results);
+
         break;
-       
-        case 'listarActivos':
-            $rspta=$noticia->listarActivo();
-             //Vamos a declarar un array
-             $data= Array();
-    
-             while ($reg=$rspta->fetch_object()){
-                 $data[]=array(
-                    "0"=>($reg->estado)?'<button class="btnEditar" onclick="mostrar('.$reg->idNoticias.')"><i class="fa fa-pencil"></i></button>'.
-                    ' <button class="btnActivar" onclick="desactivar('.$reg->idNoticias.')"><i class="fa fa-close"></i></button>':
-                    '<button class="btnEditar" onclick="mostrar('.$reg->idNoticias.')"><i class="fa fa-pencil"></i></button>'.
-                    ' <button class="btnDesactivar" onclick="activar('.$reg->idNoticias.')"><i class="fa fa-check"></i></button>',
-        
-                    
-                    "1"=>$reg->titulo,
-                    "2"=>$reg->descripcion,
-                    "3"=>$reg->nombreImagenN
-                     
-                     );
-             }
-             $results = array(
-                 "sEcho"=>1, //Información para el datatables
-                 "iTotalRecords"=>count($data), //enviamos el total registros al datatable
-                 "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
-                 "aaData"=>$data);
-             echo json_encode($results);
-    
+
+    case 'listarActivos':
+        $rspta = $noticia->listarActivo();
+        //Vamos a declarar un array
+        $data = array();
+
+        while ($reg = $rspta->fetch_object()) {
+            $data[] = array(
+                "0" => ($reg->estado) ? '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
+                    ' <button class="btnActivar" onclick="desactivar(' . $reg->idNoticias . ')"><i class="fa fa-close"></i></button>' :
+                    '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
+                    ' <button class="btnDesactivar" onclick="activar(' . $reg->idNoticias . ')"><i class="fa fa-check"></i></button>',
+
+
+                "1" => $reg->titulo,
+                "2" => $reg->descripcion,
+                "3" => $reg->nombreImagenN
+
+            );
+        }
+        $results = array(
+            "sEcho" => 1, //Información para el datatables
+            "iTotalRecords" => count($data), //enviamos el total registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total registros a visualizar
+            "aaData" => $data
+        );
+        echo json_encode($results);
+
         break;
-       
-       
-        case 'mostrar':
-            $rspta=$noticia->mostrar($idNoticias);
-                 //Codificar el resultado utilizando json
-            echo json_encode($rspta);   
-            break; 
-            case 'desactivar':
-                $rspta=$noticia->desactivar($idNoticias);
-                echo $rspta ? "Noticia Desactivado" : "Noticia no se puede desactivar";
-                break;
-                case 'activar':
-                    $rspta=$noticia->activar($idNoticias);
-                    echo $rspta ? "Noticia Activado" : "Noticia no se puede activar";
-                    break;
-        
+
+
+    case 'mostrar':
+        $rspta = $noticia->mostrar($idNoticias);
+        //Codificar el resultado utilizando json
+        echo json_encode($rspta);
+        break;
+    case 'desactivar':
+        $rspta = $noticia->desactivar($idNoticias);
+        echo $rspta ? "Noticia Desactivado" : "Noticia no se puede desactivar";
+        break;
+    case 'activar':
+        $rspta = $noticia->activar($idNoticias);
+        echo $rspta ? "Noticia Activado" : "Noticia no se puede activar";
+        break;
+
     default:
         echo "Operación no válida.";
         break;
 }
 
 ?>
-

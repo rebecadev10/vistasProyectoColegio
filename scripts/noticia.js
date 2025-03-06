@@ -250,4 +250,16 @@ $(document).ready(function () {
 listar();
 
 listarNoticias();
+document.addEventListener("DOMContentLoaded", function () {
+    // Función para actualizar el nombre del archivo seleccionado
+    function actualizarNombreArchivo(input, spanId) {
+        let fileName = input.files.length > 0 ? input.files[0].name : "Ningún archivo seleccionado";
+        document.getElementById(spanId).textContent = fileName;
+    }
+
+    // Detectar cambios en el input de imagen
+    document.getElementById("imagen").addEventListener("change", function () {
+        actualizarNombreArchivo(this, "file-name");
+    });
+});
 init();

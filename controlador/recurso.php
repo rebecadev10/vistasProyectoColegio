@@ -20,7 +20,8 @@ switch ($_GET["op"]) {
         // Manejo de la imagen
         if (isset($_FILES["imagen"]) && is_uploaded_file($_FILES["imagen"]["tmp_name"])) {
             $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
-            $nombreImagen = uniqid() . "." . $extension;
+            $nombreImagen = $fechaPublicacion . "-" . preg_replace("/[^a-zA-Z0-9]/", "_", $tituloRecurso) . "." . $extension;
+           
             $rutaImagen = $directorio . $nombreImagen;
 
             if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $rutaImagen)) {
@@ -43,7 +44,7 @@ switch ($_GET["op"]) {
                 exit();
             }
 
-            $nombreRecurso =$_FILES["recurso"]["name"];
+            $nombreRecurso =$idRecursos . "-" . $_FILES["recurso"]["name"];
             $rutaRecurso = $directorio . $nombreRecurso;
 
             if (move_uploaded_file($_FILES["recurso"]["tmp_name"], $rutaRecurso)) {
@@ -75,7 +76,11 @@ switch ($_GET["op"]) {
                 "0"=>'<button class="btnEditar" onclick="mostrar(' . $reg->idRecursos . ')"><i class="fa fa-pencil"></i></button>',
                 "1" => $reg->tituloRecurso,
                 "2" => $reg->descripcion,
-                "3" => $reg->fotoPortada
+                "3"=>$reg->autor,
+                "4"=>$reg->fechaPublicacion,
+                "5"=>$reg->editorial,
+                "6" => $reg->fotoPortada,
+                "7"=>$reg->dataRecurso
             ];
         }
 

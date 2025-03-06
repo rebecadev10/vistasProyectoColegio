@@ -168,16 +168,26 @@ function listarRecursos() {
                 let recursosHTML = "";
 
                 response.aaData.forEach(recurso => {
-                    let imagenRuta = recurso[3] ? `./data/${recurso[3]}` : './data/noticia.jpg';
-
+                    let imagenRuta = recurso[6] ? `./data/${recurso[6]}` : './data/noticia.jpg';
+					let archivoRuta = `./data/${recurso[7]}`;
                     recursosHTML += `
-                        <div class="card">
+                        <div class="cardBook">
                             <img src="${imagenRuta}" alt="Imagen del recurso">
-                            <div class="card-body">
-                                <h5 class="card-title">${recurso[1]}</h5>
-                                <p class="card-text">${recurso[2]}</p>
-                                <a href="#" class="btn btn-primary">Ver más</a>
-                            </div>
+                            
+                                <h3 class="card__titulo">${recurso[1]}</h3>
+                                <p class="">${recurso[2]}</p>
+								<div class="book">
+         
+          <div class="book-info">
+          <h4>Autor: ${recurso[3]}</h4>
+          <span>fecha publicacion:${recurso[4]} </span>
+          <span>Editorial:${recurso[5]} </span>
+
+          </div>
+		  </div>
+             <a href="${archivoRuta}" class="btn-descargar" download>Descargar</a>
+                                
+                            
                         </div>
                     `;
                 });

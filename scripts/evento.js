@@ -213,5 +213,19 @@ function activar(idEventos)
 function cancelar() {
     window.location.href = "eventoEditar.php"; // Cambia "noticias.php" por la URL a la que deseas redirigir
 }
+document.addEventListener("DOMContentLoaded", function () {
+    // Función para actualizar el nombre del archivo seleccionado
+    function actualizarNombreArchivo(input, spanId) {
+        let fileName = input.files.length > 0 ? input.files[0].name : "Ningún archivo seleccionado";
+        document.getElementById(spanId).textContent = fileName;
+    }
+
+    // Detectar cambios en el input de imagen
+    document.getElementById("imagen").addEventListener("change", function () {
+        actualizarNombreArchivo(this, "file-name");
+    });
+
+
+});
 
 init();
