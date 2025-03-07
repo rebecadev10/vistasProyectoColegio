@@ -26,7 +26,7 @@
       <li class="navbar-list__link">
         <a href="./anuncio.php">Comunicación</a>
         <ul class="dropdown">
-          <li><a href="./anunciosEditar.php">Crear Anuncio</a></li>
+          <li><a href="./comunicacionEditar.php">Crear Anuncio</a></li>
          
         </ul>
       </li>
