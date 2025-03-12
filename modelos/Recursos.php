@@ -20,12 +20,25 @@ class Recursos
      
      return ejecutarConsulta($sql);
     }
-    public function listar(){
-       $sql=" SELECT * FROM recursos";
-       return ejecutarConsulta(sql: $sql);
+    // public function listar(){
+    //    $sql=" SELECT * FROM recursos";
+    //    return ejecutarConsulta(sql: $sql);
+    // }
+  
+    public function listar($buscarTitulo = "", $departamento = "") {
+        $sql = "SELECT * FROM recursos WHERE 1=1";
+        
+        if(!empty($buscarTitulo)) {
+            $sql .= " AND tituloRecurso LIKE '%$buscarTitulo%'";
+        }
+        
+        if(!empty($departamento) && $departamento != 'todos') {
+            $sql .= " AND idDepartamento = '$departamento'";
+        }
+        
+        $sql .= " ORDER BY fechaPublicacion DESC";
+        return ejecutarConsulta($sql);
     }
-  
-  
     public function mostrar($idRecursos){
         $sql="SELECT * FROM recursos    WHERE idRecursos='$idRecursos'";
 		return ejecutarConsultaSimpleFila($sql);

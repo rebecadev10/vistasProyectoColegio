@@ -50,11 +50,59 @@
     border-radius: 50%;
     color: white;
   }
-  
+  .buscador {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 2rem;
+    align-items: center;
+}
+
+/* Estilo para el input de búsqueda */
+.buscador-input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid #007bff;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    max-width: 400px;
+}
+
+.buscador-input:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0,123,255,0.3);
+}
+
+/* Estilo para el filtro de departamentos */
+.filtro-departamento {
+    padding: 10px 15px;
+    border: 2px solid #6c757d;
+    border-radius: 20px;
+    background-color: #f8f9fa;
+    font-size: 1rem;
+    cursor: pointer;
+    max-width: 250px;
+    transition: all 0.3s ease;
+}
+
+.filtro-departamento:hover {
+    background-color: #e9ecef;
+}
+
+
   @media screen and (max-width: 768px) {
     #calendar {
         margin: 120px auto;
         max-width: 700px;
     }
+    .buscador {
+      flex-direction: column;
+  }
+  
+  .buscador-input,
+  .filtro-departamento {
+      width: 100%;
+      max-width: 100%;
+  }
 
   }

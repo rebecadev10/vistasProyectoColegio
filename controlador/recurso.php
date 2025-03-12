@@ -21,7 +21,7 @@ switch ($_GET["op"]) {
         if (isset($_FILES["imagen"]) && is_uploaded_file($_FILES["imagen"]["tmp_name"])) {
             $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
             $nombreImagen = $fechaPublicacion . "-" . preg_replace("/[^a-zA-Z0-9]/", "_", $tituloRecurso) . "." . $extension;
-           
+
             $rutaImagen = $directorio . $nombreImagen;
 
             if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $rutaImagen)) {
@@ -44,7 +44,7 @@ switch ($_GET["op"]) {
                 exit();
             }
 
-            $nombreRecurso =$idRecursos . "-" . $_FILES["recurso"]["name"];
+            $nombreRecurso = $idRecursos . "-" . $_FILES["recurso"]["name"];
             $rutaRecurso = $directorio . $nombreRecurso;
 
             if (move_uploaded_file($_FILES["recurso"]["tmp_name"], $rutaRecurso)) {
@@ -53,34 +53,38 @@ switch ($_GET["op"]) {
                 echo "Error al subir el recurso.";
                 exit();
             }
-            } else {
-                $rutaRecursoBD = isset($_POST["recurso"]) ? limpiarCadena($_POST["recurso"]) : "";
-            }
+        } else {
+            $rutaRecursoBD = isset($_POST["recurso"]) ? limpiarCadena($_POST["recurso"]) : "";
+        }
 
         if (empty($idRecursos)) {
             $rspta = $recurso->insertar($idRecursos, $tituloRecurso, $descripcion, $autor, $fechaPublicacion, $editorial, $departamento, $rutaImagenBD, $rutaRecursoBD);
             echo $rspta ? "Recurso registrado" : "No se pudo registrar el recurso";
         } else {
-            $rspta = $recurso->editar($idRecursos, $tituloRecurso, $descripcion,$autor, $fechaPublicacion, $editorial, $departamento, $rutaImagenBD, $rutaRecursoBD);
+            $rspta = $recurso->editar($idRecursos, $tituloRecurso, $descripcion, $autor, $fechaPublicacion, $editorial, $departamento, $rutaImagenBD, $rutaRecursoBD);
             echo $rspta ? "Recurso actualizado" : "No se pudo actualizar el recurso";
         }
         break;
 
     case 'listar':
-        $rspta = $recurso->listar();
+        $buscarTitulo = isset($_GET['buscarTitulo']) ? $_GET['buscarTitulo'] : '';
+        $filtroDepartamento = isset($_GET['departamento']) ? $_GET['departamento'] : '';
+
+        $rspta = $recurso->listar($buscarTitulo, $filtroDepartamento);
+        // $rspta = $recurso->listar();
         $data = [];
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = [
                 // "0" => ($reg->estado) ?
-                "0"=>'<button class="btnEditar" onclick="mostrar(' . $reg->idRecursos . ')"><i class="fa fa-pencil"></i></button>',
+                "0" => '<button class="btnEditar" onclick="mostrar(' . $reg->idRecursos . ')"><i class="fa fa-pencil"></i></button>',
                 "1" => $reg->tituloRecurso,
                 "2" => $reg->descripcion,
-                "3"=>$reg->autor,
-                "4"=>$reg->fechaPublicacion,
-                "5"=>$reg->editorial,
+                "3" => $reg->autor,
+                "4" => $reg->fechaPublicacion,
+                "5" => $reg->editorial,
                 "6" => $reg->fotoPortada,
-                "7"=>$reg->dataRecurso
+                "7" => $reg->dataRecurso
             ];
         }
 
