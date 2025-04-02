@@ -90,8 +90,7 @@ switch ($_GET["op"]) {
                     ' <button class="btnActivar" onclick="desactivar(' . $reg->idNoticias . ')"><i class="fa fa-close"></i></button>' :
                     '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
                     ' <button class="btnDesactivar" onclick="activar(' . $reg->idNoticias . ')"><i class="fa fa-check"></i></button>',
-
-
+                
                 "1" => $reg->titulo,
                 "2" => $reg->descripcion,
                 "3" => $reg->nombreImagenN

@@ -1,4 +1,16 @@
-<?php include 'componentes/header.php' ?>
+
+<?php
+
+//Activamos el almacenamiento en el buffer
+
+session_start();
+ob_start();
+if (!isset($_SESSION["login"])) {
+    header("Location: index.html");
+} else {
+    require 'componentes/header.php';
+    if ($_SESSION['Estudiante'] == 1) {
+?>
 <div class="layout">
 
 
@@ -49,6 +61,13 @@
       
     </section>
 
-    <?php include 'componentes/footer.php' ?>    
+    
 </div>
 
+ <?php  } else {
+    require 'noacceso.php';
+}
+include 'componentes/footer.php';
+}
+ob_end_flush();
+?>

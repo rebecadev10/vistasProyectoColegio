@@ -11,13 +11,13 @@ $idPermiso=1;?>
 
                     <div class="formulario-subir-noticia__grupo">
                     <input type="hidden" id="idUsuario" name="idUsuario">
-                    <input type="hidden" id="idPermiso" name="idPermiso" value="<?php echo $idPermiso; ?>">
+                    <!-- <input type="hidden" id="permisos" name="idPermiso" value=""> -->
                         <label for="titulo" class="formulario-subir-noticia__etiqueta">Nombres:</label>
-                        <input type="text" id="nombreUsu" name="nombreUsu" class="formulario-subir-noticia__input" required>
+                        <input type="text" id="nombre" name="nombre" class="formulario-subir-noticia__input" required>
                     </div>
                     <div class="formulario-subir-noticia__grupo">
                         <label for="titulo" class="formulario-subir-noticia__etiqueta">Apellidos:</label>
-                        <input type="text" id="nombreUsu" name="nombreUsu" class="formulario-subir-noticia__input" required>
+                        <input type="text" id="apellido" name="apellido" class="formulario-subir-noticia__input" required>
                     </div>
                   
                     <div class="formulario-subir-noticia__grupo">
@@ -28,6 +28,9 @@ $idPermiso=1;?>
                         <label for="titulo" class="formulario-subir-noticia__etiqueta">Clave:</label>
                         <input type="password" id="clave" name="clave" class="formulario-subir-noticia__input" required>
                     </div>
+                    <label>Permisos:</label>
+                        <ul style="list-style: none;" id="permisos">
+                        </ul>
                      <!-- Campo Imagen -->
             <div class="formulario-subir-noticia__grupo">
                 <label for="imagen" class="formulario-subir-noticia__etiqueta">Foto de perfil:</label>

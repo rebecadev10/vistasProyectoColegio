@@ -8,16 +8,15 @@ function init() {
     guardaryeditar(e);
   });
 
-
   // Realizar la petición al controlador para obtener los departamentos
 
-
-  $.post("controlador/evento.php?op=listarDepartamentos", function(response) {
-	$("#departamento").html(
-		'<option value="todos">Filtrar por departamentos</option>' + response
-	).selectpicker('refresh'); // Actualiza el selectpicker
-});
-
+  $.post("controlador/evento.php?op=listarDepartamentos", function (response) {
+    $("#departamento")
+      .html(
+        '<option value="todos">Filtrar por departamentos</option>' + response
+      )
+      .selectpicker("refresh"); // Actualiza el selectpicker
+  });
 }
 function guardaryeditar(e) {
   e.preventDefault(); //No se activará la acción predeterminada del evento
@@ -71,6 +70,16 @@ function listar() {
       bDestroy: true,
       iDisplayLength: 5, //Paginación
       order: [[0, "desc"]], //Ordenar (columna,orden)
+      responsive: true,
+      createdRow: function(row, data) {
+				$(row).find('td:eq(2)').css({
+					'max-width': '400px',
+					'white-space': 'nowrap',
+					'overflow': 'hidden',
+					'text-overflow': 'ellipsis',
+					'cursor': 'pointer'
+				}).attr('title', data[2]);
+			}
     })
     .DataTable();
 }
@@ -143,15 +152,19 @@ function cancelar() {
   window.location.href = "recursosEditar.php"; // Cambia "noticias.php" por la URL a la que deseas redirigir
 }
 function buscarRecursos() {
-    const searchTerm = $("#buscarTitulo").val().trim();
-    const departamento = $("#departamento").val();
-    listarRecursos(searchTerm, departamento);
-	console.log("se llama a esta funcion buscar recursos recibimos"+searchTerm+"departamento:"+departamento);
-
+  const searchTerm = $("#buscarTitulo").val().trim();
+  const departamento = $("#departamento").val();
+  listarRecursos(searchTerm, departamento);
+  console.log(
+    "se llama a esta funcion buscar recursos recibimos" +
+      searchTerm +
+      "departamento:" +
+      departamento
+  );
 }
 function listarRecursos(titulo = "", idDepartamento = "") {
-	console.log(titulo);
-	console.log(idDepartamento);
+  console.log(titulo);
+  console.log(idDepartamento);
   $.ajax({
     url: "controlador/recurso.php?op=listar",
     type: "GET",
@@ -170,24 +183,24 @@ function listarRecursos(titulo = "", idDepartamento = "") {
             : "./data/noticia.jpg";
           let archivoRuta = `./data/${recurso[7]}`;
           recursosHTML += ` 
-							<div class="cardBook">
+							<div class="card">
 								<img src="${imagenRuta}" alt="Imagen del recurso">
-								
+								<div class="card-content">
 									<h3 class="card__titulo">${recurso[1]}</h3>
-									<p class="">${recurso[2]}</p>
-									<div class="book">
+									<p class="card__descripcion">${recurso[2]}</p>
+                  
+									  <div class="book">
 			 
-			  <div class="book-info">
-			  <h4>Autor: ${recurso[3]}</h4>
-			  <span>fecha publicacion:${recurso[4]} </span>
-			  <span>Editorial:${recurso[5]} </span>
-	
-			  </div>
-			  </div>
-				 <a href="${archivoRuta}" class="btn-descargar" download>Descargar</a>
-									
-								
-							</div>
+                      <div class="book-info">
+                      <h4>Autor: ${recurso[3]}</h4>
+                      <span>fecha publicacion:${recurso[4]} </span>
+                      <span>Editorial:${recurso[5]} </span>
+              			  </div>
+                    </div>
+                  
+                </div>
+                <button  class="btn-card"> <a href="${archivoRuta}" download>Descargar</a></button>
+              </div>
 						`;
         });
 

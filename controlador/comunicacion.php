@@ -11,6 +11,9 @@ $descripcion = isset($_POST["descripcion"]) ? limpiarCadena($_POST["descripcion"
 $directorio = "C:/xampp/htdocs/colegio/data/comunicacion/";
 $rutaImagenBD = ""; // Variable para guardar la ruta en la BD
 
+// manejo de fecha
+$fecha = new DateTime('now', new DateTimeZone('America/Caracas'));
+$fecha_mysql = $fecha->format('Y-m-d H:i:s');
 switch ($_GET["op"]) {
     case 'guardaryeditar':
         // Verificar si se subió una imagen
@@ -43,7 +46,7 @@ switch ($_GET["op"]) {
         }
 
         if (empty($idAnuncio)) {
-            $rspta = $comunicacion->insertar($idAnuncio, $asunto, $descripcion, $rutaImagenBD);
+            $rspta = $comunicacion->insertar($idAnuncio, $asunto, $descripcion, $rutaImagenBD,$fecha_mysql);
             echo $rspta ? "comunicacion registrado" : "No se pudieron registrar todos los datos del noticia";
         } else {
             $rspta = $comunicacion->editar($idAnuncio, $asunto, $descripcion, $rutaImagenBD);

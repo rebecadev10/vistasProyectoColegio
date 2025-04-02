@@ -1,4 +1,3 @@
-<?php $idPermiso=1;?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +32,7 @@
 
                     <div class="formulario-subir-noticia__grupo">
                     <input type="hidden" id="idUsuario" name="idUsuario">
-                    <input type="hidden" id="idPermiso" name="idPermiso" value="<?php echo $idPermiso; ?>">
+                    
                         <label for="titulo" class="formulario-subir-noticia__etiqueta">Nombres:</label>
                         <input type="text" id="nombre" name="nombre" class="formulario-subir-noticia__input" required>
                     </div>

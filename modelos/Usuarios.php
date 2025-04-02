@@ -6,18 +6,18 @@ class Usuarios
 	public function __construct()
 	{
 	}
-    public function insertar($idUsuario,$nombre,$apellido,$cedula,$idPermiso,$permisos,$imagenUsuario,$clave)
+    public function insertar($idUsuario,$nombre,$apellido,$cedula,$permisos,$imagenUsuario,$clave)
     {
-     $sql="  INSERT INTO  usuario ( idUsuario ,  nombre ,  apellido ,  cedula ,  idPermiso ,  imagenUsuario,clave) 
-     VALUES ('$idUsuario','$nombre','$apellido','$cedula','$idPermiso','$imagenUsuario','$clave)";
-     $ObjUsuarioNew=ejecutarConsulta_retornarID($sql);
-     $num_elementos=0;
-     $sw=true;
+        $sql="  INSERT INTO  usuario ( idUsuario ,  nombre ,  apellido ,  cedula ,    imagenUsuario,clave) 
+        VALUES ('$idUsuario','$nombre','$apellido','$cedula','$imagenUsuario','$clave')";
+        $idUsuarioNew=ejecutarConsulta_retornarID($sql);
+        $num_elementos=0;
+        $sw=true;
 
  while ($num_elementos < count($permisos))
      {
-         $sql_detalle = "INSERT INTO `usuariopermiso`(`idUsuario`, `idPermiso`) VALUES ( '$ObjUsuarioNew', '$permisos[$num_elementos]');";
-         //$sql_detalle = "INSERT INTO `usuarios_permiso` (`ObjUsuarioPermiso`, `ObjUsuario`, `ObjPermiso`) VALUES (NULL, '$ObjUsuario', '$ObjPermiso');";
+         $sql_detalle = "INSERT INTO `usuariopermiso`(`idUsuario`, `idPermisos`) VALUES ( '$idUsuarioNew', '$permisos[$num_elementos]');";
+        
          ejecutarConsulta($sql_detalle) or $sw = false;
          $num_elementos=$num_elementos + 1;
      }

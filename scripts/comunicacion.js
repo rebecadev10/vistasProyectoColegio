@@ -167,14 +167,44 @@ function listarComunicacion() {
                     comunicacionHTML += `
                         <div class="cardAnuncio">
                             <img src="${imagenRuta}" alt="imagen referente">
+							<div class="card-content">
                             <h3 class="card__titulo">${anuncio[1]}</h3>
-                            <p>${anuncio[2]}</p>
+                            <p class="card__descripcion">${anuncio[2]}</p>
+							 <button type="button" class="btn-card" 
+                                data-titulo="${anuncio[1].replace(/"/g, '&quot;')}"
+                                data-contenido="${anuncio[2].replace(/"/g, '&quot;')}"
+                                data-imagen="${imagenRuta}">
+                                Leer más
+                            </button>
                            
                         </div>
+						</div>
                     `;
                 });
 
                 $("#contenedorComunicacion").html(comunicacionHTML);
+				 // Event Delegation para todos los botones
+				 $(document).on('click', '.btn-card', function() {
+                    const titulo = $(this).data('titulo');
+                    const contenido = $(this).data('contenido');
+                    const imagen = $(this).data('imagen');
+
+                    Swal.fire({
+                        title: titulo,
+                        html: `
+                            <div class="swal2-news-modal">
+                                <img src="${imagen}" class="swal2-news-image" alt="Imagen noticia">
+                                <div class="swal2-news-content">${contenido}</div>
+                            </div>
+                        `,
+                        showCloseButton: true,
+                        width: '60%',
+                        customClass: {
+                            popup: 'custom-modal',
+							htmlContainer: 'news-modal-html-container'
+                        }
+                    });
+                });
             } else {
                 $("#contenedorComunicacion").html("<p>No hay noticias disponibles.</p>");
             }

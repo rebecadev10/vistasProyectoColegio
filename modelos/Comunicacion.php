@@ -6,11 +6,11 @@ class Comunicacion
 	public function __construct()
 	{
 	}
-    public function insertar($idAnuncio,$asunto,$descripcion,$imagenAnuncio)
+    public function insertar($idAnuncio,$asunto,$descripcion,$imagenAnuncio,$fecha)
     {
-     $sql=" INSERT INTO `comunicacion`(idAnuncio,asunto,descripcion,imagenAnuncio) 
+     $sql=" INSERT INTO `comunicacion`(idAnuncio,asunto,descripcion,imagenAnuncio,fecha) 
         
-     VALUES ('$idAnuncio','$asunto','$descripcion','$imagenAnuncio')";
+     VALUES ('$idAnuncio','$asunto','$descripcion','$imagenAnuncio','$fecha')";
      return ejecutarConsulta($sql);
     }
     public function editar($idAnuncio,$asunto,$descripcion,$imagenAnuncio)

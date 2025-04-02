@@ -50,6 +50,7 @@ function listar(){
 			"lengthMenu": [ 5, 10, 25, 75, 100],//mostramos el menú de registros a revisar
 			"aProcessing": true,//Activamos el procesamiento del datatables
 			"aServerSide": true,//Paginación y filtrado realizados por el servidor
+			responsive: true,
 			dom: '<Bl<f>rtip>',//Definimos los elementos del control de tabla
 			buttons: [		          
 						'copyHtml5',
@@ -78,7 +79,16 @@ function listar(){
 			},
 			"bDestroy": true,
 			"iDisplayLength": 5,//Paginación
-			"order": [[ 0, "desc" ]]//Ordenar (columna,orden)
+			"order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+			"createdRow": function(row, data) {
+				$(row).find('td:eq(2)').css({
+					'max-width': '400px',
+					'white-space': 'nowrap',
+					'overflow': 'hidden',
+					'text-overflow': 'ellipsis',
+					'cursor': 'pointer'
+				}).attr('title', data[2]);
+			}
 		}).DataTable();
 	}
 	function mostrar(idNoticias) {
@@ -149,41 +159,74 @@ function limpiar()
 function cancelar() {
     window.location.href = "noticiasEditar.php"; // Cambia "noticias.php" por la URL a la que deseas redirigir
 }
-
 function listarNoticias() {
     $.ajax({
         url: 'controlador/noticia.php?op=listarActivos',
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-            console.log(response); // Verificar los datos en la consola
+            console.log(response);
 
             if (response.aaData && response.aaData.length > 0) {
                 let noticiasHTML = "";
 
                 response.aaData.forEach(noticia => {
-                    let imagenRuta = noticia[3] ? `./data/${noticia[3]}` : './data/noticia.jpg';
-
+                    const imagenRuta = noticia[3] ? `./data/${noticia[3]}` : './data/noticia.jpg';
+                    
                     noticiasHTML += `
                         <div class="card">
                             <img src="${imagenRuta}" alt="imagen referente">
-                            <h3 class="card__titulo">${noticia[1]}</h3>
-                            <p>${noticia[2]}</p>
-                           
+                            <div class="card-content">
+                                <h3 class="card__titulo">${noticia[1]}</h3>
+                                <p class="card__descripcion">${noticia[2].substring(0, 100)}...</p>
+								
+                            </div>
+							<button type="button" class="btn-card" 
+                                data-titulo="${noticia[1].replace(/"/g, '&quot;')}"
+                                data-contenido="${noticia[2].replace(/"/g, '&quot;')}"
+                                data-imagen="${imagenRuta}">
+                                Leer más
+                            </button>
+                            
                         </div>
                     `;
                 });
 
                 $("#contenedorNoticias").html(noticiasHTML);
+
+                // Event Delegation para todos los botones
+                $(document).on('click', '.btn-card', function() {
+                    const titulo = $(this).data('titulo');
+                    const contenido = $(this).data('contenido');
+                    const imagen = $(this).data('imagen');
+
+                    Swal.fire({
+                        title: titulo,
+                        html: `
+                            <div class="swal2-news-modal">
+                                <img src="${imagen}" class="swal2-news-image" alt="Imagen noticia">
+                                <div class="swal2-news-content">${contenido}</div>
+                            </div>
+                        `,
+                        showCloseButton: true,
+                        width: '60%',
+                        customClass: {
+                            popup: 'custom-modal',
+							htmlContainer: 'news-modal-html-container'
+                        }
+                    });
+                });
+
             } else {
                 $("#contenedorNoticias").html("<p>No hay noticias disponibles.</p>");
             }
         },
-        error: function(xhr, status, error) {
-            console.error("Error cargando noticias: ", xhr.responseText);
+        error: function(xhr) {
+            console.error("Error:", xhr.responseText);
         }
     });
 }
+
 function desactivar(idNoticias)
 {
 	Swal.fire({
@@ -250,6 +293,7 @@ $(document).ready(function () {
 listar();
 
 listarNoticias();
+// Modificar el evento DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function () {
     // Función para actualizar el nombre del archivo seleccionado
     function actualizarNombreArchivo(input, spanId) {
@@ -257,9 +301,16 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById(spanId).textContent = fileName;
     }
 
-    // Detectar cambios en el input de imagen
-    document.getElementById("imagen").addEventListener("change", function () {
-        actualizarNombreArchivo(this, "file-name");
-    });
+    // Verificar si el elemento existe antes de agregar el listener
+    const imagenInput = document.getElementById("imagen");
+    if (imagenInput) {
+        imagenInput.addEventListener("change", function () {
+            actualizarNombreArchivo(this, "file-name");
+        });
+    }
 });
-init();
+
+// Mover la llamada a init() dentro de DOMContentLoaded
+document.addEventListener("DOMContentLoaded", function() {
+    init();
+});
