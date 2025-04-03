@@ -27,6 +27,10 @@
     --azulPastel:#CaF0F8;
     --succes:#00c503;
     --cancel:#ed0000;
+      --azulMarino: #221b68;
+      --azulElectrico: #3e7ecc;
+      --degradadoAzul: linear-gradient(105deg, rgba(0,119,182,1) 0%, rgba(3,4,94,1) 56%, rgba(2,0,36,1) 100%);
+    
   }
   
   @media (min-width: 800px) {

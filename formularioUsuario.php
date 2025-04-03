@@ -43,9 +43,10 @@ $idPermiso=1;?>
 
 
                     <!-- Botones -->
-                    <div class="formulario-subir-noticia__grupo formulario-subir-noticia__botones">
-                        <button type="submit" class="formulario-subir-noticia__boton-enviar">Registrar Usuario</button>
+                    <div class="formulario-subir-noticia__botones">
+                      
                         <button type="reset" class="formulario-subir-noticia__boton-cancelar">Cancelar</button>
+                        <button type="submit" class="formulario-subir-noticia__boton-enviar">Registrar</button>
                     </div>
                 </form>
     </div>

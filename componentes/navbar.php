@@ -1,4 +1,5 @@
-<l?php if (strlen(session_id()) < 1)
+<?php 
+if (strlen(session_id()) < 1)
     session_start();
 ?>
 <div class="navbar-content">

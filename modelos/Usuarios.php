@@ -24,9 +24,9 @@ class Usuarios
 
      return $sw;
     }
-    public function editar($idUsuario,$nombre,$apellido,$cedula,$idPermiso,$permisos,$clave)
+    public function editar($idUsuario,$nombre,$apellido,$cedula,$permisos,$clave)
     {
-        $sql="UPDATE  usuario  SET  nombre ='$nombre', apellido ='$apellido', cedula ='$cedula', idPermiso ='$idPermiso',clave='$clave'
+        $sql="UPDATE  usuario  SET  nombre ='$nombre', apellido ='$apellido', cedula ='$cedula', clave='$clave'
          WHERE  idUsuario ='$idUsuario'";
      
      ejecutarConsulta($sql);
@@ -39,7 +39,7 @@ class Usuarios
 
 		while ($num_elementos < count($permisos))
 		{
-			$sql_detalle = "INSERT INTO usuariopermiso(idUsuario, idPermiso) VALUES('$idUsuario', '$permisos[$num_elementos]')";
+			$sql_detalle = "INSERT INTO usuariopermiso(idUsuario, idPermisos) VALUES('$idUsuario', '$permisos[$num_elementos]')";
 			ejecutarConsulta($sql_detalle) or $sw = false;
 			$num_elementos=$num_elementos + 1;
 		}
@@ -63,7 +63,7 @@ class Usuarios
     }
   
     public function mostrar($idUsuario){
-        $sql="SELECT * FROM usuario WHERE idUsuario='$idUsuario'";
+        $sql="SELECT idUsuario,cedula,nombre,apellido FROM usuario WHERE idUsuario='$idUsuario'";
 		return ejecutarConsultaSimpleFila($sql);
     }
    

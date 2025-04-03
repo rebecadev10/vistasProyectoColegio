@@ -32,9 +32,10 @@
 
 
             <!-- Botones -->
-            <div class="formulario-subir-noticia__grupo formulario-subir-noticia__botones">
-                <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Publicar Anuncio</button>
+            <div class="formulario-subir-noticia__botones">
+                
                 <button type="reset" class="formulario-subir-noticia__boton-cancelar">Cancelar</button>
+                <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Publicar </button>
             </div>
         </form>
     </div>

@@ -1,38 +1,166 @@
-/* Estilos generales para el formulario */
-.formulario-subir-noticia {
-    max-width: 500px;
-    width: 100%;
-    margin: 20px auto;
-    background-color: var(--blancoA);
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+/* formulario login y registro */
+.formulario__card{
+    background: rgba(255, 255, 255, 0.908);
+ -webkit-backdrop-filter: blur(5px);
+ backdrop-filter: blur(5px);
+ border: 1.5px solid rgba(209, 213, 219, 0.3);
+ border-radius: 15px;
+ padding:2rem  4rem;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+
+ gap: 0.5rem;
+ width: 100%;
+ max-width: 400px;
+}
+.formulario__titulo{
+    font-size: 28px;
+    color: var(--azulOscuro);
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+}
+.formulario__enviar {
+    background: var(--azulOscuro);
+    color: var(--blancoA);
+    padding: 14px 28px;
+    border: none;
     border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 1rem;
+}
+.formulario__enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
+    background-color: var(--azulElectrico);
+}
+.formulario__grupo-botones {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.formulario-subir-noticia__titulo {
-    font-size: 24px;
-    color: var(--azulOscuro);
-    font-weight: 600;
-    margin-bottom: 20px;
-    text-align: center;
+.formulario__grupo{
+    display: flex;
+    align-items: left;
+    justify-content: space-around;
+    flex-direction: column;
+    
+    
+    }
+    /* Etiquetas modernas */
+.formulario__etiqueta {
+    margin-top: 8px;
+    font-size: 16px;
+    color: var(--azulIndigo);
+    font-family: var(--montserrat);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+/* Inputs estilo línea minimalista */
+.formulario__input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--grisClaro);
+    margin-bottom: 3px;
+    border-radius: 0;
+    padding: 10px 5px;
+    transition: all 0.3s ease;
     
 }
 
-/* Estructura de los grupos del formulario */
-.formulario-subir-noticia__grupo {
-    margin-bottom: 15px;
+.formulario__input:focus {
+    border-bottom-color: var(--azulMarino);
+    box-shadow: none;
+    background: rgba(42, 74, 110, 0.03);
+}
+
+/* Enlaces animados */
+.link {
+    color: var(--azulElectrico);
+    text-decoration: none;
+    position: relative;
+    font-weight: 500;
+    padding: 0px 3px;
+}
+.link:hover {
+    
+    color: var(--azulMarino);
+    font-weight: bold;
+    transition: ease-in-out 0.5s;
+}
+.btn-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    color: var(--gris);
+}
+/* Estilos generales para formularios */
+
+.formulario-subir-noticia {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+        max-width: 500px;
+        width: 100%;
+        height: 100%;
+        min-height: 500px;
+        margin: 50px;
+        background-color: var(--blancoA);
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+       
+
 }
 
-.formulario-subir-noticia__etiqueta {
-    font-size: var(--font-size-input-label);
-    color: var(--azulIndigo);
-    margin-bottom: 5px;
-    font-family: var(--montserrat);
+
+.formulario-subir-noticia__titulo {
+    font-size: 28px;
+    color: var(--azulElectrico);
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
 }
 
-/* Estilos para los inputs de texto y el área de texto */
+.formulario-subir-noticia__titulo::after {
+    
+    position: absolute;
+    right: -15px;
+    top: -5px;
+    font-size: 1.8rem;
+}
+/* Grupos de campos */
+
+.formulario-subir-noticia__grupo{
+display: flex;
+
+
+flex-direction: column;
+gap: 10px;
+margin-bottom: 20px;
+}
+
+
+
+/* Títulos con iconografía escolar */
+
+/* Inputs interactivos */
 .formulario-subir-noticia__input,
 .formulario-subir-noticia__textarea {
     padding: 10px;
@@ -45,51 +173,61 @@
     background-color: var(--blanco);
 }
 
-.formulario-subir-noticia__textarea {
-    resize: vertical;
+.formulario-subir-noticia__input:focus,
+.formulario-subir-noticia__textarea:focus {
+    border-color: var(--verdeMenta);
+    box-shadow: 0 0 12px rgba(78, 205, 196, 0.2);
+    outline: none;
 }
 
-/* Estilos para el campo de imagen */
-.formulario-subir-noticia__input-archivo {
-    border: none;
-    font-size: 14px;
-}
+/* Botones con efecto 3D */
 
-/* Estilos para los botones */
-.formulario-subir-noticia__botones {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.formulario-subir-noticia__boton-enviar,
-.formulario-subir-noticia__boton-cancelar {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size:16px ;
-    
-}
-
+/* Botón principal */
 .formulario-subir-noticia__boton-enviar {
+
+
+    background: var(--azulMarino);
+    color: var(--blanco);
+    font-size: var(--montserrat);
+    font-weight: 400;
+    border-radius: 25px;
+    margin-top: 0.1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    padding: 0.8rem 1rem;
+}
+.formulario-subir-noticia__boton-enviar:hover{
     background-color: var(--succes);
-    color: var(--blancoA);
-    transition: background-color 0.3s ease;
+    transition: ease-in-out 0.2s;
 }
-
-.formulario-subir-noticia__boton-enviar:hover {
-    background-color: var(--aguamarina);
-}
-
 .formulario-subir-noticia__boton-cancelar {
+    
     background-color: var(--cancel);
     color: var(--blancoA);
+    font-size: var(--montserrat);
+    font-weight: 400;
+    border-radius: 25px;
+    margin-top: 0.1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    padding: 0.8rem 1rem;
 }
 
 .formulario-subir-noticia__boton-cancelar:hover {
     background-color: var(--gris);
+    transition: ease-in-out 0.2s;
 }
+
+
+.formulario-subir-noticia__botones{
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+ width: 100%;
+ flex-wrap: wrap;
+ gap: 10px;
+}
+
 /* Estilo del contenedor para el input de archivo */
 .formulario-subir-noticia__input-archivo-wrapper {
     display: flex;
@@ -131,17 +269,15 @@
 .formulario-subir-noticia__archivo-nombre.seleccionado {
     color: var(--azulIndigo);
 }
-.btn-login{
-    text-align: center;
-    color: var(--gris);
+
+
+
+/* Estilos específicos para recuperación de contraseña */
+.formulario-recuperar-contrasena {
+    background: var(--blancoA);
+    border: 2px solid var(--grisClaro);
 }
-.link{
-    color: var(--azulOscuro);
-    padding-bottom: 3px;
-    text-decoration: underline;
-}
-.imgFormulario img{
-    width: 100%;
-    height: 30%;
-    object-fit: cover;
+
+.formulario-recuperar-contrasena__boton-enviar {
+    background: var(--verdeMenta);
 }

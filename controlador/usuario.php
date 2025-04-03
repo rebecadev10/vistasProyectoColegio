@@ -81,9 +81,11 @@ switch ($_GET["op"]) {
             
             var_dump($rspta);
             echo $rspta ? "Usuario registrado" : "No se pudo registrar el Usuario";
+            
         } else {
-            $rspta = $usuario->editar($idUsuario, $nombre, $apellido, $cedula, $idPermiso, $_POST['permiso'],  $clave);
+            $rspta = $usuario->editar($idUsuario, $nombre, $apellido, $cedula,  $_POST['permiso'],  $clave);
             echo $rspta ? "Usuario actualizado" : "No se pudo actualizar el Usuario";
+            
         }
         break;
 
@@ -97,8 +99,8 @@ switch ($_GET["op"]) {
             $data[] = [
                 // "0" => ($reg->estado) ?
                 "0" => '<button class="btnEditar" onclick="mostrar(' . $reg->idUsuario . ')"><i class="fa fa-pencil"></i></button>',
-                "1" => $reg->nombre.'-'.$reg->apellido,
-                "2" => $reg->cedula
+                "1" => $reg->nombre.'  '.$reg->apellido,
+                "2" => 'V- '. $reg->cedula
                
             ];
         }
@@ -112,9 +114,28 @@ switch ($_GET["op"]) {
         echo json_encode($results);
         break;
 
-    case 'mostrar':
-        $rspta = $usuario->mostrar($idUsuario);
-        echo json_encode($rspta);
+    case 'mostrar': 
+        if (!isset($_SESSION["login"]))
+		{
+		  header("Location: ../vistas/index.html");//Validamos el acceso solo a los usuarios logueados al sistema.
+		}
+		else
+		{
+			//Validamos el acceso solo al usuario logueado y autorizado.
+			if ($_SESSION['Administrativo']==1)
+			{
+                $rspta = $usuario->mostrar($idUsuario);
+		 		//Codificar el resultado utilizando json
+		 		echo json_encode($rspta);
+			//Fin de las validaciones de acceso
+			}
+			else
+			{
+		  	require 'noacceso.php';
+			}
+		}
+       
+        
         break;
     case 'permisos':
             //Obtenemos todos los permisos de la tabla permisos
@@ -130,7 +151,7 @@ switch ($_GET["op"]) {
             //Almacenar los permisos asignados al usuario en el array
         while ($per = $marcados->fetch_object())
             {
-                    array_push($valores, $per->idPermiso);
+                    array_push($valores, $per->idPermisos);
             }
     
         //Mostramos la lista de permisos en la vista y si están o no marcados
