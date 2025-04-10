@@ -1,7 +1,7 @@
 function init() {
   // //
   mostrarform(false);
-  listar();
+  
   // listarpagobol();
 
   $("#formulario").on("submit", function (e) {
@@ -10,13 +10,7 @@ function init() {
 
   // Realizar la petición al controlador para obtener los departamentos
 
-  $.post("controlador/evento.php?op=listarDepartamentos", function (response) {
-    $("#departamento")
-      .html(
-        '<option value="todos">Filtrar por departamentos</option>' + response
-      )
-      .selectpicker("refresh"); // Actualiza el selectpicker
-  });
+  
 }
 function guardaryeditar(e) {
   e.preventDefault(); //No se activará la acción predeterminada del evento
@@ -82,6 +76,15 @@ function listar() {
 			}
     })
     .DataTable();
+}
+function listarDepartamentos(){
+  $.post("controlador/evento.php?op=listarDepartamentos", function (response) {
+    $("#departamento")
+      .html(
+        '<option value="todos">Filtrar por departamentos</option>' + response
+      )
+      .selectpicker("refresh"); // Actualiza el selectpicker
+  });
 }
 function mostrar(idRecursos) {
   // Carga la información desde tu controlador usando jQuery
@@ -217,7 +220,23 @@ function listarRecursos(titulo = "", idDepartamento = "") {
 
 // Cargar recursos cuando la página termine de cargar
 $(document).ready(function () {
-  listarRecursos();
+  let contenedor=document.getElementById("contenedorRecursos");
+  let tabla=document.getElementById("tbllistado");
+  let select = document.getElementById("departamento")
+  if(contenedor){
+    listarRecursos();
+  }else{
+
+  }
+  if(tabla){
+listar();
+  }else{
+
+  }
+  if(select){
+    listarDepartamentos()
+  }
+  
 });
 
 // document.addEventListener("DOMContentLoaded", function () {
@@ -241,7 +260,4 @@ $(document).ready(function () {
 //   });
 // });
 
-listar();
-
-listarRecursos();
 init();

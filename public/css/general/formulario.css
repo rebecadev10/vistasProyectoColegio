@@ -42,6 +42,26 @@
     box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
     background-color: var(--azulElectrico);
 }
+.formulario__cancelar {
+    background: var(--cancel);
+    color: var(--blancoA);
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 1rem;
+}
+.formulario__cancelar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 30, 0, 0.3);
+    background-color: var(--blanco);
+    border: 1px solid var(--cancel);
+    color: var(--cancel);
+}
 .formulario__grupo-botones {
     margin-bottom: 1.5rem;
     display: flex;

@@ -34,7 +34,7 @@
             <!-- Botones -->
             <div class="formulario-subir-noticia__botones">
                 
-                <button type="reset" class="formulario-subir-noticia__boton-cancelar">Cancelar</button>
+                <button type="reset" class="formulario-subir-noticia__boton-cancelar" onclick="cancelar()">Cancelar</button>
                 <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Publicar </button>
             </div>
         </form>

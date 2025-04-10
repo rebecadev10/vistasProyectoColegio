@@ -20,51 +20,51 @@
             <img src="./public/img/contenido/3.jpg" alt="">
         </div>
         <div class="area2">
-            <div class="logo">
-                <img src="./public/img/logos/logo.jpeg" alt="">
-            </div>
-            <div class="formulario-subir-noticia">
-                <h2 class="formulario-subir-noticia__titulo">Registrate</h2>
+            <div class="formulario__card">
+                <div class="logo">
+                    <img src="./public/img/logos/logo.jpeg" alt="">
+                </div>
+                <div class="formulario">
+                    <h2 class="formulario__titulo">Registrate</h2>
 
-                <form id="formulario" class="formulario-subir-noticia__formulario" enctype="multipart/form-data"
-                     method="POST">
+                    <form id="formulario"  method="POST">
 
 
-                    <div class="formulario-subir-noticia__grupo">
-                    <input type="hidden" id="idUsuario" name="idUsuario">
-                    
-                        <label for="titulo" class="formulario-subir-noticia__etiqueta">Nombres:</label>
-                        <input type="text" id="nombre" name="nombre" class="formulario-subir-noticia__input" required>
-                    </div>
-                    <div class="formulario-subir-noticia__grupo">
-                        <label for="titulo" class="formulario-subir-noticia__etiqueta">Apellidos:</label>
-                        <input type="text" id="apellido" name="apellido" class="formulario-subir-noticia__input" required>
-                    </div>
-                  
-                    <div class="formulario-subir-noticia__grupo">
-                        <label for="titulo" class="formulario-subir-noticia__etiqueta">Cedula:</label>
-                        <input type="number" id="cedula" name="cedula" class="formulario-subir-noticia__input" required>
-                    </div>
-                    <div class="formulario-subir-noticia__grupo">
-                        <label for="titulo" class="formulario-subir-noticia__etiqueta">Clave:</label>
-                        <input type="password" id="clave" name="clave" class="formulario-subir-noticia__input" required>
-                    </div>
-                     <!-- Campo Imagen -->
-            <div class="formulario-subir-noticia__grupo">
-                <label for="imagen" class="formulario-subir-noticia__etiqueta">Foto de perfil:</label>
-                <div class="formulario-subir-noticia__input-archivo-wrapper">
-                <input type="file" id="imagen" name="imagen" class="formulario-subir-noticia__input-archivo" accept="image/*" required>
-                <label for="imagen" class="formulario-subir-noticia__input-archivo-boton">Seleccionar archivo</label>
+                        <div class="formulario__grupo">
+                            <input type="hidden" id="idUsuario" name="idUsuario">
+
+                            <label for="titulo" class="formulario__etiqueta">Nombres:</label>
+                            <input type="text" id="nombre" name="nombre" class="formulario__input" required>
+                        </div>
+                        <div class="formulario__grupo">
+                            <label for="titulo" class="formulario__etiqueta">Apellidos:</label>
+                            <input type="text" id="apellido" name="apellido" class="formulario__input" required>
+                        </div>
+
+                        <div class="formulario__grupo">
+                            <label for="titulo" class="formulario__etiqueta">Cedula:</label>
+                            <input type="number" id="cedula" name="cedula" class="formulario__input" required>
+                        </div>
+                        <div class="formulario__grupo">
+                            <label for="titulo" class="formulario__etiqueta">Clave:</label>
+                            <input type="password" id="clave" name="clave" class="formulario__input" required>
+                        </div>
+                        <!-- Campo Imagen -->
+                        <!-- <div class="formulario__grupo">
+                <label for="imagen" class="formulario__etiqueta">Foto de perfil:</label>
+                <div class="formulario__input-archivo-wrapper">
+                <input type="file" id="imagen" name="imagen" class="formulario__input-archivo" accept="image/*" required>
+                <label for="imagen" class="formulario__input-archivo-boton">Seleccionar archivo</label>
                 <span id="file-name" class="formulario-subir-noticia__archivo-nombre">Ningún archivo seleccionado</span>
-            </div>
-            </div>
+                 </div> -->
+                </div>
 
 
-                    <!-- Botones -->
-                    <div class="formulario-subir-noticia__grupo formulario-subir-noticia__botones">
-                        <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Registrar Usuario</button>
-                        <button type="reset" class="formulario-subir-noticia__boton-cancelar">Cancelar</button>
-                    </div>
+                <!-- Botones -->
+                <div class="formulario__grupo-botones formulario__botones">
+                    <button type="submit" id="btnGuardar" class="formulario__enviar">Registrar Usuario</button>
+                    <button type="reset" class="formulario__cancelar"><a href="index.html">Cancelar</a></button>
+                </div>
                 </form>
             </div>
         </div>
@@ -73,4 +73,5 @@
 
 </html>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script type="text/javascript" src="./scripts/usuario.js"></script>
+<script type="text/javascript" src="scripts/usuario.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -3,7 +3,7 @@ function init() {
   
   mostrarform(false);
   
-listar();
+
   $("#formulario").on("submit", function (e) {
     guardaryeditar(e);
   });
@@ -15,9 +15,11 @@ listar();
 
 
   });
+ 
 }
  
 function guardaryeditar(e) {
+  console.log("gurdar datos");
   e.preventDefault(); //No se activará la acción predeterminada del evento
   $("#btnGuardar").prop("disabled", true);
   
@@ -33,11 +35,11 @@ console.log(formData);
     success: function(datos) {
       const respuesta = datos.trim();
       let redireccion = "";
-
+console.log(respuesta);
       // Configurar según tipo de operación
-      if (respuesta === "Usuario registrado") {
+      if (respuesta.includes( "Usuario registrado")) {
           redireccion = "index.html";
-      } else if (respuesta === "Usuario actualizado") {
+      } else if (respuesta.includes( "Usuario actualizado")) {
           redireccion = "usuariosEditar.php";
       }
 
@@ -176,3 +178,12 @@ function mostrar(idUsuario) {
 });
 }
 init();
+
+$(document).ready(function(){
+  let tabla=document.getElementById("tbllistado");
+  if(tabla){
+  listar();}
+  else{
+    console.log('sigue navegando');
+  }
+})

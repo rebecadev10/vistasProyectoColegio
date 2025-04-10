@@ -33,7 +33,7 @@ switch ($_GET["op"]) {
                 exit();
             }
         } else {
-            $rutaImagenBD = isset($_POST["imagen"]) ? limpiarCadena($_POST["imagen"]) : "imgProductos/no-image.jpg";
+            $rutaImagenBD = isset($_POST["imagen"]) ? limpiarCadena($_POST["imagen"]) : "usuarios/user.png";
         }
 
         // Manejo del Usuario (solo PDF, Word, Excel)
@@ -79,7 +79,7 @@ switch ($_GET["op"]) {
             
            
             
-            var_dump($rspta);
+            
             echo $rspta ? "Usuario registrado" : "No se pudo registrar el Usuario";
             
         } else {
