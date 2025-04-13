@@ -18,6 +18,7 @@
     --blancoA: #ffffff;
     --negro: #050115dd;
     --gris: #585858cd;
+    --grisOscuro:#3d3d3d;
     --grisClaro: #b6b6b6;
     --grisPalido: rgba(255, 255, 255, 0.654);
     --azulOscuro:#03045e;
@@ -26,7 +27,11 @@
     --azulCeleste:#90E0ef;
     --azulPastel:#CaF0F8;
     --succes:#00c503;
+    --succesBtn:#479300;
     --cancel:#ed0000;
+    --cancelBtn:#820404;
+    --naranjaClaro:#ff8b06;
+    --naranjaOscuro:#d65900;
       --azulMarino: #221b68;
       --azulElectrico: #3e7ecc;
       --degradadoAzul: linear-gradient(105deg, rgba(0,119,182,1) 0%, rgba(3,4,94,1) 56%, rgba(2,0,36,1) 100%);

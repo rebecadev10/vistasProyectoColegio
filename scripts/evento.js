@@ -33,12 +33,41 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {                    
-	        //   bootbox.alert(datos);	          
-	        //   mostrarform(false);
-	        //   tabla.ajax.reload();
-			
-            window.alert("Exito!");
-			window.location.href="eventoEditar.php"
+	        const respuesta = datos.trim();
+      let redireccion = "";
+      console.log(respuesta);
+      // Configurar según tipo de operación
+      if (
+        respuesta.includes("Evento registrado") ||
+        respuesta.includes("Evento actualizado")
+      ) {
+        redireccion = "eventoEditar.php";
+      }
+
+      // Configuración de SweetAlert
+      const swalConfig = {
+        icon: redireccion ? "success" : "error",
+        title: redireccion ? "¡Éxito!" : "Error",
+        text: datos,
+        showConfirmButton: true,
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "#3085d6",
+        willClose: () => {
+          if (redireccion) {
+            window.location.href = redireccion;
+          }
+        },
+      };
+      if (redireccion) {
+        Swal.fire(swalConfig);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Acción no completada",
+          text: datos,
+        });
+      }
+		
 	    }
 
 	});
@@ -227,5 +256,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
-
+function eliminar(idEventos)
+{
+	Swal.fire({
+		title: '¿Está seguro de eliminar el evento?',
+		icon: 'warning',
+		text: 'Ten en cuenta que no podrás recuperar la información que elimines',
+		showCancelButton: true,
+		confirmButtonText: 'Sí, eliminar',
+		cancelButtonText: 'Cancelar'
+	  }).then((result) => {
+		if (result.isConfirmed) {
+			$.post("controlador/evento.php?op=eliminar", {idEventos : idEventos}, function(e){
+        		// bootbox.alert(e);
+	            tabla.ajax.reload();
+        	});	
+		  // Aquí colocas el código para desactivar el usuario
+		  Swal.fire(
+			' Eliminada!',
+			'El evento ha sido Eliminada.',
+			'success'
+		  )
+		}
+	  })
+}
 init();

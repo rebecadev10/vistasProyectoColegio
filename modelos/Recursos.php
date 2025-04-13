@@ -43,7 +43,10 @@ class Recursos
         $sql="SELECT * FROM recursos    WHERE idRecursos='$idRecursos'";
 		return ejecutarConsultaSimpleFila($sql);
     }
-   
+    public function eliminar ($idRecursos){
+        $sql="DELETE FROM recursos WHERE idRecursos='$idRecursos'";
+        return ejecutarConsulta($sql);
+    }
    
   
 }

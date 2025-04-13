@@ -32,15 +32,18 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch('controlador/evento.php?op=listarCalendario')  // URL correcta para tu controlador
                 .then(response => response.json())
                 .then(data => {
-                  console.log(data);
+                  
                     const events = data.aaData.map(evento => ({
                         id: evento.id,
                         title: evento.title,
+                        description:evento.description,
                         start: evento.start,
                         end: evento.end,
                         department: evento.department,
                         image: evento.image // URL de la imagen
+
                     }));
+                    
                     successCallback(events);
                 })
                 .catch(error => {
@@ -49,10 +52,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         },
         eventClick: function(info) {
+            
             // Mostrar SweetAlert con los detalles del evento
             Swal.fire({
                 title: info.event.title,
+                text: info.event.description,
                 html: `
+                <p>${info.event.extendedProps.description}</p>
                     <img src="${info.event.extendedProps.image}" alt="Imagen del evento" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;">
                     <p><strong>Departamento:</strong> ${info.event.extendedProps.department}</p>
                     <p><strong>Fecha Inicio:</strong> ${info.event.start.toLocaleString()}</p>

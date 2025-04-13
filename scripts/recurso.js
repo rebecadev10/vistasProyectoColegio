@@ -25,12 +25,40 @@ function guardaryeditar(e) {
     processData: false,
 
     success: function (datos) {
-      //   bootbox.alert(datos);
-      //   mostrarform(false);
-      //   tabla.ajax.reload();
-
-      window.alert("Exito!");
-      window.location.href = "recursosEditar.php";
+      
+				const respuesta = datos.trim();
+				let redireccion = "";
+		  console.log(respuesta);
+				// Configurar según tipo de operación
+				if (respuesta.includes("Recurso registrado") || respuesta.includes("Recurso actualizado")) {
+					redireccion = "recursosEditar.php";
+				}
+		  
+				// Configuración de SweetAlert
+				const swalConfig = {
+					icon: redireccion ? "success" : "error",
+					title: redireccion ? "¡Éxito!" : "Error",
+					text: datos,
+					showConfirmButton: true,
+					confirmButtonText: "Aceptar",
+					confirmButtonColor: "#3085d6",
+					willClose: () => {
+						if(redireccion) {
+							window.location.href = redireccion;
+						}
+          
+					},
+				}
+				if(redireccion) {
+					Swal.fire(swalConfig);
+				} else {
+					Swal.fire({
+						icon: "error",
+						title: "Acción no completada",
+						text: datos
+					});
+				}
+      
     },
   });
   // limpiar();
@@ -218,6 +246,30 @@ function listarRecursos(titulo = "", idDepartamento = "") {
   });
 }
 
+function eliminar(idRecursos)
+{
+	Swal.fire({
+		title: '¿Está seguro de eliminar el recurso?',
+		icon: 'warning',
+		text: 'Ten en cuenta que no podrás recuperar la información que elimines',
+		showCancelButton: true,
+		confirmButtonText: 'Sí, eliminar',
+		cancelButtonText: 'Cancelar'
+	  }).then((result) => {
+		if (result.isConfirmed) {
+			$.post("controlador/recurso.php?op=eliminar", {idRecursos : idRecursos}, function(e){
+        		// bootbox.alert(e);
+	            tabla.ajax.reload();
+        	});	
+		  // Aquí colocas el código para desactivar el usuario
+		  Swal.fire(
+			' Eliminado!',
+			'Recurso  ha sido Eliminado.',
+			'success'
+		  )
+		}
+	  })
+}
 // Cargar recursos cuando la página termine de cargar
 $(document).ready(function () {
   let contenedor=document.getElementById("contenedorRecursos");
@@ -239,25 +291,5 @@ listar();
   
 });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Función para actualizar el nombre del archivo seleccionado
-//   function actualizarNombreArchivo(input, spanId) {
-//     let fileName =
-//       input.files.length > 0
-//         ? input.files[0].name
-//         : "Ningún archivo seleccionado";
-//     document.getElementById(spanId).textContent = fileName;
-//   }
-
-//   // Detectar cambios en el input de imagen
-//   document.getElementById("imagen").addEventListener("change", function () {
-//     actualizarNombreArchivo(this, "file-name");
-//   });
-
-//   // Detectar cambios en el input de recurso
-//   document.getElementById("recurso").addEventListener("change", function () {
-//     actualizarNombreArchivo(this, "file-name-recurso");
-//   });
-// });
 
 init();

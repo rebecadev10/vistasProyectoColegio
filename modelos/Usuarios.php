@@ -66,6 +66,11 @@ class Usuarios
         $sql="SELECT idUsuario,cedula,nombre,apellido FROM usuario WHERE idUsuario='$idUsuario'";
 		return ejecutarConsultaSimpleFila($sql);
     }
+    public function eliminar ($idUsuario){
+        $sql="DELETE FROM usuario WHERE idUsuario='$idUsuario'";
+        return ejecutarConsulta($sql);
+    }
+   
    
    
   

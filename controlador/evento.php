@@ -59,9 +59,11 @@ switch ($_GET["op"]) {
              while ($reg=$rspta->fetch_object()){
                  $data[]=array(
                     "0"=>($reg->estado)?'<button class="btnEditar" onclick="mostrar('.$reg->idEventos.')"><i class="fa fa-pencil"></i></button>'.
-		 					' <button class="btnActivar" onclick="desactivar('.$reg->idEventos.')"><i class="fa fa-close"></i></button>':
+		 					' <button class="btnDesactivar" onclick="desactivar('.$reg->idEventos.')"><i class="fa-solid fa-toggle-on"></i></button>'.
+                             ' <button class="btnEliminar" onclick="eliminar(' . $reg->idEventos . ')"><i class="fa-solid fa-trash"></i></button>' :
 		 					'<button class="btnEditar" onclick="mostrar('.$reg->idEventos.')"><i class="fa fa-pencil"></i></button>'.
-		 					' <button class="btnDesactivar" onclick="activar('.$reg->idEventos.')"><i class="fa fa-check"></i></button>',
+		 					' <button class="btnActivar" onclick="activar('.$reg->idEventos.')"><i class="fa-solid fa-toggle-off"></i></button>'.
+                           '<button class="btnEliminar" onclick="eliminar(' . $reg->idEventos . ')"><i class="fa-solid fa-trash"></i></button>' ,
                     //  "0"=>' <button  onclick="mostrar('.$reg->idEventos.')"><i class="fa-solid fa-pen-to-square"></i></button>',
                     "1"=>$reg->titulo,
                     "2"=>$reg->nombre, 	 
@@ -88,6 +90,7 @@ switch ($_GET["op"]) {
                 $data[] = array(
                     "id" => $reg->idEventos,
                     "title" => $reg->titulo,
+                    "description"=>$reg->descripcion,
                     "start" => $reg->fechaInicio . 'T' . $reg->horaInicio,
                     "end" => $reg->fechaFin . 'T' . $reg->horaFin,
                     "department" => $reg->nombre,
@@ -126,6 +129,10 @@ switch ($_GET["op"]) {
             case 'activar':
                 $rspta=$evento->activar($idEventos);
                 echo $rspta ? "Evento Activado" : "Evento no se puede activar";
+                break;
+        case 'eliminar':
+            $rspta = $evento->eliminar($idEventos);
+                echo $rspta ? "Evento Eliminado" : "Evento no se puede eliminar";
                 break;
     default:
         echo "Operación no válida.";

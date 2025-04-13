@@ -33,22 +33,68 @@
     position: static;
   }
   .btnEditar{
-    background: #ff8b06;
+    background:var(--naranjaClaro);
     padding: 10px;
     border-radius: 50%;
     color: white;
+  }
+  .btnEditar:hover{
+    background: var(--naranjaOscuro);
+    transition: 0.3s ease-in-out;
+  }
+  .btnEditar:active{
+    background: var(--blanco);
+    border: 1px solid var(--naranjaClaro);
+    color: var(--naranjaClaro);
+    transition: 0.3s ease-in-out; 
   }
   .btnActivar{
-    background: #db0101;
+    background: var(--gris);
     padding: 10px;
     border-radius: 50%;
     color: white;
   }
+  .btnActivar:hover{
+    background: var(--grisOscuro);
+    transition: 0.3s ease-in-out;
+  }
+  .btnActivar:active{
+    background: var(--blanco);
+    border: 1px solid var(--grisOscuro);
+    color: var(--grisOscuro);
+    transition: 0.3s ease-in-out;
+  }
   .btnDesactivar{
-    background: #479300;
+    background:var(--succes);
     padding: 10px;
     border-radius: 50%;
     color: white;
+  }
+  .btnDesactivar:hover{
+    background: var(--succesBtn);
+    transition: 0.3s ease-in-out;
+  }
+  .btnDesactivar:active{
+    background: var(--blanco);
+    border: 1px solid var(--succes);
+    color: var(--succes);
+    transition: 0.3s ease-in-out;
+  }
+  .btnEliminar{
+    background:var(--cancel);
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+  }
+  .btnEliminar:hover{
+    background: var(--cancelBtn);
+    transition: 0.3s ease-in-out;
+  }
+  .btnEliminar:active{
+    background: var(--blanco);
+    border: 1px solid var(--cancel);
+    color: var(--cancel);
+    transition: 0.3s ease-in-out;
   }
   .buscador {
     display: flex;

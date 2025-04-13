@@ -25,12 +25,12 @@
     </div>
   </div>
   <div class="formulario-subir-noticia" id="formularioregistros">
-    <h2 class="formulario-subir-noticia__titulo">Nueva Noticia</h2>
 
-    <div class="formulario-subir-noticia">
-      <h2 class="formulario-subir-noticia__titulo">Publicar Nueva Noticia</h2>
 
-      <form id="formulario" class="formulario-subir-noticia__formulario" enctype="multipart/form-data" method="POST">
+    <div>
+      <h2 class="formulario-subir-noticia__titulo">Editar Noticia</h2>
+
+      <form id="formulario" enctype="multipart/form-data" method="POST">
         <!-- Campo Título -->
         <div class="formulario-subir-noticia__grupo">
           <label for="titulo" class="formulario-subir-noticia__etiqueta">Título:</label>
@@ -49,16 +49,18 @@
 
         <!-- Campo Imagen con estilo personalizado -->
         <div class="formulario-subir-noticia__grupo">
-        <label for="imagen" class="formulario-subir-evento__etiqueta"> Imagen Actual:</label>
-        <img id="imagenActual" alt="" class="imgFormulario">
-      
+          <label for="imagen" class="formulario-subir-evento__etiqueta"> Imagen Actual:</label>
+          <img id="imagenActual" alt="" class="imgFormulario">
+
         </div>
 
 
         <!-- Botones -->
         <div class="formulario-subir-noticia__grupo formulario-subir-noticia__botones">
-          <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Guardar</button>
-          <button type="reset" class="formulario-subir-noticia__boton-cancelar"onclick="cancelarform()">Cancelar</button>
+         
+          <button type="reset" class="formulario-subir-noticia__boton-cancelar"
+            onclick="cancelarform()">Cancelar</button>
+            <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Guardar</button>
         </div>
       </form>
     </div>

@@ -53,5 +53,8 @@ class Eventos
 		return ejecutarConsulta($sql);
 	}
 
-
+  public function eliminar ($idEventos){
+    $sql="DELETE FROM eventos WHERE idEventos='$idEventos'";
+    return ejecutarConsulta($sql);
+}
 }

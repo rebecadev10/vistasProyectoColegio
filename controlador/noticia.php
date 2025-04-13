@@ -58,9 +58,11 @@ switch ($_GET["op"]) {
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
                 "0" => ($reg->estado) ? '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
-                    ' <button class="btnActivar" onclick="desactivar(' . $reg->idNoticias . ')"><i class="fa fa-close"></i></button>' :
+                    ' <button class="btnDesactivar" onclick="desactivar(' . $reg->idNoticias . ')"><i class="fa-solid fa-toggle-on"></i></button>'.
+                    ' <button class="btnEliminar" onclick="eliminar(' . $reg->idNoticias . ')"><i class="fa-solid fa-trash"></i></button>' :
                     '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
-                    ' <button class="btnDesactivar" onclick="activar(' . $reg->idNoticias . ')"><i class="fa fa-check"></i></button>',
+                    ' <button class=" btnActivar " onclick="activar(' . $reg->idNoticias . ')"><i class="fa-solid fa-toggle-off"></i></button>'.
+                    ' <button class="btnEliminar" onclick="eliminar(' . $reg->idNoticias . ')"><i class="fa-solid fa-trash"></i></button>' ,
 
 
                 "1" => $reg->titulo,
@@ -121,7 +123,10 @@ switch ($_GET["op"]) {
         $rspta = $noticia->activar($idNoticias);
         echo $rspta ? "Noticia Activado" : "Noticia no se puede activar";
         break;
-
+    case 'eliminar':
+        $rspta = $noticia->eliminar($idNoticias);
+        echo $rspta ? "Noticia Eliminada" : "Noticia no se puede eliminar";
+        break;
     default:
         echo "Operación no válida.";
         break;

@@ -14,7 +14,7 @@ class Noticias
     }
     public function editar($idNoticias,$titulo,$descripcion,$nombreImagenN)
     {
-     $sql="  UPDATE `noticias ` SET `titulo`='$titulo',`descripcion`='$descripcion',`nombreImagenN`='$nombreImagenN'
+     $sql="  UPDATE noticias SET titulo='$titulo',descripcion='$descripcion',nombreImagenN='$nombreImagenN'
       WHERE `idNoticias`='$idNoticias'";
      return ejecutarConsulta($sql);
     }
@@ -48,5 +48,9 @@ class Noticias
       //$sql = "UPDATE `usuario` SET `estatus` = '1' WHERE `usuario`.`ObjUsuario` = '$ObjUsuario'";
       return ejecutarConsulta($sql);
     }
+    public function eliminar ($idNoticias){
+      $sql="DELETE FROM noticias WHERE idNoticias='$idNoticias'";
+      return ejecutarConsulta($sql);
+  }
   
 }

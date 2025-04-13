@@ -33,15 +33,42 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {                    
-	        //   bootbox.alert(datos);	          
-	        //   mostrarform(false);
-	        //   tabla.ajax.reload();
+	   
 			
-            window.alert("Exito!");
-			window.location.href="noticiasEditar.php"
-	    }
-
-	});
+				const respuesta = datos.trim();
+				let redireccion = "";
+		  console.log(respuesta);
+				// Configurar según tipo de operación
+				if (respuesta.includes("noticia registrado") || respuesta.includes("noticia actualizado")) {
+					redireccion = "noticiasEditar.php";
+				}
+		  
+				// Configuración de SweetAlert
+				const swalConfig = {
+					icon: redireccion ? "success" : "error",
+					title: redireccion ? "¡Éxito!" : "Error",
+					text: datos,
+					showConfirmButton: true,
+					confirmButtonText: "Aceptar",
+					confirmButtonColor: "#3085d6",
+					willClose: () => {
+						if(redireccion) {
+							window.location.href = redireccion;
+						}
+          
+					},
+				}
+				if(redireccion) {
+					Swal.fire(swalConfig);
+				} else {
+					Swal.fire({
+						icon: "error",
+						title: "Acción no completada",
+						text: datos
+					});
+				}
+	},
+});
 	// limpiar();
 }
 function listar(){
@@ -249,13 +276,6 @@ function desactivar(idNoticias)
 		  )
 		}
 	  })
-	  
-	// bootbox.confirm("¿Está Seguro de desactivar el usuario?", function(result){
-	// 	if(result)
-    //     {
-        	
-    //     }
-	// })
 }
 
 //Función para activar registros
@@ -283,6 +303,30 @@ function activar(idNoticias)
 	  })
 	  
 
+}
+function eliminar(idNoticias)
+{
+	Swal.fire({
+		title: '¿Está seguro de eliminar la noticia?',
+		icon: 'warning',
+		text: 'Ten en cuenta que no podrás recuperar la información que elimines',
+		showCancelButton: true,
+		confirmButtonText: 'Sí, eliminar',
+		cancelButtonText: 'Cancelar'
+	  }).then((result) => {
+		if (result.isConfirmed) {
+			$.post("controlador/noticia.php?op=eliminar", {idNoticias : idNoticias}, function(e){
+        		// bootbox.alert(e);
+	            tabla.ajax.reload();
+        	});	
+		  // Aquí colocas el código para desactivar el usuario
+		  Swal.fire(
+			' Eliminada!',
+			'La Noticia ha sido Eliminada.',
+			'success'
+		  )
+		}
+	  })
 }
 // Cargar noticias cuando la página termine de cargar
 $(document).ready(function () {

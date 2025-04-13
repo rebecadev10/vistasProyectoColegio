@@ -46,11 +46,11 @@ switch ($_GET["op"]) {
         }
 
         if (empty($idAnuncio)) {
-            $rspta = $comunicacion->insertar($idAnuncio, $asunto, $descripcion, $rutaImagenBD,$fecha_mysql);
-            echo $rspta ? "comunicacion registrado" : "No se pudieron registrar todos los datos del noticia";
+            $rspta = $comunicacion->insertar($idAnuncio, $asunto, $descripcion, $rutaImagenBD, $fecha_mysql);
+            echo $rspta ? "anuncio registrado" : "No se pudieron registrar todos los datos del noticia";
         } else {
             $rspta = $comunicacion->editar($idAnuncio, $asunto, $descripcion, $rutaImagenBD);
-            echo $rspta ? "noticia actualizado" : "noticia no se pudo actualizar";
+            echo $rspta ? "anuncio actualizado" : "noticia no se pudo actualizar";
         }
         break;
     case 'listar':
@@ -60,7 +60,8 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" =>'<button class="btnEditar" onclick="mostrar(' . $reg->idAnuncio . ')"><i class="fa fa-pencil"></i></button>',
+                "0" => '<button class="btnEditar" onclick="mostrar(' . $reg->idAnuncio . ')"><i class="fa fa-pencil"></i></button>' .
+                    ' <button class="btnEliminar" onclick="eliminar(' . $reg->idAnuncio . ')"><i class="fa-solid fa-trash"></i></button>',
                 "1" => $reg->asunto,
                 "2" => $reg->descripcion,
                 "3" => $reg->imagenAnuncio
@@ -81,7 +82,11 @@ switch ($_GET["op"]) {
         //Codificar el resultado utilizando json
         echo json_encode($rspta);
         break;
-    
+    case 'eliminar':
+        $rspta = $comunicacion->eliminar($idAnuncio);
+        echo $rspta ? "Anuncio Eliminado" : "Anucio no se puede eliminar";
+        break;
+
     default:
         echo "Operación no válida.";
         break;

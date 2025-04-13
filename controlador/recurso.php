@@ -77,7 +77,8 @@ switch ($_GET["op"]) {
         while ($reg = $rspta->fetch_object()) {
             $data[] = [
                 // "0" => ($reg->estado) ?
-                "0" => '<button class="btnEditar" onclick="mostrar(' . $reg->idRecursos . ')"><i class="fa fa-pencil"></i></button>',
+                "0" => '<button class="btnEditar" onclick="mostrar(' . $reg->idRecursos . ')"><i class="fa fa-pencil"></i></button>'.
+                ' <button class="btnEliminar" onclick="eliminar(' . $reg->idRecursos . ')"><i class="fa-solid fa-trash"></i></button>',
                 "1" => $reg->tituloRecurso,
                 "2" => $reg->descripcion,
                 "3" => $reg->autor,
@@ -100,6 +101,10 @@ switch ($_GET["op"]) {
     case 'mostrar':
         $rspta = $recurso->mostrar($idRecursos);
         echo json_encode($rspta);
+        break;
+    case 'eliminar':
+        $rspta = $recurso->eliminar($idRecursos);
+        echo $rspta ? "Recurso Eliminado" : "Recurso no se puede eliminar";
         break;
 
     default:
