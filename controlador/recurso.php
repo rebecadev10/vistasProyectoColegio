@@ -1,5 +1,6 @@
 <?php
 require_once "../modelos/Recursos.php";
+require_once '../public/fpdf186/fpdf.php';
 
 $recurso = new recursos();
 
@@ -77,8 +78,9 @@ switch ($_GET["op"]) {
         while ($reg = $rspta->fetch_object()) {
             $data[] = [
                 // "0" => ($reg->estado) ?
-                "0" => '<button class="btnEditar" onclick="mostrar(' . $reg->idRecursos . ')"><i class="fa fa-pencil"></i></button>'.
-                ' <button class="btnEliminar" onclick="eliminar(' . $reg->idRecursos . ')"><i class="fa-solid fa-trash"></i></button>',
+                "0" => '<button class="btnEditar" onclick="mostrar(' . $reg->idRecursos . ')"><i class="fa fa-pencil"></i></button>' .
+                    ' <button class="btnEliminar" onclick="eliminar(' . $reg->idRecursos . ')"><i class="fa-solid fa-trash"></i></button>'. 
+                    ' <button class="btnPDF" onclick="descargarPDF(' . $reg->idRecursos . ')"><i class="fa-solid fa-file-pdf"></i></button>'  ,
                 "1" => $reg->tituloRecurso,
                 "2" => $reg->descripcion,
                 "3" => $reg->autor,
@@ -106,7 +108,118 @@ switch ($_GET["op"]) {
         $rspta = $recurso->eliminar($idRecursos);
         echo $rspta ? "Recurso Eliminado" : "Recurso no se puede eliminar";
         break;
+    case 'exportarPdf':
+        date_default_timezone_set('America/Caracas');
 
+        // Configuración inicial
+        ob_start();
+
+        class PDF extends FPDF
+        {
+            private $fechaGeneracion;
+
+            function __construct()
+            {
+                parent::__construct();
+                $this->SetMargins(25, 25, 25); // Márgenes izquierdo, superior y derecho
+                $this->SetAutoPageBreak(true, 25); // Margen inferior
+            }
+
+            function Header()
+            {
+                // Logo
+                $this->Image('../public/img/logos/logo.jpeg', 10, 8, 33);
+                // Arial bold 15
+                $this->SetFont('Arial', 'B', 12);
+                $this->SetTextColor(128);
+                // Movernos a la derecha
+
+                // Título
+                $this->Cell(160, 10, 'U.E. Manuel Diaz Rodriguez', 0, 0, 'R');
+                // Salto de línea
+                $this->Ln(20);
+                $this->SetFont('Arial', 'B', 16);
+
+                $this->SetTextColor(3, 4, 94);
+                // Título centrado
+                $this->Cell(0, 10, 'REPORTE DE RECURSO', 0, 1, 'C');
+                $this->Ln(15); // Espacio después del título
+            }
+
+            function Footer()
+            {
+                $this->SetY(-20); // Posicionar a 20mm del fondo
+                $this->SetFont('Arial', 'I', 10);
+                require_once "../modelos/Permisos.php";
+                $permiso = new Permiso();
+                // Formatear fecha en español
+                $fecha = $permiso->formatearFecha(date('d-m-Y H:i'));
+
+                // Texto alineado a la derecha
+                $this->Cell(0, 6, 'Los Teques, ' . $fecha, 0, 0, 'R');
+            }
+
+
+        }
+
+        // Validar ID
+        $idRecursos = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        if ($idRecursos == 0) {
+            ob_end_clean();
+            die(json_encode(['error' => 'ID inválido']));
+        }
+
+        // Obtener datos
+        $rspta = $recurso->detalleRecurso($idRecursos);
+        $reg = $rspta->fetch_object();
+
+        if (!$reg) {
+            ob_end_clean();
+            die(json_encode(['error' => 'recurso no encontrado']));
+        }
+
+        // Crear PDF
+        $pdf = new PDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', '', 12);
+
+        // Contenido principal
+        $pdf->SetX(25); // Respeta margen izquierdo
+
+        // Título del recurso
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->MultiCell(0, 8, utf8_decode('Título: ') . utf8_decode($reg->tituloRecurso), 0, 'L');
+        $pdf->Ln(12);
+
+
+
+
+        // Descripción
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(0, 8, utf8_decode('DESCRIPCIÓN:'), 0, 1);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->MultiCell(0, 8, utf8_decode($reg->descripcion), 0, 'J');
+
+        // Detalles del recurso
+        $detalles = [
+            'Autor' => utf8_decode($reg->autor),
+            utf8_decode('Fecha de publicación') => date('d/m/Y', strtotime($reg->fechaPublicacion)) ,
+            'Editorial' => utf8_decode($reg->editorial),
+            'Departamento' => utf8_decode($reg->nombre),
+        ];
+
+        foreach ($detalles as $titulo => $valor) {
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->Cell(50, 8, $titulo . ':', 0, 0);
+            $pdf->SetFont('Arial', '', 12);
+            $pdf->MultiCell(0, 8, $valor, 0, 'L');
+            $pdf->Ln(5);
+        }
+        // Salida
+        ob_end_clean();
+        $pdf->Output('D', 'Reporte_recurso_' . $idRecursos . '.pdf');
+        exit();
+        break;
     default:
         echo "Operación no válida.";
         break;

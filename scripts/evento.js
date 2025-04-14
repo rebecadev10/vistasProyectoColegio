@@ -79,13 +79,19 @@ function listar(){
 			"lengthMenu": [ 5, 10, 25, 75, 100],//mostramos el menú de registros a revisar
 			"aProcessing": true,//Activamos el procesamiento del datatables
 			"aServerSide": true,//Paginación y filtrado realizados por el servidor
-			dom: '<Bl<f>rtip>',//Definimos los elementos del control de tabla
-			buttons: [		          
-						'copyHtml5',
-						'excelHtml5',
-						'csvHtml5',
-						'pdf'
-					],
+			dom:  "<'topTabla'Bf>" +    // Botones y buscador
+            "<'componente__tabla'tr>" + // Tabla
+            "<'bottomTabla'ip>",   // Info y paginación", //Definimos los elementos del control de tabla
+		buttons: [{
+			extend: 'copyHtml5',
+			title: 'Data Eventos'
+		},{
+			extend: 'excelHtml5',
+			title: 'Data Eventos'
+		},{
+			extend: 'csvHtml5',
+			title: 'Data Eventos'
+		}],
 			"ajax":
 					{
 						url: 'controlador/evento.php?op=listar',
@@ -279,5 +285,8 @@ function eliminar(idEventos)
 		  )
 		}
 	  })
+}
+function descargarPDF(idEventos) {
+    window.open('controlador/evento.php?op=exportarPdf&id=' + idEventos, '_blank'); 
 }
 init();

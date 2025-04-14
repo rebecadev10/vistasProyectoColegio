@@ -1,5 +1,6 @@
 <?php
 require_once "../modelos/Noticias.php";
+require_once '../public/fpdf186/fpdf.php';
 
 $noticia = new Noticias();
 
@@ -59,10 +60,12 @@ switch ($_GET["op"]) {
             $data[] = array(
                 "0" => ($reg->estado) ? '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
                     ' <button class="btnDesactivar" onclick="desactivar(' . $reg->idNoticias . ')"><i class="fa-solid fa-toggle-on"></i></button>'.
-                    ' <button class="btnEliminar" onclick="eliminar(' . $reg->idNoticias . ')"><i class="fa-solid fa-trash"></i></button>' :
+                    ' <button class="btnEliminar" onclick="eliminar(' . $reg->idNoticias . ')"><i class="fa-solid fa-trash"></i></button>'. 
+                    ' <button class="btnPDF" onclick="descargarPDF(' . $reg->idNoticias . ')"><i class="fa-solid fa-file-pdf"></i></button>'  :
                     '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
                     ' <button class=" btnActivar " onclick="activar(' . $reg->idNoticias . ')"><i class="fa-solid fa-toggle-off"></i></button>'.
-                    ' <button class="btnEliminar" onclick="eliminar(' . $reg->idNoticias . ')"><i class="fa-solid fa-trash"></i></button>' ,
+                    ' <button class="btnEliminar" onclick="eliminar(' . $reg->idNoticias . ')"><i class="fa-solid fa-trash"></i></button>'. 
+                    ' <button class="btnPDF" onclick="descargarPDF(' . $reg->idNoticias . ')"><i class="fa-solid fa-file-pdf"></i></button>'  ,
 
 
                 "1" => $reg->titulo,
@@ -127,6 +130,104 @@ switch ($_GET["op"]) {
         $rspta = $noticia->eliminar($idNoticias);
         echo $rspta ? "Noticia Eliminada" : "Noticia no se puede eliminar";
         break;
+        case 'exportarPdf':
+            date_default_timezone_set('America/Caracas');
+    
+            // Configuración inicial
+            ob_start();
+    
+            class PDF extends FPDF
+            {
+                private $fechaGeneracion;
+    
+                function __construct()
+                {
+                    parent::__construct();
+                    $this->SetMargins(25, 25, 25); // Márgenes izquierdo, superior y derecho
+                    $this->SetAutoPageBreak(true, 25); // Margen inferior
+                }
+    
+                function Header()
+                {
+                    // Logo
+                    $this->Image('../public/img/logos/logo.jpeg', 10, 8, 33);
+                    // Arial bold 15
+                    $this->SetFont('Arial', 'B', 12);
+                    $this->SetTextColor(128);
+                    // Movernos a la derecha
+                    
+                    // Título
+                    $this->Cell(160, 10, 'U.E. Manuel Diaz Rodriguez',0, 0, 'R');
+                    // Salto de línea
+                    $this->Ln(20);
+                    $this->SetFont('Arial', 'B', 16);
+    
+                    $this->SetTextColor(3,4,94);
+                    // Título centrado
+                    $this->Cell(0, 10, 'REPORTE DE NOTICIA', 0, 1, 'C');
+                    $this->Ln(15); // Espacio después del título
+                }
+    
+                function Footer()
+                {
+                    $this->SetY(-20); // Posicionar a 20mm del fondo
+                    $this->SetFont('Arial', 'I', 10);
+                    require_once "../modelos/Permisos.php";
+                    $permiso = new Permiso();
+                    // Formatear fecha en español
+                    $fecha = $permiso->formatearFecha(date('d-m-Y H:i'));
+    
+                    // Texto alineado a la derecha
+                    $this->Cell(0, 6, 'Los Teques, ' . $fecha, 0, 0, 'R');
+                }
+    
+    
+            }
+    
+            // Validar ID
+            $idNoticias = isset($_GET['id']) ? intval($_GET['id']) : 0;
+            if ($idNoticias == 0) {
+                ob_end_clean();
+                die(json_encode(['error' => 'ID inválido']));
+            }
+    
+            // Obtener datos
+            $rspta = $noticia->detalleNoticia($idNoticias);
+            $reg = $rspta->fetch_object();
+    
+            if (!$reg) {
+                ob_end_clean();
+                die(json_encode(['error' => 'noticia no encontrado']));
+            }
+    
+            // Crear PDF
+            $pdf = new PDF();
+            $pdf->AddPage();
+            $pdf->SetFont('Arial', '', 12);
+    
+            // Contenido principal
+            $pdf->SetX(25); // Respeta margen izquierdo
+    
+            // Título del noticia
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->MultiCell(0, 8,utf8_decode('Título: '). utf8_decode($reg->titulo), 0, 'L');
+            $pdf->Ln(12);
+    
+     
+    
+         
+    
+            // Descripción
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->Cell(0, 8, utf8_decode('DESCRIPCIÓN:'), 0, 1);
+            $pdf->SetFont('Arial', '', 12);
+            $pdf->MultiCell(0, 8, utf8_decode($reg->descripcion), 0, 'J');
+    
+            // Salida
+            ob_end_clean();
+            $pdf->Output('D', 'Reporte_Noticia_' . $idNoticias . '.pdf');
+            exit();
+            break;
     default:
         echo "Operación no válida.";
         break;

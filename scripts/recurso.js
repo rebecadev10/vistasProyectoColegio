@@ -69,9 +69,20 @@ function listar() {
       lengthMenu: [5, 10, 25, 75, 100], //mostramos el menú de registros a revisar
       aProcessing: true, //Activamos el procesamiento del datatables
       aServerSide: true, //Paginación y filtrado realizados por el servidor
-      dom: "<Bl<f>rtip>", //Definimos los elementos del control de tabla
-      buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdf"],
-      ajax: {
+      dom:  "<'topTabla'Bf>" +    // Botones y buscador
+            "<'componente__tabla'tr>" + // Tabla
+            "<'bottomTabla'ip>",   // Info y paginación", //Definimos los elementos del control de tabla
+		buttons: [{
+			extend: 'copyHtml5',
+			title: 'Data Recursos'
+		},{
+			extend: 'excelHtml5',
+			title: 'Data Recursos'
+		},{
+			extend: 'csvHtml5',
+			title: 'Data Recursos'
+		}],
+    ajax: {
         url: "controlador/recurso.php?op=listar",
         type: "get",
         dataType: "json",
@@ -269,6 +280,9 @@ function eliminar(idRecursos)
 		  )
 		}
 	  })
+}
+function descargarPDF(idEventos) {
+  window.open('controlador/recurso.php?op=exportarPdf&id=' + idEventos, '_blank'); 
 }
 // Cargar recursos cuando la página termine de cargar
 $(document).ready(function () {

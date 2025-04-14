@@ -32,6 +32,10 @@ class Noticias
         $sql="SELECT * FROM noticias    WHERE idNoticias='$idNoticias'";
 		return ejecutarConsultaSimpleFila($sql);
     }
+    public function detalleNoticia($idNoticias){
+      $sql="SELECT * FROM noticias    WHERE idNoticias='$idNoticias'";
+      return ejecutarConsulta($sql);
+    }
    
     public function desactivar($idNoticias)
     {
@@ -51,6 +55,6 @@ class Noticias
     public function eliminar ($idNoticias){
       $sql="DELETE FROM noticias WHERE idNoticias='$idNoticias'";
       return ejecutarConsulta($sql);
-  }
+  } 
   
 }

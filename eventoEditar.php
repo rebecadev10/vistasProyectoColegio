@@ -9,14 +9,16 @@
     </div>
 
     <div class="componente__contenedor-tabla" id="listadoregistros">
-      <table id="tbllistado" class=" componente__tabla" style="width:100%">
-        <thead style="width:100%">
+      <table id="tbllistado" >
+        <thead >
           <tr class=" componente__fila--encabezado">
             <th class="componente__encabezado-tabla">Opción</th>
             <th class="componente__encabezado-tabla">Título</th>
             <th class="componente__encabezado-tabla">Departamento</th>
-            <th class="componente__encabezado-tabla">Fecha de Inicio</th>
-            <th class="componente__encabezado-tabla">Hora de Inicio</th>
+            <th class="componente__encabezado-tabla">Inicio de evento</th>
+            <th class="componente__encabezado-tabla">Hora de apertura</th>
+            <th class="componente__encabezado-tabla">Fin del Evento</th>
+            <th class="componente__encabezado-tabla">Hora de cierre</th>
           </tr>
         </thead>
         <tbody >

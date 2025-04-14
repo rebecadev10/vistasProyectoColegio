@@ -78,9 +78,20 @@ function listar() {
       lengthMenu: [5, 10, 25, 75, 100], //mostramos el menú de registros a revisar
       aProcessing: true, //Activamos el procesamiento del datatables
       aServerSide: true, //Paginación y filtrado realizados por el servidor
-      dom: "<Bl<f>rtip>", //Definimos los elementos del control de tabla
-      buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdf"],
-      ajax: {
+      dom:  "<'topTabla'Bf>" +    // Botones y buscador
+            "<'componente__tabla'tr>" + // Tabla
+            "<'bottomTabla'ip>",   // Info y paginación", //Definimos los elementos del control de tabla
+		buttons: [{
+			extend: 'copyHtml5',
+			title: 'Data Usuarios'
+		},{
+			extend: 'excelHtml5',
+			title: 'Data Usuarios'
+		},{
+			extend: 'csvHtml5',
+			title: 'Data Usuarios'
+		}],
+    ajax: {
         url: "controlador/usuario.php?op=listar",
         type: "get",
         dataType: "json",

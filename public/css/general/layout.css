@@ -96,6 +96,22 @@
     color: var(--cancel);
     transition: 0.3s ease-in-out;
   }
+  .btnPDF{
+    background:var(--azulIndigo);
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+  }
+  .btnPDF:hover{
+    background: var(--azulOscuro);
+    transition: 0.3s ease-in-out;
+  }
+  .btnPDF:active{
+    background: var(--blanco);
+    border: 1px solid var(--azulMarino);
+    color: var(--azulMarino);
+    transition: 0.3s ease-in-out;
+  }
   .buscador {
     display: flex;
     gap: 15px;

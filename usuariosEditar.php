@@ -7,7 +7,7 @@
     </div>
 
     <div class="componente__contenedor-tabla" id="listadoregistros">
-      <table id="tbllistado" class=" componente__tabla" style="width:100%">
+      <table id="tbllistado" class="  style="width:100%">
         <thead style="width:100%">
           <tr class="componente__fila--encabezado">
             <th class="componente__encabezado-tabla">Opción</th>

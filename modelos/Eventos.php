@@ -23,15 +23,19 @@ class Eventos
        return ejecutarConsulta($sql);
     }
     public function listarRegistros() {
-      $sql = "SELECT e.idEventos idEventos, e.titulo, d.nombre, e.fechaInicio, e.horaInicio,e.estado
+      $sql = "SELECT e.idEventos idEventos, e.titulo, d.nombre, e.fechaInicio, e.horaInicio,e.fechaFin,e.horaFin,e.estado
               FROM eventos e
               INNER JOIN departamentos d ON e.departamento = d.idDepartamento";
       return ejecutarConsulta($sql);
   }
   
     public function mostrar($idEventos){
-        $sql="SELECT * FROM eventos e INNER JOIN departamentos d  WHERE idEventos='$idEventos'";
+        $sql="SELECT * FROM eventos e INNER JOIN departamentos d ON e.departamento = d.idDepartamento  WHERE idEventos='$idEventos'";
 		return ejecutarConsultaSimpleFila($sql);
+    }
+    public function detalleEvento($idEventos){
+      $sql="SELECT * FROM eventos e INNER JOIN departamentos d  ON e.departamento = d.idDepartamento WHERE idEventos='$idEventos'";
+      return ejecutarConsulta($sql);
     }
     public function listarDepartamentos(){
       $sql ="SELECT * FROM departamentos";
@@ -57,4 +61,5 @@ class Eventos
     $sql="DELETE FROM eventos WHERE idEventos='$idEventos'";
     return ejecutarConsulta($sql);
 }
+
 }

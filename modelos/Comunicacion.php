@@ -29,6 +29,10 @@ class Comunicacion
         $sql="SELECT * FROM comunicacion    WHERE idAnuncio='$idAnuncio'";
 		return ejecutarConsultaSimpleFila($sql);
     }
+    public function detalleAnuncio($idAnuncio){
+        $sql="SELECT * FROM comunicacion    WHERE idAnuncio='$idAnuncio'";
+		return ejecutarConsulta($sql);
+    }
 
     public function eliminar ($idAnuncio){
         $sql="DELETE FROM comunicacion WHERE idAnuncio='$idAnuncio'";

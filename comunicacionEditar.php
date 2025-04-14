@@ -9,8 +9,8 @@
     </div>
 
     <div class="componente__contenedor-tabla" id="listadoregistros">
-      <table id="tbllistado" class=" componente__tabla" style="width:100%">
-        <thead style="width:100%">
+      <table id="tbllistado">
+        <thead>
           <tr class=" componente__fila--encabezado">
             <th class="componente__encabezado-tabla">Opción</th>
             <th class="componente__encabezado-tabla">Título</th>
@@ -65,6 +65,6 @@
       </form>
     </div>
   </div>
-  </div>
-  <?php require 'componentes/footer.php'; ?>
+</div>
+<?php require 'componentes/footer.php'; ?>
 <script type="text/javascript" src="scripts/comunicacion.js"></script>

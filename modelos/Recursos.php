@@ -43,6 +43,11 @@ class Recursos
         $sql="SELECT * FROM recursos    WHERE idRecursos='$idRecursos'";
 		return ejecutarConsultaSimpleFila($sql);
     }
+    
+    public function detalleRecurso($idRecursos){
+        $sql="SELECT * FROM recursos r INNER JOIN departamentos d ON r.idDepartamento = d.idDepartamento WHERE idRecursos='$idRecursos'";
+        return ejecutarConsulta($sql);
+      }
     public function eliminar ($idRecursos){
         $sql="DELETE FROM recursos WHERE idRecursos='$idRecursos'";
         return ejecutarConsulta($sql);

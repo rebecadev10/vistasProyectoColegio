@@ -71,53 +71,59 @@ function guardaryeditar(e)
 });
 	// limpiar();
 }
-function listar(){
-	tabla=$('#tbllistado').dataTable(
-		{
-			"lengthMenu": [ 5, 10, 25, 75, 100],//mostramos el menú de registros a revisar
-			"aProcessing": true,//Activamos el procesamiento del datatables
-			"aServerSide": true,//Paginación y filtrado realizados por el servidor
-			responsive: true,
-			dom: '<Bl<f>rtip>',//Definimos los elementos del control de tabla
-			buttons: [		          
-						'copyHtml5',
-						'excelHtml5',
-						'csvHtml5',
-						'pdf'
-					],
-			"ajax":
-					{
-						url: 'controlador/noticia.php?op=listar',
-						type : "get",
-						dataType : "json",						
-						error: function(e){
-							console.log(e.responseText);	
-						}
-					},
-			"language": {
-				"lengthMenu": "Mostrar : _MENU_ registros",
-				"buttons": {
-				"copyTitle": "Tabla Copiada",
-				"copySuccess": {
-						_: '%d líneas copiadas',
-						1: '1 línea copiada'
-					}
-				}
+function listar() {
+	tabla = $("#tbllistado")
+	  .dataTable({
+		lengthMenu: [5, 10, 25, 75, 100], //mostramos el menú de registros a revisar
+		aProcessing: true, //Activamos el procesamiento del datatables
+		aServerSide: true, //Paginación y filtrado realizados por el servidor
+		dom:  "<'topTabla'Bf>" +    // Botones y buscador
+            "<'componente__tabla'tr>" + // Tabla
+            "<'bottomTabla'ip>",   // Info y paginación", //Definimos los elementos del control de tabla
+		buttons: [{
+			extend: 'copyHtml5',
+			title: 'Data Noticia'
+		},{
+			extend: 'excelHtml5',
+			title: 'Data Noticia'
+		},{
+			extend: 'csvHtml5',
+			title: 'Data Noticia'
+		}],
+		ajax: {
+		  url: "controlador/noticia.php?op=listar",
+		  type: "get",
+		  dataType: "json",
+		  error: function (e) {
+			console.log(e.responseText);
+		  },
+		},
+		language: {
+		  lengthMenu: "Mostrar : _MENU_ registros",
+		  buttons: {
+			copyTitle: "Tabla Copiada",
+			copySuccess: {
+			  _: "%d líneas copiadas",
+			  1: "1 línea copiada",
 			},
-			"bDestroy": true,
-			"iDisplayLength": 5,//Paginación
-			"order": [[ 0, "desc" ]],//Ordenar (columna,orden)
-			"createdRow": function(row, data) {
-				$(row).find('td:eq(2)').css({
-					'max-width': '400px',
-					'white-space': 'nowrap',
-					'overflow': 'hidden',
-					'text-overflow': 'ellipsis',
-					'cursor': 'pointer'
-				}).attr('title', data[2]);
-			}
-		}).DataTable();
-	}
+		  },
+		},
+		bDestroy: true,
+		iDisplayLength: 5, //Paginación
+		order: [[0, "desc"]], //Ordenar (columna,orden)
+		responsive: true,
+		createdRow: function(row, data) {
+				  $(row).find('td:eq(2)').css({
+					  'max-width': '400px',
+					  'white-space': 'nowrap',
+					  'overflow': 'hidden',
+					  'text-overflow': 'ellipsis',
+					  'cursor': 'pointer'
+				  }).attr('title', data[2]);
+			  }
+	  })
+	  .DataTable();
+  }
 	function mostrar(idNoticias) {
 		// Carga la información desde tu controlador usando jQuery
 		$.post("controlador/noticia.php?op=mostrar", { idNoticias: idNoticias }, function(data, status) {
@@ -327,6 +333,9 @@ function eliminar(idNoticias)
 		  )
 		}
 	  })
+}
+function descargarPDF(idNoticias) {
+    window.open('controlador/noticia.php?op=exportarPdf&id=' + idNoticias, '_blank'); 
 }
 // Cargar noticias cuando la página termine de cargar
 $(document).ready(function () {

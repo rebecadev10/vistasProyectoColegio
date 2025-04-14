@@ -126,6 +126,19 @@
     margin-top: 5px;
     color: var(--gris);
 }
+.viewPassword{
+    background-color: var(--azulOscuro);
+    color: var(--blanco);
+    border-radius: 50%;
+    padding: 8px;
+
+}
+.viewPassword:active{
+    background-color: var(--blanco);
+    color: var(--azulOscuro);
+    border: 1px solid var(--azulOscuro);
+    transition: 0.3s ease-in-out;
+}
 /* Estilos generales para formularios */
 
 .formulario-subir-noticia {
