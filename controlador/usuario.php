@@ -176,7 +176,7 @@ switch ($_GET["op"]) {
             {
                 //Declaramos las variables de sesión
                 $_SESSION['idUsuario']=$fetch->idUsuario;
-                // $_SESSION['idPermiso']=$fetch->idPermiso;
+            //   $_SESSION['idPermiso']=$fetch->idPermiso;
     
                 $_SESSION['login']=$fetch->cedula;
     

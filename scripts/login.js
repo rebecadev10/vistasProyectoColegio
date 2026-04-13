@@ -1,40 +1,35 @@
-$("#frmAcceso").on('submit',function(e)
-{
-	e.preventDefault();
-    nombreUsu=$("#nombreUsu").val();
-    clave=$("#clave").val();
-console.log("verificando usuario")
-    $.post("controlador/usuario.php?op=verificar",
-        {"nombreUsu":nombreUsu,"clave":clave},
-        function(data)
-        
-    {
-        console.log(data)
-        if (data !==null)
-        {
-            console.log("usuario correcto :)")
-            // $(location).attr("href","index.php");            
-            window.location.href="./index.php";
-        }
-        else
-        {
-            console.warn("ERROR intenta nuevamente")
+$("#frmAcceso").on('submit', function(e) {
+    e.preventDefault();
+    
+    let nombreUsu = $("#nombreUsu").val();
+    let clave = $("#clave").val();
+    
+    console.log("verificando usuario...");
+
+    // Agregamos "json" al final para que jQuery convierta la respuesta automáticamente
+    $.post("controlador/usuario.php?op=verificar", {
+        "nombreUsu": nombreUsu,
+        "clave": clave
+    }, function(data) {
+        console.log(data);
+
+        // Validamos si data tiene contenido (si el login fue exitoso)
+        if (data && data !== "null") { 
+            console.log("usuario correcto :)");
+            // Una sola forma de redirección es suficiente
+            window.location.href = "index.php";
+        } else {
+            console.warn("ERROR intenta nuevamente");
             window.alert("Usuario y/o Password incorrectos");
-            
         }
-    });
-}) 
-let password = document.getElementById('clave');
-let viewPassword = document.getElementById('viewPassword');
-let click = false;
+    }, "json"); // <--- Importante definir el tipo de dato
+});
 
-viewPassword.addEventListener('click', (e)=>{
-  if(!click){
-    password.type = 'text'
-    click = true
-  }else if(click){
-    password.type = 'password'
-    click = false
-  }
-})
+// Optimización del botón Ver Contraseña
+const passwordField = document.getElementById('clave');
+const viewPasswordBtn = document.getElementById('viewPassword');
 
+viewPasswordBtn.addEventListener('click', () => {
+    const isPassword = passwordField.type === 'password';
+    passwordField.type = isPassword ? 'text' : 'password';
+});
