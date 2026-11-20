@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="./public/css/base/base.css">
+
+    <link rel="stylesheet" href="./public/css/general/formulario.css">
+    <link rel="stylesheet" href="./public/css/general/autenticacion.css">
+</head>
+
+<body>
+
+
+    <div class="contenedorAutenticacion">
+        <div class="area1">
+
+            <img src="./public/img/contenido/3.jpg" alt="">
+        </div>
+        <div class="area2">
+            <div class="formulario__card">
+                    <div class="logo">
+                        <img src="./public/img/logos/logo.jpeg" alt="">
+                    </div>
+                    <div class="formulario">
+                        <h2 class="formulario__titulo">Iniciar Sesión</h2>
+
+                        <form class="" 
+                            method="POST" id="frmAcceso">
+
+
+
+                            <!-- Campo Nombre usuario -->
+                            <div class="formulario__grupo">
+                                <label for="titulo" class="formulario__etiqueta">Nombre de usuario:</label>
+                                <input type="text" id="nombreUsu" name="nombreUsu" class="formulario__input" required>
+                            </div>
+                        
+                            <div class="formulario__grupo">
+                                <label for="titulo" class="formulario__etiqueta">Clave:</label>
+                                <div>
+                                <input type="password" id="clave" name="clave" class="formulario__input" required>
+                                <button class="viewPassword"  id="viewPassword"> <i class="fa-solid fa-eye ojo"></i></button>
+                            </div>
+                            </div>
+
+
+
+                            <!-- Botones -->
+                            <div class="formulario__grupo-botones formulario__botones">
+                                <button type="submit" class="formulario__enviar">Iniciar Sesión</button>
+                                <p class="btn-login">¿No tienes cuenta? <a href="./registroUsuario.php" class="link">Registrate</a></p>
+                                <p class="btn-login">¿Olvidaste tu contraseña? <a href="./recuperarClave.php" class="link">Recuperar</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+       
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+<script src="https://kit.fontawesome.com/3d7cd8560c.js" crossorigin="anonymous"></script>

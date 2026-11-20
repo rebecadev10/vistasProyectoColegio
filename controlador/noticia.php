@@ -1,0 +1,236 @@
+<?php
+require_once "../modelos/Noticias.php";
+require_once '../public/fpdf186/fpdf.php';
+
+$noticia = new Noticias();
+
+$idNoticias = isset($_POST["idNoticias"]) ? limpiarCadena($_POST["idNoticias"]) : "";
+$titulo = isset($_POST["titulo"]) ? limpiarCadena($_POST["titulo"]) : "";
+$descripcion = isset($_POST["descripcion"]) ? limpiarCadena($_POST["descripcion"]) : "";
+
+// Directorio para guardar imágenes
+$directorio = "C:/xampp/htdocs/colegio/data/noticias/";
+$rutaImagenBD = ""; // Variable para guardar la ruta en la BD
+
+switch ($_GET["op"]) {
+    case 'guardaryeditar':
+        // Verificar si se subió una imagen
+        // Verificar si se subió una imagen
+        if (isset($_FILES["imagen"]) && is_uploaded_file($_FILES["imagen"]["tmp_name"])) {
+            $imagen = $_FILES["imagen"];
+
+            // Limpiar el título (eliminar caracteres especiales y espacios)
+            $tituloLimpio = preg_replace("/[^a-zA-Z0-9]/", "_", trim($titulo));
+
+            // Obtener la extensión del archivo
+            $extension = pathinfo($imagen["name"], PATHINFO_EXTENSION);
+
+            // Generar el nuevo nombre de la imagen con ID y título limpio
+            $nombreImagen = $idNoticias . $tituloLimpio . "." . $extension;
+            $rutaImagen = $directorio . $nombreImagen;
+
+            // Intentar mover el archivo al directorio
+            if (move_uploaded_file($imagen["tmp_name"], $rutaImagen)) {
+                $rutaImagenBD = "noticias/" . $nombreImagen; // Ruta relativa para la BD
+            } else {
+                echo "Error al subir la imagen.";
+                exit();
+            }
+
+
+        } else {
+            // Si no se sube una nueva imagen, mantener la actual (si aplica)
+            $rutaImagenBD = isset($_POST["imagenProductoActual"]) ? limpiarCadena($_POST["imagenProductoActual"]) : "imgProductos/no-image.jpg";
+        }
+
+        if (empty($idNoticias)) {
+            $rspta = $noticia->insertar($idNoticias, $titulo, $descripcion, $rutaImagenBD);
+            echo $rspta ? "noticia registrado" : "No se pudieron registrar todos los datos del noticia";
+        } else {
+            $rspta = $noticia->editar($idNoticias, $titulo, $descripcion, $rutaImagenBD);
+            echo $rspta ? "noticia actualizado" : "noticia no se pudo actualizar";
+        }
+        break;
+    case 'listar':
+        $rspta = $noticia->listar();
+        //Vamos a declarar un array
+        $data = array();
+
+        while ($reg = $rspta->fetch_object()) {
+            $data[] = array(
+                "0" => ($reg->estado) ? '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
+                    ' <button class="btnDesactivar" onclick="desactivar(' . $reg->idNoticias . ')"><i class="fa-solid fa-toggle-on"></i></button>'.
+                    ' <button class="btnEliminar" onclick="eliminar(' . $reg->idNoticias . ')"><i class="fa-solid fa-trash"></i></button>'. 
+                    ' <button class="btnPDF" onclick="descargarPDF(' . $reg->idNoticias . ')"><i class="fa-solid fa-file-pdf"></i></button>'  :
+                    '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
+                    ' <button class=" btnActivar " onclick="activar(' . $reg->idNoticias . ')"><i class="fa-solid fa-toggle-off"></i></button>'.
+                    ' <button class="btnEliminar" onclick="eliminar(' . $reg->idNoticias . ')"><i class="fa-solid fa-trash"></i></button>'. 
+                    ' <button class="btnPDF" onclick="descargarPDF(' . $reg->idNoticias . ')"><i class="fa-solid fa-file-pdf"></i></button>'  ,
+
+
+                "1" => $reg->titulo,
+                "2" => $reg->descripcion,
+                "3" => $reg->nombreImagenN
+
+            );
+        }
+        $results = array(
+            "sEcho" => 1, //Información para el datatables
+            "iTotalRecords" => count($data), //enviamos el total registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total registros a visualizar
+            "aaData" => $data
+        );
+        echo json_encode($results);
+
+        break;
+
+    case 'listarActivos':
+        $rspta = $noticia->listarActivo();
+        //Vamos a declarar un array
+        $data = array();
+
+        while ($reg = $rspta->fetch_object()) {
+            $data[] = array(
+                "0" => ($reg->estado) ? '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
+                    ' <button class="btnActivar" onclick="desactivar(' . $reg->idNoticias . ')"><i class="fa fa-close"></i></button>' :
+                    '<button class="btnEditar" onclick="mostrar(' . $reg->idNoticias . ')"><i class="fa fa-pencil"></i></button>' .
+                    ' <button class="btnDesactivar" onclick="activar(' . $reg->idNoticias . ')"><i class="fa fa-check"></i></button>',
+                
+                "1" => $reg->titulo,
+                "2" => $reg->descripcion,
+                "3" => $reg->nombreImagenN
+
+            );
+        }
+        $results = array(
+            "sEcho" => 1, //Información para el datatables
+            "iTotalRecords" => count($data), //enviamos el total registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total registros a visualizar
+            "aaData" => $data
+        );
+        echo json_encode($results);
+
+        break;
+
+
+    case 'mostrar':
+        $rspta = $noticia->mostrar($idNoticias);
+        //Codificar el resultado utilizando json
+        echo json_encode($rspta);
+        break;
+    case 'desactivar':
+        $rspta = $noticia->desactivar($idNoticias);
+        echo $rspta ? "Noticia Desactivado" : "Noticia no se puede desactivar";
+        break;
+    case 'activar':
+        $rspta = $noticia->activar($idNoticias);
+        echo $rspta ? "Noticia Activado" : "Noticia no se puede activar";
+        break;
+    case 'eliminar':
+        $rspta = $noticia->eliminar($idNoticias);
+        echo $rspta ? "Noticia Eliminada" : "Noticia no se puede eliminar";
+        break;
+        case 'exportarPdf':
+            date_default_timezone_set('America/Caracas');
+    
+            // Configuración inicial
+            ob_start();
+    
+            class PDF extends FPDF
+            {
+                private $fechaGeneracion;
+    
+                function __construct()
+                {
+                    parent::__construct();
+                    $this->SetMargins(25, 25, 25); // Márgenes izquierdo, superior y derecho
+                    $this->SetAutoPageBreak(true, 25); // Margen inferior
+                }
+    
+                function Header()
+                {
+                    // Logo
+                    $this->Image('../public/img/logos/logo.jpeg', 10, 8, 33);
+                    // Arial bold 15
+                    $this->SetFont('Arial', 'B', 12);
+                    $this->SetTextColor(128);
+                    // Movernos a la derecha
+                    
+                    // Título
+                    $this->Cell(160, 10, 'U.E. Manuel Diaz Rodriguez',0, 0, 'R');
+                    // Salto de línea
+                    $this->Ln(20);
+                    $this->SetFont('Arial', 'B', 16);
+    
+                    $this->SetTextColor(3,4,94);
+                    // Título centrado
+                    $this->Cell(0, 10, 'REPORTE DE NOTICIA', 0, 1, 'C');
+                    $this->Ln(15); // Espacio después del título
+                }
+    
+                function Footer()
+                {
+                    $this->SetY(-20); // Posicionar a 20mm del fondo
+                    $this->SetFont('Arial', 'I', 10);
+                    require_once "../modelos/Permisos.php";
+                    $permiso = new Permiso();
+                    // Formatear fecha en español
+                    $fecha = $permiso->formatearFecha(date('d-m-Y H:i'));
+    
+                    // Texto alineado a la derecha
+                    $this->Cell(0, 6, 'Los Teques, ' . $fecha, 0, 0, 'R');
+                }
+    
+    
+            }
+    
+            // Validar ID
+            $idNoticias = isset($_GET['id']) ? intval($_GET['id']) : 0;
+            if ($idNoticias == 0) {
+                ob_end_clean();
+                die(json_encode(['error' => 'ID inválido']));
+            }
+    
+            // Obtener datos
+            $rspta = $noticia->detalleNoticia($idNoticias);
+            $reg = $rspta->fetch_object();
+    
+            if (!$reg) {
+                ob_end_clean();
+                die(json_encode(['error' => 'noticia no encontrado']));
+            }
+    
+            // Crear PDF
+            $pdf = new PDF();
+            $pdf->AddPage();
+            $pdf->SetFont('Arial', '', 12);
+    
+            // Contenido principal
+            $pdf->SetX(25); // Respeta margen izquierdo
+    
+            // Título del noticia
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->MultiCell(0, 8,utf8_decode('Título: '). utf8_decode($reg->titulo), 0, 'L');
+            $pdf->Ln(12);
+    
+     
+    
+         
+    
+            // Descripción
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->Cell(0, 8, utf8_decode('DESCRIPCIÓN:'), 0, 1);
+            $pdf->SetFont('Arial', '', 12);
+            $pdf->MultiCell(0, 8, utf8_decode($reg->descripcion), 0, 'J');
+    
+            // Salida
+            ob_end_clean();
+            $pdf->Output('D', 'Reporte_Noticia_' . $idNoticias . '.pdf');
+            exit();
+            break;
+    default:
+        echo "Operación no válida.";
+        break;
+}
+
+?>

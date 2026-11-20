@@ -1,15 +1,30 @@
-<?php include 'componentes/header.php'?>
+<?php include 'componentes/header.php' ?>
 <div class="layout">
-    <h2 class="subtitulos">Recursos</h2>
-<div class="contenedor">
+  <h2 class="subtitulos">Recursos</h2>
 
-
-  <!-- aqui se debe insertar un for para iterar y traer cada una de las noticias registradas en la base de datos con nuestro componente cardBook -->
-
-  <?php for ($i = 0; $i < 10; $i++) {
-      include 'componentes/cardBook.php';
-    }
-  ?>
+  <!-- Contenedor de búsqueda -->
+  <div class="buscador">
+    <input type="text" 
+           id="buscarTitulo" 
+           class="buscador-input"
+           placeholder="🔍 Buscar por título..."
+           onkeyup="buscarRecursos()">
+    
+    <select id="departamento" 
+            class="filtro-departamento"
+            name="departamento" 
+            title="Filtrar por departamento"
+            onchange="buscarRecursos()">
+        <option value="todos">Todos los departamentos</option>
+        <!-- Opciones cargadas dinámicamente -->
+    </select>
   </div>
+
+  <!-- Contenedor donde se listan los recursos -->
+  <div class="contenedor" id="contenedorRecursos">
+    <!-- Aquí se insertarán los recursos desde JS -->
   </div>
-  <?php require 'componentes/footer.php' ?>
+
+</div>
+<?php require 'componentes/footer.php' ?>
+<script type="text/javascript" src="scripts/recurso.js"></script>

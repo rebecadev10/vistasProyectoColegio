@@ -1,15 +1,21 @@
-<?php include 'componentes/header.php'?>
+<?php include 'componentes/header.php' ?>
 <div class="layout">
-    <h2 class="subtitulos">Foro de noticias</h2>
-<div class="contenedor">
+  <h2 class="subtitulos">Foro de noticias</h2>
+  <div class="contenedor"id="contenedorNoticias" >
+    <!-- <div class="noticias-grid">
+      
+    </div> -->
 
 
-  <!-- aqui se debe insertar un for para iterar y traer cada una de las noticias registradas en la base de datos con nuestro componente card -->
 
-  <?php  for ($i = 0; $i < 10; $i++) {
+
+    <!-- aqui se debe insertar un for para iterar y traer cada una de las noticias registradas en la base de datos con nuestro componente card -->
+
+    <!-- </?php  for ($i = 0; $i < 10; $i++) {
       include 'componentes/card.php';
     }
-  ?>
+  ?> -->
   </div>
-  </div>
-  <?php require 'componentes/footer.php' ?>
+</div>
+<?php require 'componentes/footer.php' ?>
+<script type="text/javascript" src="scripts/noticia.js"></script>
