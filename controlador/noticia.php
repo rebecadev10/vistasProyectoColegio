@@ -9,7 +9,10 @@ $titulo = isset($_POST["titulo"]) ? limpiarCadena($_POST["titulo"]) : "";
 $descripcion = isset($_POST["descripcion"]) ? limpiarCadena($_POST["descripcion"]) : "";
 
 // Directorio para guardar imágenes
-$directorio = "C:/xampp/htdocs/colegio/data/noticias/";
+$directorio = dirname(__DIR__) . "/data/noticias/";
+if (!file_exists($directorio)) {
+    mkdir($directorio, 0777, true);
+}
 $rutaImagenBD = ""; // Variable para guardar la ruta en la BD
 
 switch ($_GET["op"]) {

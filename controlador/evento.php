@@ -13,7 +13,10 @@ $fechaFin = isset($_POST["fechaFin"]) ? limpiarCadena($_POST["fechaFin"]) : "";
 $horaFin = isset($_POST["horaFin"]) ? limpiarCadena($_POST["horaFin"]) : "";
 
 // Directorio para guardar imágenes
-$directorio = "C:/xampp/htdocs/colegio/data/eventos/";
+$directorio = dirname(__DIR__) . "/data/eventos/";
+if (!file_exists($directorio)) {
+    mkdir($directorio, 0777, true);
+}
 $rutaImagenBD = ""; // Variable para guardar la ruta en la BD
 
 switch ($_GET["op"]) {

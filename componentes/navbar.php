@@ -1,6 +1,10 @@
 <?php 
-if (strlen(session_id()) < 1)
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+$isEstudiante = !empty($_SESSION['Estudiante']) && $_SESSION['Estudiante'] == 1;
+$isDocente = !empty($_SESSION['Docente']) && $_SESSION['Docente'] == 1;
+$isAdmin = !empty($_SESSION['Administrativo']) && $_SESSION['Administrativo'] == 1;
 ?>
 <div class="navbar-content">
   <nav role="navigation" class="navbar">
@@ -8,52 +12,42 @@ if (strlen(session_id()) < 1)
       <li class="navbar-list__link"><a href="index.php">Inicio</a></li>
       <li class="navbar-list__link">
         <a href="./noticias.php">Noticias</a>
-        <?php 
-         if ($_SESSION['Administrativo'] == 1){?>
+        <?php if ($isAdmin): ?>
         <ul class="dropdown">
           <li><a href="./noticiasEditar.php">Crear Noticias</a></li>
-         
         </ul>
-       <?php } ?>
+        <?php endif; ?>
       </li>
       <li class="navbar-list__link">
         <a href="eventos.php">Eventos</a>
-        <?php 
-         if ($_SESSION['Administrativo'] == 1){?>
+        <?php if ($isAdmin): ?>
         <ul class="dropdown">
           <li><a href="eventoEditar.php">Crear Eventos</a></li>
-         
         </ul>
-        <?php } ?>
+        <?php endif; ?>
       </li>
       <li class="navbar-list__link">
         <a href="./recursos.php">Recursos</a>
-        <?php 
-       if ($_SESSION['Administrativo'] == 1 or $_SESSION['Docente']==1){?>
+        <?php if ($isAdmin || $isDocente): ?>
         <ul class="dropdown">
           <li><a href="./recursosEditar.php">Crear Recursos</a></li>
-         
         </ul>
-        <?php } ?>
+        <?php endif; ?>
       </li>
       <li class="navbar-list__link">
         <a href="./anuncio.php">Comunicación</a>
-        <?php 
-         if ($_SESSION['Administrativo'] == 1){?>
+        <?php if ($isAdmin): ?>
         <ul class="dropdown">
           <li><a href="./comunicacionEditar.php">Crear Anuncio</a></li>
-         
         </ul>
-        <?php } ?>
+        <?php endif; ?>
       </li>
-      <?php 
-         if ($_SESSION['Administrativo'] == 1){?>
+      <?php if ($isAdmin): ?>
       <li class="navbar-list__link"><a href="./usuariosEditar.php">Gestión de Usuario</a></li>
+      <?php endif; ?>
     </ul>
-    <?php } ?>
     <ul class="navbar-list__right">
-    <a class="dropdown-item" href="controlador/usuario.php?op=salir"><li class="navbar-list__link"> Cerrar Sesión</li></a>
-      
+      <li class="navbar-list__link"><a href="controlador/usuario.php?op=salir" class="dropdown-item">Cerrar Sesión</a></li>
     </ul>
   </nav>
 </div>

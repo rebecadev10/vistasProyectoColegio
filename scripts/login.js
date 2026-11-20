@@ -28,8 +28,17 @@ $("#frmAcceso").on('submit', function(e) {
 // Optimización del botón Ver Contraseña
 const passwordField = document.getElementById('clave');
 const viewPasswordBtn = document.getElementById('viewPassword');
+const eyeIcon = document.getElementById('eyeIcon');
 
-viewPasswordBtn.addEventListener('click', () => {
-    const isPassword = passwordField.type === 'password';
-    passwordField.type = isPassword ? 'text' : 'password';
-});
+if (viewPasswordBtn && passwordField) {
+    viewPasswordBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const isPassword = passwordField.type === 'password';
+        passwordField.type = isPassword ? 'text' : 'password';
+        if (eyeIcon) {
+            eyeIcon.classList.toggle('fa-eye', !isPassword);
+            eyeIcon.classList.toggle('fa-eye-slash', isPassword);
+        }
+    });
+}

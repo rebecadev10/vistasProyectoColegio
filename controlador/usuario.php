@@ -13,7 +13,10 @@ $apellido = isset($_POST["apellido"]) ? limpiarCadena($_POST["apellido"]) : "";
 $cedula = isset($_POST["cedula"]) ? limpiarCadena($_POST["cedula"]) : "";
 $idPermiso = isset($_POST["idPermiso"]) ? limpiarCadena($_POST["idPermiso"]) : "";
 $clave = isset($_POST["clave"]) ? limpiarCadena($_POST["clave"]) : "";
-$directorio = "C:/xampp/htdocs/colegio/data/usuarios/";
+$directorio = dirname(__DIR__) . "/data/usuarios/";
+if (!file_exists($directorio)) {
+    mkdir($directorio, 0777, true);
+}
 $rutaImagenBD = "";
 $rutaUsuarioBD = "";
 
@@ -60,30 +63,29 @@ switch ($_GET["op"]) {
         }
 
         if (empty($idUsuario)) {
-            
-                // Asignar valor a $permiso sin modificar $_POST
-                $permiso = isset($_POST['permiso']) && trim($_POST['permiso']) !== '' 
-                           ? $_POST['permiso'] 
-                           : [1]; // Valor por defecto (1 = estudiante)
-            
-                // Insertar (evita duplicar la línea)
-                $rspta = $usuario->insertar(
-                    $idUsuario, 
-                    $nombre, 
-                    $apellido, 
-                    $cedula, 
-                    $permiso, // Usamos la variable $permiso
-                    $rutaImagenBD, 
-                    $clave
-                );
-            
-           
-            
-            
+            // Asignar valor a $permiso de forma compatible con PHP 8+
+            if (isset($_POST['permiso'])) {
+                $permiso = is_array($_POST['permiso']) ? $_POST['permiso'] : [$_POST['permiso']];
+            } else {
+                $permiso = [1]; // 1 = Estudiante por defecto
+            }
+
+            // Insertar
+            $rspta = $usuario->insertar(
+                $idUsuario, 
+                $nombre, 
+                $apellido, 
+                $cedula, 
+                $permiso, 
+                $rutaImagenBD, 
+                $clave
+            );
+
             echo $rspta ? "Usuario registrado" : "No se pudo registrar el Usuario";
             
         } else {
-            $rspta = $usuario->editar($idUsuario, $nombre, $apellido, $cedula,  $_POST['permiso'],  $clave);
+            $permisosEditar = (isset($_POST['permiso']) && is_array($_POST['permiso'])) ? $_POST['permiso'] : [1];
+            $rspta = $usuario->editar($idUsuario, $nombre, $apellido, $cedula, $permisosEditar, $clave);
             echo $rspta ? "Usuario actualizado" : "No se pudo actualizar el Usuario";
             
         }

@@ -3,7 +3,7 @@
   <div class="componente" id="encabezado">
     <div class="componente__encabezado">
       <h2 class="componente__titulo">Lista de Recursos</h2>
-      <button class="componente__boton-subir"><a href="./formularioRecurso.php"> Publicar Nuevo Recurso</a></button>
+      <a href="./formularioRecurso.php" class="componente__boton-subir">Publicar Nuevo Recurso</a>
     </div>
 
     <div class="componente__contenedor-tabla" id="listadoregistros">

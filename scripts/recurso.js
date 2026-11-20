@@ -1,16 +1,11 @@
 function init() {
-  // //
-  mostrarform(false);
-  
-  // listarpagobol();
+  if ($("#tbllistado").length > 0) {
+    mostrarform(false);
+  }
 
   $("#formulario").on("submit", function (e) {
     guardaryeditar(e);
   });
-
-  // Realizar la petición al controlador para obtener los departamentos
-
-  
 }
 function guardaryeditar(e) {
   e.preventDefault(); //No se activará la acción predeterminada del evento

@@ -1,22 +1,19 @@
 function init(){
-	// // 
-	mostrarform(false);
-	listar();
-	// listarpagobol();
-
 	$("#formulario").on("submit",function(e)
 	{
 		guardaryeditar(e);	
-	})
-	//Cargamos los items al select categoria
+	});
 
+	if ($("#tbllistado").length > 0) {
+		mostrarform(false);
+		listar();
+	}
 
-	 // Realizar la petición al controlador para obtener los departamentos
-	 $.post("controlador/evento.php?op=listarDepartamentos", function(response) {
-        // Rellenar el select con las opciones recibidas
-		console.log(response);
-        $("#departamento").html(response); // Agrega las opciones al select
-    });
+	if ($("#departamento").length > 0) {
+		$.post("controlador/evento.php?op=listarDepartamentos", function(response) {
+			$("#departamento").html(response);
+		});
+	}
 }
 function guardaryeditar(e)
 {
@@ -252,15 +249,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // Función para actualizar el nombre del archivo seleccionado
     function actualizarNombreArchivo(input, spanId) {
         let fileName = input.files.length > 0 ? input.files[0].name : "Ningún archivo seleccionado";
-        document.getElementById(spanId).textContent = fileName;
+        let span = document.getElementById(spanId);
+        if (span) {
+            span.textContent = fileName;
+        }
     }
 
     // Detectar cambios en el input de imagen
-    document.getElementById("imagen").addEventListener("change", function () {
-        actualizarNombreArchivo(this, "file-name");
-    });
-
-
+    let inputImg = document.getElementById("imagen");
+    if (inputImg) {
+        inputImg.addEventListener("change", function () {
+            actualizarNombreArchivo(this, "file-name");
+        });
+    }
 });
 function eliminar(idEventos)
 {

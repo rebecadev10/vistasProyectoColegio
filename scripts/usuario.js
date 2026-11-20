@@ -1,21 +1,17 @@
 function init() {
-  // //
-  
-  mostrarform(false);
-  
+  if ($("#tbllistado").length > 0) {
+    mostrarform(false);
+  }
 
   $("#formulario").on("submit", function (e) {
     guardaryeditar(e);
   });
-  
-  //Mostramos los permisos
-	$.post("controlador/usuario.php?op=permisos&id=",function(r){
-       $("#permisos").html(r);
 
-
-
-  });
- 
+  if ($("#permisos").length > 0) {
+    $.post("controlador/usuario.php?op=permisos&id=", function (r) {
+      $("#permisos").html(r);
+    });
+  }
 }
  
 function guardaryeditar(e) {

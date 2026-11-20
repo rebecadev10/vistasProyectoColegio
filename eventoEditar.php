@@ -3,9 +3,7 @@
   <div class="componente" id="encabezado">
     <div class="componente__encabezado" >
       <h2 class="componente__titulo">Lista de Eventos</h2>
-      <button class="componente__boton-subir">
-        <a href="./formularioEvento.php">Publicar Nuevo Evento</a>
-      </button>
+      <a href="./formularioEvento.php" class="componente__boton-subir">Publicar Nuevo Evento</a>
     </div>
 
     <div class="componente__contenedor-tabla" id="listadoregistros">

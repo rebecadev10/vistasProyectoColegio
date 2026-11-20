@@ -12,7 +12,10 @@ $fechaPublicacion = isset($_POST["fechaPublicacion"]) ? limpiarCadena($_POST["fe
 $editorial = isset($_POST["editorial"]) ? limpiarCadena($_POST["editorial"]) : "";
 $departamento = isset($_POST["departamento"]) ? limpiarCadena($_POST["departamento"]) : "";
 
-$directorio = "C:/xampp/htdocs/colegio/data/recursos/";
+$directorio = dirname(__DIR__) . "/data/recursos/";
+if (!file_exists($directorio)) {
+    mkdir($directorio, 0777, true);
+}
 $rutaImagenBD = "";
 $rutaRecursoBD = "";
 

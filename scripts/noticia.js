@@ -1,22 +1,13 @@
 function init(){
-	// // 
-	mostrarform(false);
-	listar();
-	// listarpagobol();
-
 	$("#formulario").on("submit",function(e)
 	{
 		guardaryeditar(e);	
-	})
-	//Cargamos los items al select categoria
+	});
 
-
-	 // Realizar la petición al controlador para obtener los departamentos
-	//  $.post("controlador/evento.php?op=listarDepartamentos", function(response) {
-    //     // Rellenar el select con las opciones recibidas
-	// 	console.log(response);
-    //     $("#departamento").html(response); // Agrega las opciones al select
-    // });
+	if ($("#tbllistado").length > 0) {
+		mostrarform(false);
+		listar();
+	}
 }
 function guardaryeditar(e)
 {
@@ -339,13 +330,10 @@ function descargarPDF(idNoticias) {
 }
 // Cargar noticias cuando la página termine de cargar
 $(document).ready(function () {
-    listarNoticias();
+    if ($("#contenedorNoticias").length > 0) {
+        listarNoticias();
+    }
 });
-
-
-listar();
-
-listarNoticias();
 // Modificar el evento DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function () {
     // Función para actualizar el nombre del archivo seleccionado

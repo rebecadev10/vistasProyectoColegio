@@ -1,20 +1,12 @@
 function init() {
-  // //
-  mostrarform(false);
-  listar();
-  // listarpagobol();
-
   $("#formulario").on("submit", function (e) {
     guardaryeditar(e);
   });
-  //Cargamos los items al select categoria
 
-  // Realizar la petición al controlador para obtener los departamentos
-  //  $.post("controlador/evento.php?op=listarDepartamentos", function(response) {
-  //     // Rellenar el select con las opciones recibidas
-  // 	console.log(response);
-  //     $("#departamento").html(response); // Agrega las opciones al select
-  // });
+  if ($("#tbllistado").length > 0) {
+    mostrarform(false);
+    listar();
+  }
 }
 function guardaryeditar(e) {
   e.preventDefault(); //No se activará la acción predeterminada del evento
@@ -277,14 +269,13 @@ function eliminar(idAnuncio) {
 function descargarPDF(idAnuncio) {
   window.open('controlador/comunicacion.php?op=exportarPdf&id=' + idAnuncio, '_blank'); 
 }
-// Cargar noticias cuando la página termine de cargar
+// Cargar anuncios cuando la página termine de cargar
 $(document).ready(function () {
-  listarComunicacion();
+  if ($("#contenedorComunicacion").length > 0) {
+    listarComunicacion();
+  }
 });
 
-listar();
-
-listarComunicacion();
 document.addEventListener("DOMContentLoaded", function () {
   // Función para actualizar el nombre del archivo seleccionado
   function actualizarNombreArchivo(input, spanId) {
@@ -292,12 +283,18 @@ document.addEventListener("DOMContentLoaded", function () {
       input.files.length > 0
         ? input.files[0].name
         : "Ningún archivo seleccionado";
-    document.getElementById(spanId).textContent = fileName;
+    let span = document.getElementById(spanId);
+    if (span) {
+      span.textContent = fileName;
+    }
   }
 
   // Detectar cambios en el input de imagen
-  document.getElementById("imagen").addEventListener("change", function () {
-    actualizarNombreArchivo(this, "file-name");
-  });
+  let imgInput = document.getElementById("imagen");
+  if (imgInput) {
+    imgInput.addEventListener("change", function () {
+      actualizarNombreArchivo(this, "file-name");
+    });
+  }
 });
 init();

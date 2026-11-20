@@ -1,19 +1,14 @@
 <?php 
-//Ip de la pc servidor de base de datos
-define("DB_HOST","localhost");
+// Configuración dinámica por variables de entorno o valores por defecto para XAMPP
+define("DB_HOST", getenv("DB_HOST") ?: (getenv("MYSQLHOST") ?: "localhost"));
+define("DB_NAME", getenv("DB_NAME") ?: (getenv("MYSQLDATABASE") ?: "colegio"));
+define("DB_USERNAME", getenv("DB_USER") ?: (getenv("DB_USERNAME") ?: (getenv("MYSQLUSER") ?: "root")));
+define("DB_PASSWORD", getenv("DB_PASSWORD") !== false ? getenv("DB_PASSWORD") : (getenv("MYSQLPASSWORD") !== false ? getenv("MYSQLPASSWORD") : ""));
+define("DB_PORT", (int)(getenv("DB_PORT") ?: (getenv("MYSQLPORT") ?: 3306)));
 
-//Nombre de la base de datos
-define("DB_NAME", "colegio");
+// Definimos la codificación de los caracteres
+define("DB_ENCODE", "utf8mb4");
 
-//Usuario de la base de datos
-define("DB_USERNAME", "root");
-
-//Contraseña del usuario de la base de datos
-define("DB_PASSWORD", "");
-
-//definimos la codificación de los caracteres
-define("DB_ENCODE","utf8");
-
-//Definimos una constante como nombre del proyecto
-define("PRO_NOMBRE","COLEGIO");
+// Definimos una constante como nombre del proyecto
+define("PRO_NOMBRE", "COLEGIO");
 ?>

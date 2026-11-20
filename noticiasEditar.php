@@ -3,9 +3,7 @@
   <div class="componente" id="encabezado">
     <div class="componente__encabezado">
       <h2 class="componente__titulo">Lista de Noticias</h2>
-      <button class="componente__boton-subir">
-        <a href="./formularioNoticias.php">Nueva Noticia</a>
-      </button>
+      <a href="./formularioNoticias.php" class="componente__boton-subir">Nueva Noticia</a>
     </div>
 
     <div class="componente__contenedor-tabla" id="listadoregistros">
