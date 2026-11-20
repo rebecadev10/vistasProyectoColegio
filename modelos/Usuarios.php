@@ -8,21 +8,22 @@ class Usuarios
 	}
     public function insertar($idUsuario,$nombre,$apellido,$cedula,$permisos,$imagenUsuario,$clave)
     {
-        $sql="  INSERT INTO  usuario ( idUsuario ,  nombre ,  apellido ,  cedula ,    imagenUsuario,clave) 
-        VALUES ('$idUsuario','$nombre','$apellido','$cedula','$imagenUsuario','$clave')";
+        $sql="INSERT INTO usuario (nombre, apellido, cedula, imagenUsuario, clave) 
+              VALUES ('$nombre', '$apellido', '$cedula', '$imagenUsuario', '$clave')";
         $idUsuarioNew=ejecutarConsulta_retornarID($sql);
         $num_elementos=0;
         $sw=true;
 
- while ($num_elementos < count($permisos))
-     {
-         $sql_detalle = "INSERT INTO `usuariopermiso`(`idUsuario`, `idPermisos`) VALUES ( '$idUsuarioNew', '$permisos[$num_elementos]');";
-        
-         ejecutarConsulta($sql_detalle) or $sw = false;
-         $num_elementos=$num_elementos + 1;
-     }
+        if (is_array($permisos)) {
+            while ($num_elementos < count($permisos))
+            {
+                $sql_detalle = "INSERT INTO `usuariopermiso`(`idUsuario`, `idPermisos`) VALUES ( '$idUsuarioNew', '{$permisos[$num_elementos]}');";
+                ejecutarConsulta($sql_detalle) or $sw = false;
+                $num_elementos++;
+            }
+        }
 
-     return $sw;
+        return $sw;
     }
     public function editar($idUsuario,$nombre,$apellido,$cedula,$permisos,$clave)
     {

@@ -8,9 +8,8 @@ class Comunicacion
 	}
     public function insertar($idAnuncio,$asunto,$descripcion,$imagenAnuncio,$fecha)
     {
-     $sql=" INSERT INTO `comunicacion`(idAnuncio,asunto,descripcion,imagenAnuncio,fecha) 
-        
-     VALUES ('$idAnuncio','$asunto','$descripcion','$imagenAnuncio','$fecha')";
+     $sql="INSERT INTO comunicacion (asunto, descripcion, imagenAnuncio, fecha) 
+           VALUES ('$asunto', '$descripcion', '$imagenAnuncio', '$fecha')";
      return ejecutarConsulta($sql);
     }
     public function editar($idAnuncio,$asunto,$descripcion,$imagenAnuncio)

@@ -8,8 +8,8 @@ class Recursos
 	}
     public function insertar($idRecursos,$tituloRecurso,$descripcion,$autor,$fechaPublicacion,$editorial,$departamento,$fotoPortada,$dataRecurso)
     {
-     $sql="   INSERT INTO  recursos (idRecursos,tituloRecurso,descripcion,autor,fechaPublicacion,editorial,idDepartamento,fotoPortada,dataRecurso) 
-     VALUES ('$idRecursos','$tituloRecurso','$descripcion','$autor','$fechaPublicacion','$editorial','$departamento','$fotoPortada','$dataRecurso')";
+     $sql="INSERT INTO recursos (tituloRecurso, descripcion, autor, fechaPublicacion, editorial, idDepartamento, fotoPortada, dataRecurso) 
+           VALUES ('$tituloRecurso', '$descripcion', '$autor', '$fechaPublicacion', '$editorial', '$departamento', '$fotoPortada', '$dataRecurso')";
      return ejecutarConsulta($sql);
     }
     public function editar($idRecursos,$tituloRecurso,$descripcion,$autor,$fechaPublicacion,$editorial,$departamento,$fotoPortada,$dataRecurso)

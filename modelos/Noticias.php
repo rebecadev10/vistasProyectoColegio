@@ -8,8 +8,8 @@ class Noticias
 	}
     public function insertar($idNoticias,$titulo,$descripcion,$nombreImagenN)
     {
-     $sql="   INSERT INTO  noticias ( idNoticias ,  titulo ,  descripcion ,  nombreImagenN,estado ) 
-     VALUES ('$idNoticias','$titulo','$descripcion','$nombreImagenN','1')";
+     $sql="INSERT INTO noticias (titulo, descripcion, nombreImagenN, estado) 
+           VALUES ('$titulo', '$descripcion', '$nombreImagenN', '1')";
      return ejecutarConsulta($sql);
     }
     public function editar($idNoticias,$titulo,$descripcion,$nombreImagenN)

@@ -8,8 +8,8 @@ class Eventos
 	}
     public function insertar($idEventos,$titulo,$descripcion,$nombreImagen,$departamento,$fechaInicio,$horaInicio,$fechaFin,$horaFin)
     {
-     $sql="   INSERT INTO  eventos ( idEventos ,  titulo ,  descripcion ,  nombreImagen ,  departamento ,  fechaInicio ,  horaInicio ,  fechaFin ,  horaFin,estado ) 
-     VALUES ('$idEventos','$titulo','$descripcion','$nombreImagen','$departamento','$fechaInicio','$horaInicio','$fechaFin','$horaFin','1')";
+     $sql="INSERT INTO eventos (titulo, descripcion, nombreImagen, departamento, fechaInicio, horaInicio, fechaFin, horaFin, estado) 
+           VALUES ('$titulo', '$descripcion', '$nombreImagen', '$departamento', '$fechaInicio', '$horaInicio', '$fechaFin', '$horaFin', '1')";
      return ejecutarConsulta($sql);
     }
     public function editar($idEventos,$titulo,$descripcion,$nombreImagen,$departamento,$fechaInicio,$horaInicio,$fechaFin,$horaFin)
