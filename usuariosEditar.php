@@ -28,19 +28,22 @@
     <form id="formulario" class="formulario-subir-noticia__formulario" enctype="multipart/form-data" method="POST">
 
 
-      <div class="formulario-subir-noticia__grupo">
-        <input type="hidden" id="idUsuario" name="idUsuario">
-        <!-- <input type="hidden" id="permisos" name="idPermiso" value=""> -->
-        <label for="titulo" class="formulario-subir-noticia__etiqueta">Nombres:</label>
-        <input type="text" id="nombre" name="nombre" class="formulario-subir-noticia__input" required>
-      </div>
-      <div class="formulario-subir-noticia__grupo">
-        <label for="titulo" class="formulario-subir-noticia__etiqueta">Apellidos:</label>
-        <input type="text" id="apellido" name="apellido" class="formulario-subir-noticia__input" required>
+      <input type="hidden" id="idUsuario" name="idUsuario">
+
+      <!-- Nombres y Apellidos en 2 Columnas -->
+      <div class="form-row-2">
+        <div class="formulario-subir-noticia__grupo">
+          <label for="nombre" class="formulario-subir-noticia__etiqueta">Nombres:</label>
+          <input type="text" id="nombre" name="nombre" class="formulario-subir-noticia__input" required>
+        </div>
+        <div class="formulario-subir-noticia__grupo">
+          <label for="apellido" class="formulario-subir-noticia__etiqueta">Apellidos:</label>
+          <input type="text" id="apellido" name="apellido" class="formulario-subir-noticia__input" required>
+        </div>
       </div>
 
       <div class="formulario-subir-noticia__grupo">
-        <label for="titulo" class="formulario-subir-noticia__etiqueta">Cedula:</label>
+        <label for="cedula" class="formulario-subir-noticia__etiqueta">Cédula:</label>
         <input type="number" id="cedula" name="cedula" class="formulario-subir-noticia__input" required>
       </div>
      

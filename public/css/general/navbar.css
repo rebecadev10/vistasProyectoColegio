@@ -134,39 +134,51 @@
   color: var(--brand-primary);
 }
 
-/* Dropdown Menu 2026 */
+/* Dropdown Menu 2026 con hover bridge y persistencia suave */
 .dropdown-menu {
-  display: none;
+  display: block;
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 4px);
   left: 0;
   min-width: 220px;
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--slate-200);
   border-radius: var(--radius-lg);
   padding: 8px;
-  box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.03);
   list-style: none;
   margin: 0;
   z-index: 1050;
-  animation: dropdownFade 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.18s; /* Retraso protector para que no se cierre si el usuario mueve el cursor */
+  pointer-events: none;
 }
 
-@keyframes dropdownFade {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Puente invisible para que el cursor no pierda el hover entre el nav-link y el menú */
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: transparent;
 }
 
-.nav-item:hover .dropdown-menu {
-  display: block;
+.nav-item:hover .dropdown-menu,
+.dropdown-menu:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+  pointer-events: auto;
 }
 
 .nav-item:hover .dropdown-arrow {

@@ -6,6 +6,19 @@ function init() {
   $("#formulario").on("submit", function (e) {
     guardaryeditar(e);
   });
+
+  $(document).on("change", "#imagen", function(e) {
+    if (this.files && this.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $("#imagenActual").attr("src", e.target.result).show();
+      };
+      reader.readAsDataURL(this.files[0]);
+      if ($("#file-name").length > 0) {
+        $("#file-name").text(this.files[0].name);
+      }
+    }
+  });
 }
 function guardaryeditar(e) {
   e.preventDefault(); //No se activará la acción predeterminada del evento
@@ -86,7 +99,21 @@ function listar() {
         },
       },
       language: {
-        lengthMenu: "Mostrar : _MENU_ registros",
+        sProcessing: "Procesando...",
+        sLengthMenu: "Mostrar _MENU_ registros",
+        sZeroRecords: "No se encontraron resultados",
+        sEmptyTable: "Ningún dato disponible en esta tabla",
+        sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+        sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
+        sSearch: "Buscar:",
+        sLoadingRecords: "Cargando registros...",
+        oPaginate: {
+          sFirst: "Primero",
+          sLast: "Último",
+          sNext: "Siguiente",
+          sPrevious: "Anterior"
+        },
         buttons: {
           copyTitle: "Tabla Copiada",
           copySuccess: {
@@ -142,12 +169,13 @@ function mostrar(idRecursos) {
           $("#fechaPublicacion").val(data.fechaPublicacion);
           $("#editorial").val(data.editorial);
           $("#departamento").val(data.idDepartamento);
+          $("#imagenProductoActual").val(data.fotoPortada || "");
 
           // Corrige la asignación de la imagen
           if (data.fotoPortada) {
-            $("#imagenActual").attr("src", "data/" + data.fotoPortada);
+            $("#imagenActual").attr("src", "data/" + data.fotoPortada).show();
           } else {
-            $("#imagenActual").attr("src", "img/no-image.jpg"); // Imagen por defecto si no hay imagen
+            $("#imagenActual").attr("src", "public/img/logos/logo.jpeg").show();
           }
           $("#recursoActual").val(data.dataRecurso);
         } else {

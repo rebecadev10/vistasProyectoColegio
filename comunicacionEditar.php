@@ -23,45 +23,52 @@
     </div>
   </div>
   <div class="formulario-subir-noticia" id="formularioregistros">
-    <h2 class="formulario-subir-noticia__titulo">Nuevo Anuncio</h2>
+    <h2 class="formulario-subir-noticia__titulo">Editar Anuncio</h2>
 
-    <div class="formulario-subir-noticia">
-      <h2 class="formulario-subir-noticia__titulo">Publicar Nuevo Anuncio</h2>
-      <form class="formulario-subir-noticia__formulario" enctype="multipart/form-data" method="POST">
-        <div class="formulario-subir-noticia__grupo">
-          <label for="titulo" class="formulario-subir-noticia__etiqueta">Título:</label>
-          <input type="hidden" id="idAnuncio" name="idAnuncio">
-          <input type="text" id="asunto" name="asunto" class="formulario-subir-noticia__input" required>
-        </div>
+    <form id="formulario" class="formulario-subir-noticia__formulario" enctype="multipart/form-data" method="POST">
+      <input type="hidden" id="idAnuncio" name="idAnuncio">
+      <input type="hidden" id="imagenProductoActual" name="imagenProductoActual">
 
-        <!-- Campo Descripción -->
-        <div class="formulario-subir-noticia__grupo">
-          <label for="descripcion" class="formulario-subir-noticia__etiqueta">Descripción:</label>
-          <textarea id="descripcion" name="descripcion" class="formulario-subir-noticia__textarea" rows="5"
-            required></textarea>
-        </div>
+      <div class="formulario-subir-noticia__grupo">
+        <label for="asunto" class="formulario-subir-noticia__etiqueta">Título / Asunto:</label>
+        <input type="text" id="asunto" name="asunto" class="formulario-subir-noticia__input" required>
+      </div>
 
-        <!-- Campo Imagen con estilo personalizado -->
+      <!-- Campo Descripción -->
+      <div class="formulario-subir-noticia__grupo">
+        <label for="descripcion" class="formulario-subir-noticia__etiqueta">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" class="formulario-subir-noticia__textarea" rows="4"
+          required></textarea>
+      </div>
+
+      <!-- Sección de Imagen en 2 Columnas: Actual vs Nueva -->
+      <div class="form-row-2">
         <div class="formulario-subir-noticia__grupo">
-          <label for="imagen" class="formulario-subir-noticia__etiqueta">Imagen:</label>
-          <div class="formulario-subir-noticia__input-archivo-wrapper">
-            <input type="file" id="imagen" name="imagen" class="formulario-subir-noticia__input-archivo"
-              accept="image/*" required>
-            <label for="imagen" class="formulario-subir-noticia__input-archivo-boton">Seleccionar
-              archivo</label>
-            <span id="file-name" class="formulario-subir-noticia__archivo-nombre">Ningún archivo
-              seleccionado</span>
+          <label class="formulario-subir-evento__etiqueta">Imagen Actual:</label>
+          <div class="preview-imagen-box">
+            <img id="imagenActual" alt="Vista previa de imagen" class="imgFormulario" style="max-height: 140px;">
           </div>
         </div>
 
-
-        <!-- Botones -->
-        <div class="formulario-subir-noticia__grupo formulario-subir-noticia__botones">
-          <button type="submit" class="formulario-subir-noticia__boton-enviar">Publicar Anuncio</button>
-          <button type="reset" class="formulario-subir-noticia__boton-cancelar" onclick="cancelar()">Cancelar</button>
+        <div class="formulario-subir-noticia__grupo">
+          <label for="imagen" class="formulario-subir-evento__etiqueta">Cambiar Imagen (opcional):</label>
+          <div class="formulario-subir-noticia__input-archivo-wrapper">
+            <input type="file" id="imagen" name="imagen" class="formulario-subir-noticia__input-archivo"
+              accept="image/*">
+            <label for="imagen" class="formulario-subir-noticia__input-archivo-boton">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Seleccionar archivo
+            </label>
+            <span id="file-name" class="formulario-subir-noticia__archivo-nombre">Ningún archivo seleccionado</span>
+          </div>
         </div>
-      </form>
-    </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="formulario-subir-noticia__grupo formulario-subir-noticia__botones">
+        <button type="reset" class="formulario-subir-noticia__boton-cancelar" onclick="cancelarform()">Cancelar</button>
+        <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Guardar Cambios</button>
+      </div>
+    </form>
   </div>
 </div>
 <?php require 'componentes/footer.php'; ?>

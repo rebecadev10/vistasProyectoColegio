@@ -31,28 +31,29 @@
                 <!-- <input type="text" id="departamento" name="departamento" class="formulario-subir-noticia__input" required> -->
             </div>
 
-            <!-- Campo Fecha Inicio -->
-            <div class="formulario-subir-noticia__grupo">
-                <label for="fechaInicio" class="formulario-subir-noticia__etiqueta">Fecha de Inicio:</label>
-                <input type="date" id="fechaInicio" name="fechaInicio" class="formulario-subir-noticia__input" required>
+            <!-- Fechas y Horas en 2 Columnas -->
+            <div class="form-row-2">
+                <div class="formulario-subir-noticia__grupo">
+                    <label for="fechaInicio" class="formulario-subir-noticia__etiqueta">Fecha de Inicio:</label>
+                    <input type="date" id="fechaInicio" name="fechaInicio" class="formulario-subir-noticia__input" required>
+                </div>
+
+                <div class="formulario-subir-noticia__grupo">
+                    <label for="horaInicio" class="formulario-subir-noticia__etiqueta">Hora de Inicio:</label>
+                    <input type="time" id="horaInicio" name="horaInicio" class="formulario-subir-noticia__input" required>
+                </div>
             </div>
 
-            <!-- Campo Hora Inicio -->
-            <div class="formulario-subir-noticia__grupo">
-                <label for="horaInicio" class="formulario-subir-noticia__etiqueta">Hora de Inicio:</label>
-                <input type="time" id="horaInicio" name="horaInicio" class="formulario-subir-noticia__input" required>
-            </div>
+            <div class="form-row-2">
+                <div class="formulario-subir-noticia__grupo">
+                    <label for="fechaFin" class="formulario-subir-noticia__etiqueta">Fecha de Fin:</label>
+                    <input type="date" id="fechaFin" name="fechaFin" class="formulario-subir-noticia__input" required>
+                </div>
 
-            <!-- Campo Fecha Fin -->
-            <div class="formulario-subir-noticia__grupo">
-                <label for="fechaFin" class="formulario-subir-noticia__etiqueta">Fecha de Fin:</label>
-                <input type="date" id="fechaFin" name="fechaFin" class="formulario-subir-noticia__input" required>
-            </div>
-
-            <!-- Campo Hora Fin -->
-            <div class="formulario-subir-noticia__grupo">
-                <label for="horaFin" class="formulario-subir-noticia__etiqueta">Hora de Fin:</label>
-                <input type="time" id="horaFin" name="horaFin" class="formulario-subir-noticia__input" required>
+                <div class="formulario-subir-noticia__grupo">
+                    <label for="horaFin" class="formulario-subir-noticia__etiqueta">Hora de Fin:</label>
+                    <input type="time" id="horaFin" name="horaFin" class="formulario-subir-noticia__input" required>
+                </div>
             </div>
 
             <!-- Campo Imagen -->

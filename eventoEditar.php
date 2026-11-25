@@ -27,11 +27,12 @@
     </div>
   </div>
   <div class="formulario-subir-noticia" id="formularioregistros">
-    <h2 class="formulario-subir-noticia__titulo">Publicar Nuevo Evento</h2>
+    <h2 class="formulario-subir-noticia__titulo">Editar Evento</h2>
 
     <form id="formulario" class="formulario-subir-evento__formulario" enctype="multipart/form-data" method="POST">
-      <!-- Campo ID (oculto) -->
+      <!-- Campo ID e Imagen Actual (ocultos) -->
       <input type="hidden" id="idEventos" name="idEventos">
+      <input type="hidden" id="imagenProductoActual" name="imagenProductoActual">
 
       <!-- Campo Tema -->
       <div class="formulario-subir-noticia__grupo">
@@ -42,60 +43,68 @@
       <!-- Campo Descripción -->
       <div class="formulario-subir-noticia__grupo">
         <label for="descripcion" class="formulario-subir-evento__etiqueta">Descripción:</label>
-        <textarea id="descripcion" name="descripcion" class="formulario-subir-evento__textarea" rows="5"
+        <textarea id="descripcion" name="descripcion" class="formulario-subir-evento__textarea" rows="4"
           required></textarea>
       </div>
 
       <!-- Campo Departamento -->
       <div class="formulario-subir-noticia__grupo">
-        <label for="departamento" class="formulario-subir-evento__etiqueta">Departamento:</label>
-        <!-- <select id="departamento" class="formulario-subir-noticia__input selectpicker" name="departamento"
-          data-live-search="true"></select> -->
-          <input type="hidden" id="departamento" name="departamento">
-          <input type="text" class="formulario-subir-noticia__input" name="departamentoDescripcion" id="departamentoDescripcion"disabled>
-
-        <!-- <input type="text" id="departamento" name="departamento" class="formulario-subir-noticia__input" required> -->
+        <label for="departamentoDescripcion" class="formulario-subir-evento__etiqueta">Departamento:</label>
+        <input type="hidden" id="departamento" name="departamento">
+        <input type="text" class="formulario-subir-noticia__input" name="departamentoDescripcion" id="departamentoDescripcion" disabled>
       </div>
 
-      <!-- Campo Fecha Inicio -->
-      <div class="formulario-subir-noticia__grupo">
-        <label for="fechaInicio" class="formulario-subir-evento__etiqueta">Fecha de Inicio:</label>
-        <input type="date" id="fechaInicio" name="fechaInicio" class="formulario-subir-noticia__input" required>
+      <!-- Fechas y Horas en 2 Columnas -->
+      <div class="form-row-2">
+        <div class="formulario-subir-noticia__grupo">
+          <label for="fechaInicio" class="formulario-subir-evento__etiqueta">Fecha de Inicio:</label>
+          <input type="date" id="fechaInicio" name="fechaInicio" class="formulario-subir-noticia__input" required>
+        </div>
+
+        <div class="formulario-subir-noticia__grupo">
+          <label for="horaInicio" class="formulario-subir-evento__etiqueta">Hora de Inicio:</label>
+          <input type="time" id="horaInicio" name="horaInicio" class="formulario-subir-noticia__input" required>
+        </div>
       </div>
 
-      <!-- Campo Hora Inicio -->
-      <div class="formulario-subir-noticia__grupo">
-        <label for="horaInicio" class="formulario-subir-evento__etiqueta">Hora de Inicio:</label>
-        <input type="time" id="horaInicio" name="horaInicio" class="formulario-subir-noticia__input" required>
+      <div class="form-row-2">
+        <div class="formulario-subir-noticia__grupo">
+          <label for="fechaFin" class="formulario-subir-evento__etiqueta">Fecha de Fin:</label>
+          <input type="date" id="fechaFin" name="fechaFin" class="formulario-subir-noticia__input" required>
+        </div>
+
+        <div class="formulario-subir-noticia__grupo">
+          <label for="horaFin" class="formulario-subir-evento__etiqueta">Hora de Fin:</label>
+          <input type="time" id="horaFin" name="horaFin" class="formulario-subir-noticia__input" required>
+        </div>
       </div>
 
-      <!-- Campo Fecha Fin -->
-      <div class="formulario-subir-noticia__grupo">
-        <label for="fechaFin" class="formulario-subir-evento__etiqueta">Fecha de Fin:</label>
-        <input type="date" id="fechaFin" name="fechaFin" class="formulario-subir-noticia__input" required>
-      </div>
+      <!-- Sección de Imagen en 2 Columnas: Actual vs Nueva -->
+      <div class="form-row-2">
+        <div class="formulario-subir-noticia__grupo">
+          <label class="formulario-subir-evento__etiqueta">Imagen Actual:</label>
+          <div class="preview-imagen-box">
+            <img id="imagenActual" alt="Vista previa" class="imgFormulario" style="max-height: 140px;">
+          </div>
+        </div>
 
-      <!-- Campo Hora Fin -->
-      <div class="formulario-subir-noticia__grupo">
-        <label for="horaFin" class="formulario-subir-evento__etiqueta">Hora de Fin:</label>
-        <input type="time" id="horaFin" name="horaFin" class="formulario-subir-noticia__input" required>
-      </div>
-
-      <!-- Campo Imagen -->
-      <div class="formulario-subir-noticia__grupo">
-        
-        <!-- Campo oculto para la imagen actual (usado en edición) -->
-        <!-- <input type="hidden" id="imagenProductoActual" name="imagenProductoActual"> -->
-        <label for="imagen" class="formulario-subir-evento__etiqueta"> Imagen Actual:</label>
-        <img id="imagenActual" alt="" class="imgFormulario">
-      
-        <!-- <input type="file" id="imagen" name="imagen" class="formulario-subir-noticia__input"> -->
+        <div class="formulario-subir-noticia__grupo">
+          <label for="imagen" class="formulario-subir-evento__etiqueta">Cambiar Imagen (opcional):</label>
+          <div class="formulario-subir-noticia__input-archivo-wrapper">
+            <input type="file" id="imagen" name="imagen" class="formulario-subir-noticia__input-archivo"
+              accept="image/*">
+            <label for="imagen" class="formulario-subir-noticia__input-archivo-boton">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Seleccionar archivo
+            </label>
+            <span id="file-name" class="formulario-subir-noticia__archivo-nombre">Ningún archivo seleccionado</span>
+          </div>
+        </div>
       </div>
 
       <!-- Botones -->
       <div class="formulario-subir-noticia__grupo formulario-subir-evento__botones">
-        <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Guardar</button>
         <button type="reset" class="formulario-subir-noticia__boton-cancelar" onclick="cancelarform()">Cancelar</button>
+        <button type="submit" id="btnGuardar" class="formulario-subir-noticia__boton-enviar">Guardar</button>
       </div>
     </form>
 

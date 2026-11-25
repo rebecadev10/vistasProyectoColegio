@@ -8,7 +8,7 @@
             <li><a href="#">Política de Privacidad</a></li>
             <li><a href="#">Términos y Condiciones</a></li>
         </ul>
-        <p>&copy; 2024 Centro Educativo. Todos los derechos reservados.</p>
+        <p>&copy; 2026 U.E. Manuel Díaz Rodríguez. Todos los derechos reservados.</p>
     </div>
 </footer>
 <!-- jQuery desde el CDN oficial -->
@@ -31,3 +31,39 @@
 <script src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.print.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+if (window.jQuery && jQuery.fn && jQuery.fn.dataTable) {
+  jQuery.extend(true, jQuery.fn.dataTable.defaults, {
+    language: {
+      processing: "Procesando...",
+      search: "Buscar:",
+      lengthMenu: "Mostrar _MENU_ registros",
+      info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+      infoFiltered: "(filtrado de un total de _MAX_ registros)",
+      infoPostFix: "",
+      loadingRecords: "Cargando registros...",
+      zeroRecords: "No se encontraron resultados",
+      emptyTable: "Ningún dato disponible en esta tabla",
+      paginate: {
+        first: "Primero",
+        previous: "Anterior",
+        next: "Siguiente",
+        last: "Último"
+      },
+      aria: {
+        sortAscending: ": Activar para ordenar la columna de manera ascendente",
+        sortDescending: ": Activar para ordenar la columna de manera descendente"
+      },
+      buttons: {
+        copy: "Copiar",
+        copyTitle: "Tabla Copiada",
+        copySuccess: {
+          _: "%d líneas copiadas",
+          1: "1 línea copiada"
+        }
+      }
+    }
+  });
+}
+</script>

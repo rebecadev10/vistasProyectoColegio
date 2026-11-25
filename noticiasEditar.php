@@ -29,27 +29,42 @@
       <h2 class="formulario-subir-noticia__titulo">Editar Noticia</h2>
 
       <form id="formulario" enctype="multipart/form-data" method="POST">
+        <input type="hidden" id="idNoticias" name="idNoticias">
+        <input type="hidden" id="imagenProductoActual" name="imagenProductoActual">
+
         <!-- Campo Título -->
         <div class="formulario-subir-noticia__grupo">
           <label for="titulo" class="formulario-subir-noticia__etiqueta">Título:</label>
-          <input type="hidden" id="idNoticias" name="idNoticias">
           <input type="text" id="titulo" name="titulo" class="formulario-subir-noticia__input" required>
         </div>
 
         <!-- Campo Descripción -->
         <div class="formulario-subir-noticia__grupo">
           <label for="descripcion" class="formulario-subir-noticia__etiqueta">Descripción:</label>
-          <textarea id="descripcion" name="descripcion" class="formulario-subir-noticia__textarea" rows="5"
+          <textarea id="descripcion" name="descripcion" class="formulario-subir-noticia__textarea" rows="4"
             required></textarea>
         </div>
 
+        <!-- Sección de Imagen en 2 Columnas: Actual vs Nueva -->
+        <div class="form-row-2">
+          <div class="formulario-subir-noticia__grupo">
+            <label class="formulario-subir-evento__etiqueta">Imagen Actual:</label>
+            <div class="preview-imagen-box">
+              <img id="imagenActual" alt="Vista previa" class="imgFormulario" style="max-height: 140px;">
+            </div>
+          </div>
 
-
-        <!-- Campo Imagen con estilo personalizado -->
-        <div class="formulario-subir-noticia__grupo">
-          <label for="imagen" class="formulario-subir-evento__etiqueta"> Imagen Actual:</label>
-          <img id="imagenActual" alt="" class="imgFormulario">
-
+          <div class="formulario-subir-noticia__grupo">
+            <label for="imagen" class="formulario-subir-evento__etiqueta">Cambiar Imagen (opcional):</label>
+            <div class="formulario-subir-noticia__input-archivo-wrapper">
+              <input type="file" id="imagen" name="imagen" class="formulario-subir-noticia__input-archivo"
+                accept="image/*">
+              <label for="imagen" class="formulario-subir-noticia__input-archivo-boton">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Seleccionar archivo
+              </label>
+              <span id="file-name" class="formulario-subir-noticia__archivo-nombre">Ningún archivo seleccionado</span>
+            </div>
+          </div>
         </div>
 
 

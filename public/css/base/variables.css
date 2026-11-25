@@ -4,24 +4,26 @@
     --montserrat: var(--font-sans);
     --oswald: var(--font-sans);
 
-    /* Sistema de Color Vibrant & Clean (Inspirado en Fluentify 2026) */
-    --brand-primary: #2563eb;
-    --brand-primary-hover: #1d4ed8;
-    --brand-primary-light: #eff6ff;
-    --brand-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    --brand-dark-gradient: linear-gradient(145deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
-    --brand-glow-gradient: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(59, 130, 246, 0.8) 100%);
+    /* Sistema de Color Navy Colegial Elegante (Azul Marino Oscuro Institucional) */
+    --brand-primary: #03045e;
+    --brand-primary-hover: #02033b;
+    --brand-primary-light: #e6f0fa;
+    --brand-accent: #0077b6;
+    --brand-accent-hover: #0096c7;
+    --brand-gradient: linear-gradient(135deg, #03045e 0%, #0077b6 100%);
+    --brand-dark-gradient: linear-gradient(145deg, #020024 0%, #03045e 60%, #0077b6 100%);
+    --brand-glow-gradient: linear-gradient(135deg, rgba(3, 4, 94, 0.95) 0%, rgba(0, 119, 182, 0.85) 100%);
 
     /* Superficies y Glassmorphism */
     --fondo: #f8fafc;
-    --fondo-mesh: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.08) 0px, transparent 50%),
-                  radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.07) 0px, transparent 50%),
+    --fondo-mesh: radial-gradient(at 0% 0%, rgba(3, 4, 94, 0.08) 0px, transparent 50%),
+                  radial-gradient(at 100% 0%, rgba(0, 119, 182, 0.07) 0px, transparent 50%),
                   radial-gradient(at 50% 100%, rgba(147, 197, 253, 0.08) 0px, transparent 50%),
                   #f8fafc;
     --card-bg: rgba(255, 255, 255, 0.88);
     --card-bg-solid: #ffffff;
     --card-border: rgba(226, 232, 240, 0.85);
-    --card-border-focus: rgba(37, 99, 235, 0.4);
+    --card-border-focus: rgba(3, 4, 94, 0.4);
     --glass-blur: blur(20px);
 
     /* Escala Neutral */
@@ -56,7 +58,7 @@
     --grisOscuro: var(--slate-700);
     --grisClaro: var(--slate-200);
     --azulOscuro: var(--brand-primary);
-    --azulIndigo: #1d4ed8;
+    --azulIndigo: #023e8a;
     --aguamarina: #38bdf8;
     --azulCeleste: #dbeafe;
     --azulPastel: #eff6ff;

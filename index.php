@@ -118,17 +118,28 @@ if (!isset($_SESSION["login"])) {
                 </p>
             </div>
 
-            <!-- Ubicación -->
+            <!-- Ubicación vinculada con Google Maps -->
             <div class="bento-ubicacion">
                 <div class="bento-ubicacion-info">
                     <h2><i class="fa-solid fa-location-dot" style="color: var(--brand-primary); margin-right: 8px;"></i> Ubicación Estratégica</h2>
                     <p>
                         Ubicada en el sector La Estrella, pertenecemos con orgullo al Circuito Educativo # 151001001. Instalaciones seguras, accesibles y diseñadas para el óptimo desarrollo de los educandos.
                     </p>
-                    <span class="badge-pill badge-pill--primary">Circuito # 151001001</span>
+                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <span class="badge-pill badge-pill--primary">Circuito # 151001001</span>
+                        <a href="https://maps.google.com/?q=U.E.+Manuel+D%C3%ADaz+Rodr%C3%ADguez,+La+Estrella,+Los+Teques" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+                            <i class="fa-solid fa-diamond-turn-right"></i> Cómo llegar en Google Maps
+                        </a>
+                    </div>
                 </div>
                 <div class="bento-ubicacion-img">
-                    <img src="./public/img/contenido/ubicacion.png" alt="Mapa de Ubicación">
+                    <iframe 
+                        title="Mapa de Google Maps - U.E. Manuel Díaz Rodríguez"
+                        src="https://maps.google.com/maps?q=U.E.+Manuel+D%C3%ADaz+Rodr%C3%ADguez,+La+Estrella,+Los+Teques,+Miranda&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
             </div>
         </div>

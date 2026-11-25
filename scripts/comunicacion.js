@@ -3,6 +3,19 @@ function init() {
     guardaryeditar(e);
   });
 
+  $(document).on("change", "#imagen", function(e) {
+    if (this.files && this.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $("#imagenActual").attr("src", e.target.result).show();
+      };
+      reader.readAsDataURL(this.files[0]);
+      if ($("#file-name").length > 0) {
+        $("#file-name").text(this.files[0].name);
+      }
+    }
+  });
+
   if ($("#tbllistado").length > 0) {
     mostrarform(false);
     listar();
@@ -89,10 +102,24 @@ function listar(){
 						}
 					},
 			"language": {
-				"lengthMenu": "Mostrar : _MENU_ registros",
-				"buttons": {
-				"copyTitle": "Tabla Copiada",
-				"copySuccess": {
+				sProcessing: "Procesando...",
+				sLengthMenu: "Mostrar _MENU_ registros",
+				sZeroRecords: "No se encontraron resultados",
+				sEmptyTable: "Ningún dato disponible en esta tabla",
+				sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+				sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+				sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
+				sSearch: "Buscar:",
+				sLoadingRecords: "Cargando registros...",
+				oPaginate: {
+					sFirst: "Primero",
+					sLast: "Último",
+					sNext: "Siguiente",
+					sPrevious: "Anterior"
+				},
+				buttons: {
+					copyTitle: "Tabla Copiada",
+					copySuccess: {
 						_: '%d líneas copiadas',
 						1: '1 línea copiada'
 					}
@@ -117,17 +144,17 @@ function mostrar(idAnuncio) {
         mostrarform(true);
 
         if (data && data.idAnuncio) {
-          // Cambiado de idEventos a idAnuncio
-          // Muestra la información en el formulario
+          // Asignar datos del anuncio
           $("#idAnuncio").val(data.idAnuncio);
-          $("#titulo").val(data.titulo);
+          $("#asunto").val(data.asunto);
           $("#descripcion").val(data.descripcion);
+          $("#imagenProductoActual").val(data.imagenAnuncio || "");
 
-          // Corrige la asignación de la imagen
+          // Vista previa de imagen
           if (data.imagenAnuncio) {
-            $("#imagenActual").attr("src", "data/" + data.imagenAnuncio);
+            $("#imagenActual").attr("src", "data/" + data.imagenAnuncio).show();
           } else {
-            $("#imagenActual").attr("src", "img/no-image.jpg"); // Imagen por defecto si no hay imagen
+            $("#imagenActual").attr("src", "public/img/logos/logo.jpeg").show();
           }
         } else {
           console.error("Datos mal formateados o faltantes.");

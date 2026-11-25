@@ -4,6 +4,19 @@ function init(){
 		guardaryeditar(e);	
 	});
 
+	$(document).on("change", "#imagen", function(e) {
+		if (this.files && this.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$("#imagenActual").attr("src", e.target.result).show();
+			};
+			reader.readAsDataURL(this.files[0]);
+			if ($("#file-name").length > 0) {
+				$("#file-name").text(this.files[0].name);
+			}
+		}
+	});
+
 	if ($("#tbllistado").length > 0) {
 		mostrarform(false);
 		listar();
@@ -90,14 +103,28 @@ function listar() {
 		  },
 		},
 		language: {
-		  lengthMenu: "Mostrar : _MENU_ registros",
-		  buttons: {
-			copyTitle: "Tabla Copiada",
-			copySuccess: {
-			  _: "%d líneas copiadas",
-			  1: "1 línea copiada",
-			},
+		  sProcessing: "Procesando...",
+		  sLengthMenu: "Mostrar _MENU_ registros",
+		  sZeroRecords: "No se encontraron resultados",
+		  sEmptyTable: "Ningún dato disponible en esta tabla",
+		  sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+		  sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+		  sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
+		  sSearch: "Buscar:",
+		  sLoadingRecords: "Cargando registros...",
+		  oPaginate: {
+		    sFirst: "Primero",
+		    sLast: "Último",
+		    sNext: "Siguiente",
+		    sPrevious: "Anterior"
 		  },
+		  buttons: {
+		    copyTitle: "Tabla Copiada",
+		    copySuccess: {
+		      _: "%d líneas copiadas",
+		      1: "1 línea copiada"
+		    }
+		  }
 		},
 		bDestroy: true,
 		iDisplayLength: 5, //Paginación
@@ -131,10 +158,11 @@ function listar() {
 					$("#descripcion").val(data.descripcion);
 					
 					// Corrige la asignación de la imagen
+					$("#imagenProductoActual").val(data.nombreImagenN || "");
 					if (data.nombreImagenN) {
-						$("#imagenActual").attr("src", "data/" + data.nombreImagenN);
+						$("#imagenActual").attr("src", "data/" + data.nombreImagenN).show();
 					} else {
-						$("#imagenActual").attr("src", "img/no-image.jpg"); // Imagen por defecto si no hay imagen
+						$("#imagenActual").attr("src", "public/img/logos/logo.jpeg").show();
 					}
 				} else {
 					console.error("Datos mal formateados o faltantes.");
