@@ -201,17 +201,16 @@ function listarNoticias() {
                         <div class="card">
                             <img src="${imagenRuta}" alt="imagen referente">
                             <div class="card-content">
+                                <span class="badge-pill badge-pill--primary" style="margin-bottom: 12px; width: fit-content;"><i class="fa-solid fa-newspaper"></i> Noticia</span>
                                 <h3 class="card__titulo">${noticia[1]}</h3>
-                                <p class="card__descripcion">${noticia[2].substring(0, 100)}...</p>
-								
+                                <p class="card__descripcion">${noticia[2].substring(0, 110)}...</p>
+                                <button type="button" class="btn-card" 
+                                    data-titulo="${noticia[1].replace(/"/g, '&quot;')}"
+                                    data-contenido="${noticia[2].replace(/"/g, '&quot;')}"
+                                    data-imagen="${imagenRuta}">
+                                    <span>Leer noticia</span> <i class="fa-solid fa-arrow-right"></i>
+                                </button>
                             </div>
-							<button type="button" class="btn-card" 
-                                data-titulo="${noticia[1].replace(/"/g, '&quot;')}"
-                                data-contenido="${noticia[2].replace(/"/g, '&quot;')}"
-                                data-imagen="${imagenRuta}">
-                                Leer más
-                            </button>
-                            
                         </div>
                     `;
                 });

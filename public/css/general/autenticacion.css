@@ -1,84 +1,74 @@
-/* Contenedor principal - Efecto espejo */
+/* Autenticación 2026 - Split Screen Glassmorphism */
 .contenedorAutenticacion {
-    display: grid;
-    grid-template-columns: 0.8fr 1fr;
-    grid-template-areas: 'area1 area2';
-    height: 100vh;
-    background: var(--degradadoAzul);
-    position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  width: 100vw;
+  background: var(--fondo-mesh);
+  overflow: hidden;
 }
 
-/* Efecto espejo para la tarjeta */
-.area2::before {
-   
-    position: absolute;
-    bottom: -10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 20px;
-    background: linear-gradient(to bottom, 
-        rgba(255,255,255,0.4) 0%, 
-        rgba(255,255,255,0) 100%);
-    filter: blur(5px);
-    z-index: -1;
-}
-
-/* Area 1 - Imagen minimalista */
+/* Área 1 - Brand & Illustration */
 .area1 {
-    grid-area: area1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(99, 102, 241, 0.12) 100%);
+  position: relative;
 }
 
 .area1 img {
-    width: 85%;
-    filter: grayscale(20%) contrast(110%);
-    border-radius: 15px;
+  width: 85%;
+  max-width: 480px;
+  height: auto;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: transform 0.4s ease;
 }
 
-/* Area 2 - Formulario tipo línea */
+.area1:hover img {
+  transform: scale(1.02);
+}
+
+/* Área 2 - Formulario Flotante */
 .area2 {
-    /* background: var(--blancoA); */
-    grid-area: area2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 3rem;
-    /* box-shadow: -8px 0 30px rgba(0,0,0,0.1); */
-}
-.logo{
-    width: 100%;
-    height: 100%;
-    max-width: 8rem;
-    max-height: 8rem;
-}
-.logo img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: var(--shadow-glow);
+  border: 3px solid #ffffff;
+}
 
 /* Responsive */
-@media (max-width: 768px) {
-    .contenedorAutenticacion {
-        grid-template-columns: 1fr;
-    }
-
-    .area1 {
-        display: none;
-    }
-
-    .area2 {
-        box-shadow: none;
-        padding: 2rem 1.5rem;
-    }
-
-    .area2::before {
-        display: none;
-    }
+@media screen and (max-width: 850px) {
+  .contenedorAutenticacion {
+    grid-template-columns: 1fr;
+  }
+  
+  .area1 {
+    display: none;
+  }
+  
+  .area2 {
+    padding: 1.5rem;
+  }
 }

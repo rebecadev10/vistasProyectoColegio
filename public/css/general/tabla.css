@@ -1,63 +1,176 @@
-/* Contenedor de la tabla de noticias */
+/* Modern DataTables & Management View 2026 */
+
+.componente {
+  width: 100%;
+  max-width: 1320px;
+  margin: 20px auto 40px auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.componente__encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.componente__titulo {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--slate-900);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+/* Botón Nuevo Registro */
+.componente__boton-subir {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  background: var(--brand-gradient);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow-glow);
+  transition: var(--transition-bounce);
+}
+
+.componente__boton-subir:hover {
+  transform: translateY(-2px);
+  background: var(--brand-primary-hover);
+  box-shadow: 0 16px 32px -4px rgba(37, 99, 235, 0.45);
+  color: #ffffff;
+}
+
+/* Contenedor Card de la Tabla */
 .componente__contenedor-tabla {
-    
-    width: 100%;
-    margin-top: 20px;
-    overflow-x: auto;
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  overflow-x: auto;
 }
 
-.componente__tabla {
-    width: 95%;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    border-collapse: collapse;
-    table-layout: fixed; /* Hace que las celdas de la tabla tengan un ancho fijo */
-    border-radius: 20px;
+/* Estilos de Tabla */
+table.dataTable {
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  margin-top: 16px !important;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--slate-200);
 }
 
-/* Encabezados de la tabla */
-.componente__encabezado-tabla {
-    text-align: center; /* Centra el contenido */
-    background-color: var(--azulPastel);
-    color: var(--azulOscuro);
-    padding: 10px;
-    font-weight: 600;
-    font-size: 16px;
-    width: 20%; /* Asigna un ancho igual a cada columna, ajustable según preferencia */
+table.dataTable thead th {
+  background: var(--slate-50) !important;
+  color: var(--slate-700) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 14px 16px !important;
+  border-bottom: 1.5px solid var(--slate-200) !important;
 }
 
-/* Filas y celdas de la tabla */
-.componente__fila {
-    background-color: var(--blanco);
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--color-borde);
+table.dataTable tbody td {
+  padding: 14px 16px !important;
+  font-size: 14px !important;
+  color: var(--slate-800) !important;
+  border-bottom: 1px solid var(--slate-100) !important;
+  vertical-align: middle !important;
 }
 
-.componente__fila--encabezado {
-    background-color: var(--color-principal);
+table.dataTable tbody tr:hover td {
+  background-color: rgba(239, 246, 255, 0.5) !important;
 }
 
-.componente__celda {
-    padding: 15px;
-    font-size: 14px;
-    color: var(--color-secundario);
-    text-align: center; /* Centra el contenido */
-    width: 20%; /* Asigna el mismo ancho que los encabezados */
+/* Top & Bottom Controls (Buscador y Paginación) */
+.topTabla,
+.dt-layout-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.topTabla{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
+.dt-search input,
+.dataTables_filter input {
+  border: 1.5px solid var(--slate-200) !important;
+  border-radius: var(--radius-full) !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  outline: none !important;
+  background: #ffffff !important;
+  color: var(--slate-800) !important;
+  transition: var(--transition-smooth) !important;
 }
-.bottomTabla{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
+
+.dt-search input:focus,
+.dataTables_filter input:focus {
+  border-color: var(--brand-primary) !important;
+  box-shadow: var(--shadow-input-focus) !important;
+}
+
+/* Botones Exportación (Excel, CSV, Copy) */
+.dt-buttons,
+.dt-button {
+  display: inline-flex !important;
+  gap: 6px !important;
+}
+
+button.dt-button,
+.dt-buttons button {
+  background: #ffffff !important;
+  border: 1px solid var(--slate-200) !important;
+  border-radius: var(--radius-full) !important;
+  padding: 6px 14px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--slate-700) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+button.dt-button:hover,
+.dt-buttons button:hover {
+  background: var(--brand-primary-light) !important;
+  color: var(--brand-primary) !important;
+  border-color: rgba(37, 99, 235, 0.3) !important;
+}
+
+/* Paginación */
+.dt-paging,
+.dataTables_paginate {
+  display: flex !important;
+  gap: 4px !important;
+  align-items: center !important;
+}
+
+.dt-paging-button,
+.dataTables_paginate .paginate_button {
+  border-radius: var(--radius-md) !important;
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  border: 1px solid transparent !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.dt-paging-button.current,
+.dataTables_paginate .paginate_button.current {
+  background: var(--brand-primary) !important;
+  color: #ffffff !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25) !important;
 }

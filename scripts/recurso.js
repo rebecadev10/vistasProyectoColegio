@@ -223,21 +223,22 @@ function listarRecursos(titulo = "", idDepartamento = "") {
 							<div class="card">
 								<img src="${imagenRuta}" alt="Imagen del recurso">
 								<div class="card-content">
+									<span class="badge-pill badge-pill--primary" style="margin-bottom: 12px; width: fit-content;"><i class="fa-solid fa-file-lines"></i> Material Pedagógico</span>
 									<h3 class="card__titulo">${recurso[1]}</h3>
-									<p class="card__descripcion">${recurso[2]}</p>
+									<p class="card__descripcion">${recurso[2].substring(0, 100)}...</p>
                   
-									  <div class="book">
-			 
-                      <div class="book-info">
-                      <h4>Autor: ${recurso[3]}</h4>
-                      <span>fecha publicacion:${recurso[4]} </span>
-                      <span>Editorial:${recurso[5]} </span>
-              			  </div>
-                    </div>
+									<div class="autor" style="margin-bottom: 14px;">
+										<div class="autor-info">
+											<h4><i class="fa-solid fa-chalkboard-user"></i> Autor: ${recurso[3]}</h4>
+											<span><i class="fa-solid fa-calendar"></i> ${recurso[4]} &bull; ${recurso[5]}</span>
+										</div>
+									</div>
                   
-                </div>
-                <button  class="btn-card"> <a href="${archivoRuta}" download>Descargar</a></button>
-              </div>
+									<a href="${archivoRuta}" download class="btn-card">
+										<i class="fa-solid fa-download"></i> <span>Descargar Recurso</span>
+									</a>
+								</div>
+							</div>
 						`;
         });
 

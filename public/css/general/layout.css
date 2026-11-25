@@ -1,170 +1,126 @@
-.layout{
-    width: 100%;
-    
-    display: flex;
-    
-    
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 48px;
+/* Modern Layout & Action Buttons 2026 */
 
+.layout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+  min-height: calc(100vh - 80px);
+  box-sizing: border-box;
 }
-.contenedor {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 90%;
-    gap: 20px;
-    padding: 20px;
-    align-items: center;
+
+/* Subtítulos de Secciones */
+.subtitulos {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--slate-900);
+  margin: 16px 0 24px 0;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.subtitulos{
-    font-size: 28px;
-    color: var(--azulIndigo);
-    font-weight: 600;
-    padding-top: 42px;
-    text-transform: uppercase;
-}
+
+/* Calendario Moderno (Eventos) */
 #calendar {
-    max-width: 900px;
-    margin: 90px auto;
-    z-index: 1;
-    position: static;
-  }
-  .btnEditar{
-    background:var(--naranjaClaro);
-    padding: 10px;
-    border-radius: 50%;
-    color: white;
-  }
-  .btnEditar:hover{
-    background: var(--naranjaOscuro);
-    transition: 0.3s ease-in-out;
-  }
-  .btnEditar:active{
-    background: var(--blanco);
-    border: 1px solid var(--naranjaClaro);
-    color: var(--naranjaClaro);
-    transition: 0.3s ease-in-out; 
-  }
-  .btnActivar{
-    background: var(--gris);
-    padding: 10px;
-    border-radius: 50%;
-    color: white;
-  }
-  .btnActivar:hover{
-    background: var(--grisOscuro);
-    transition: 0.3s ease-in-out;
-  }
-  .btnActivar:active{
-    background: var(--blanco);
-    border: 1px solid var(--grisOscuro);
-    color: var(--grisOscuro);
-    transition: 0.3s ease-in-out;
-  }
-  .btnDesactivar{
-    background:var(--succes);
-    padding: 10px;
-    border-radius: 50%;
-    color: white;
-  }
-  .btnDesactivar:hover{
-    background: var(--succesBtn);
-    transition: 0.3s ease-in-out;
-  }
-  .btnDesactivar:active{
-    background: var(--blanco);
-    border: 1px solid var(--succes);
-    color: var(--succes);
-    transition: 0.3s ease-in-out;
-  }
-  .btnEliminar{
-    background:var(--cancel);
-    padding: 10px;
-    border-radius: 50%;
-    color: white;
-  }
-  .btnEliminar:hover{
-    background: var(--cancelBtn);
-    transition: 0.3s ease-in-out;
-  }
-  .btnEliminar:active{
-    background: var(--blanco);
-    border: 1px solid var(--cancel);
-    color: var(--cancel);
-    transition: 0.3s ease-in-out;
-  }
-  .btnPDF{
-    background:var(--azulIndigo);
-    padding: 10px;
-    border-radius: 50%;
-    color: white;
-  }
-  .btnPDF:hover{
-    background: var(--azulOscuro);
-    transition: 0.3s ease-in-out;
-  }
-  .btnPDF:active{
-    background: var(--blanco);
-    border: 1px solid var(--azulMarino);
-    color: var(--azulMarino);
-    transition: 0.3s ease-in-out;
-  }
-  .buscador {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 2rem;
-    align-items: center;
+  width: 90%;
+  max-width: 1100px;
+  margin: 30px auto;
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
 }
 
-/* Estilo para el input de búsqueda */
-.buscador-input {
-    flex: 1;
-    padding: 12px 20px;
-    border: 2px solid #007bff;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    max-width: 400px;
+.fc .fc-toolbar-title {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: var(--slate-900) !important;
 }
 
-.buscador-input:focus {
-    outline: none;
-    box-shadow: 0 0 8px rgba(0,123,255,0.3);
+.fc .fc-button-primary {
+  background: var(--brand-primary) !important;
+  border-color: var(--brand-primary) !important;
+  border-radius: var(--radius-full) !important;
+  padding: 6px 16px !important;
+  font-weight: 600 !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: var(--transition-smooth) !important;
 }
 
-/* Estilo para el filtro de departamentos */
-.filtro-departamento {
-    padding: 10px 15px;
-    border: 2px solid #6c757d;
-    border-radius: 20px;
-    background-color: #f8f9fa;
-    font-size: 1rem;
-    cursor: pointer;
-    max-width: 250px;
-    transition: all 0.3s ease;
+.fc .fc-button-primary:hover {
+  background: var(--brand-primary-hover) !important;
 }
 
-.filtro-departamento:hover {
-    background-color: #e9ecef;
+/* Botones de Acción en Tablas (2026 Pill Micro-actions) */
+.btnEditar,
+.btnEliminar,
+.btnDesactivar,
+.btnActivar,
+.btnPDF {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  transition: var(--transition-smooth);
+  margin: 2px;
 }
 
+.btnEditar {
+  background: var(--brand-primary);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
 
-  @media screen and (max-width: 768px) {
-    #calendar {
-        margin: 120px auto;
-        max-width: 700px;
-    }
-    .buscador {
-      flex-direction: column;
-  }
-  
-  .buscador-input,
-  .filtro-departamento {
-      width: 100%;
-      max-width: 100%;
-  }
+.btnEditar:hover {
+  background: var(--brand-primary-hover);
+  transform: translateY(-2px);
+}
 
-  }
+.btnEliminar {
+  background: var(--danger);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+}
+
+.btnEliminar:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+.btnDesactivar {
+  background: var(--warning);
+  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.25);
+}
+
+.btnDesactivar:hover {
+  background: #d97706;
+  transform: translateY(-2px);
+}
+
+.btnActivar {
+  background: var(--success);
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+}
+
+.btnActivar:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+.btnPDF {
+  background: #8b5cf6;
+  box-shadow: 0 4px 10px rgba(139, 92, 246, 0.25);
+}
+
+.btnPDF:hover {
+  background: #7c3aed;
+  transform: translateY(-2px);
+}

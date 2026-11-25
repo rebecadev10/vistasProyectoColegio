@@ -1,8 +1,13 @@
 <?php include 'componentes/header.php'; ?>
-<h2>Eventos</h2>
+<div class="layout">
+    <div style="text-align: center; margin-top: 10px;">
+        <span class="badge-pill badge-pill--primary"><i class="fa-solid fa-calendar-star"></i> Agenda Institucional</span>
+        <h2 class="subtitulos"><i class="fa-solid fa-calendar-days" style="color: var(--brand-primary); margin-right: 8px;"></i> Calendario de Eventos</h2>
+    </div>
 
-<!-- Calendario -->
-<div id="calendar" class="calendario"></div>
+    <!-- Calendario -->
+    <div id="calendar" class="calendario"></div>
+</div>
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@3.10.2/main.min.js"></script>
