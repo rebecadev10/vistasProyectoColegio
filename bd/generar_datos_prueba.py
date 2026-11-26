@@ -168,8 +168,23 @@ with open(sql_file, "w", encoding="utf-8") as f:
     f.write("SET FOREIGN_KEY_CHECKS = 0;\n\n")
 
     # Fix empty departamento if needed
-    f.write("-- 0. Normalización de Departamentos\n")
+    f.write("-- 0. Normalización de Departamentos y Capacidades de Columnas\n")
     f.write("UPDATE `departamentos` SET `nombre` = 'Dirección Académica' WHERE `idDepartamento` = 1;\n\n")
+    f.write("ALTER TABLE `noticias` MODIFY `titulo` VARCHAR(255) NOT NULL;\n")
+    f.write("ALTER TABLE `noticias` MODIFY `nombreImagenN` VARCHAR(255) NOT NULL;\n")
+    f.write("ALTER TABLE `eventos` MODIFY `titulo` VARCHAR(255) NOT NULL;\n")
+    f.write("ALTER TABLE `eventos` MODIFY `descripcion` TEXT NOT NULL;\n")
+    f.write("ALTER TABLE `eventos` MODIFY `nombreImagen` VARCHAR(255) NOT NULL;\n")
+    f.write("ALTER TABLE `recursos` MODIFY `tituloRecurso` VARCHAR(255) NOT NULL;\n")
+    f.write("ALTER TABLE `recursos` MODIFY `descripcion` TEXT NOT NULL;\n")
+    f.write("ALTER TABLE `recursos` MODIFY `autor` VARCHAR(100) NOT NULL;\n")
+    f.write("ALTER TABLE `recursos` MODIFY `editorial` VARCHAR(100) NOT NULL;\n")
+    f.write("ALTER TABLE `recursos` MODIFY `fotoPortada` VARCHAR(255) NOT NULL;\n")
+    f.write("ALTER TABLE `recursos` MODIFY `dataRecurso` VARCHAR(255) NOT NULL;\n")
+    f.write("ALTER TABLE `comunicacion` MODIFY `asunto` VARCHAR(255) NOT NULL;\n")
+    f.write("ALTER TABLE `comunicacion` MODIFY `descripcion` TEXT NOT NULL;\n")
+    f.write("ALTER TABLE `comunicacion` MODIFY `imagenAnuncio` VARCHAR(255) NOT NULL;\n")
+    f.write("ALTER TABLE `usuario` MODIFY `imagenUsuario` VARCHAR(255) NOT NULL;\n\n")
 
     # Clean existing data and reset auto_increment for crisp testing
     f.write("-- Limpieza de tablas principales para carga limpia de pruebas\n")

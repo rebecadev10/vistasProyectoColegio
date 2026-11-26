@@ -8,8 +8,24 @@ USE `colegio`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
--- 0. Normalización de Departamentos
+-- 0. Normalización de Departamentos y Capacidades de Columnas
 UPDATE `departamentos` SET `nombre` = 'Dirección Académica' WHERE `idDepartamento` = 1;
+
+ALTER TABLE `noticias` MODIFY `titulo` VARCHAR(255) NOT NULL;
+ALTER TABLE `noticias` MODIFY `nombreImagenN` VARCHAR(255) NOT NULL;
+ALTER TABLE `eventos` MODIFY `titulo` VARCHAR(255) NOT NULL;
+ALTER TABLE `eventos` MODIFY `descripcion` TEXT NOT NULL;
+ALTER TABLE `eventos` MODIFY `nombreImagen` VARCHAR(255) NOT NULL;
+ALTER TABLE `recursos` MODIFY `tituloRecurso` VARCHAR(255) NOT NULL;
+ALTER TABLE `recursos` MODIFY `descripcion` TEXT NOT NULL;
+ALTER TABLE `recursos` MODIFY `autor` VARCHAR(100) NOT NULL;
+ALTER TABLE `recursos` MODIFY `editorial` VARCHAR(100) NOT NULL;
+ALTER TABLE `recursos` MODIFY `fotoPortada` VARCHAR(255) NOT NULL;
+ALTER TABLE `recursos` MODIFY `dataRecurso` VARCHAR(255) NOT NULL;
+ALTER TABLE `comunicacion` MODIFY `asunto` VARCHAR(255) NOT NULL;
+ALTER TABLE `comunicacion` MODIFY `descripcion` TEXT NOT NULL;
+ALTER TABLE `comunicacion` MODIFY `imagenAnuncio` VARCHAR(255) NOT NULL;
+ALTER TABLE `usuario` MODIFY `imagenUsuario` VARCHAR(255) NOT NULL;
 
 -- Limpieza de tablas principales para carga limpia de pruebas
 TRUNCATE TABLE `noticias`;

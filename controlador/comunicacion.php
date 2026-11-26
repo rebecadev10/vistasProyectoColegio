@@ -51,10 +51,22 @@ switch ($_GET["op"]) {
 
         if (empty($idAnuncio)) {
             $rspta = $comunicacion->insertar($idAnuncio, $asunto, $descripcion, $rutaImagenBD, $fecha_mysql);
-            echo $rspta ? "anuncio registrado" : "No se pudieron registrar todos los datos del noticia";
+            if ($rspta) {
+                echo "anuncio registrado";
+            } else {
+                global $conexion;
+                $err = !empty($conexion->error) ? ": " . $conexion->error : "";
+                echo "No se pudo registrar el anuncio" . $err;
+            }
         } else {
             $rspta = $comunicacion->editar($idAnuncio, $asunto, $descripcion, $rutaImagenBD);
-            echo $rspta ? "anuncio actualizado" : "noticia no se pudo actualizar";
+            if ($rspta) {
+                echo "anuncio actualizado";
+            } else {
+                global $conexion;
+                $err = !empty($conexion->error) ? ": " . $conexion->error : "";
+                echo "anuncio no se pudo actualizar" . $err;
+            }
         }
         break;
     case 'listar':

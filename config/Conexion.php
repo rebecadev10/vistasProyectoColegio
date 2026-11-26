@@ -20,6 +20,9 @@ if (!function_exists('ejecutarConsulta'))
 		global $conexion;
 		try {
 			$query = $conexion->query($sql);
+			if ($query === false) {
+				error_log("Error MySQL: " . $conexion->error . " en query: " . $sql);
+			}
 			return $query;
 		} catch (Exception $e) {
 			error_log("Error SQL: " . $e->getMessage() . " en query: " . $sql);
@@ -56,8 +59,10 @@ if (!function_exists('ejecutarConsulta'))
 	function limpiarCadena($str)
 	{
 		global $conexion;
-		$str = mysqli_real_escape_string($conexion,trim($str));
-		return htmlspecialchars($str);
+		if ($conexion && is_string($str)) {
+			return mysqli_real_escape_string($conexion, trim($str));
+		}
+		return is_string($str) ? addslashes(trim($str)) : $str;
 	}
 }
 ?>

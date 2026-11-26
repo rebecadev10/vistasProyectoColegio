@@ -63,10 +63,22 @@ switch ($_GET["op"]) {
 
         if (empty($idRecursos)) {
             $rspta = $recurso->insertar($idRecursos, $tituloRecurso, $descripcion, $autor, $fechaPublicacion, $editorial, $departamento, $rutaImagenBD, $rutaRecursoBD);
-            echo $rspta ? "Recurso registrado" : "No se pudo registrar el recurso";
+            if ($rspta) {
+                echo "Recurso registrado";
+            } else {
+                global $conexion;
+                $err = !empty($conexion->error) ? ": " . $conexion->error : "";
+                echo "No se pudo registrar el recurso" . $err;
+            }
         } else {
             $rspta = $recurso->editar($idRecursos, $tituloRecurso, $descripcion, $autor, $fechaPublicacion, $editorial, $departamento, $rutaImagenBD, $rutaRecursoBD);
-            echo $rspta ? "Recurso actualizado" : "No se pudo actualizar el recurso";
+            if ($rspta) {
+                echo "Recurso actualizado";
+            } else {
+                global $conexion;
+                $err = !empty($conexion->error) ? ": " . $conexion->error : "";
+                echo "No se pudo actualizar el recurso" . $err;
+            }
         }
         break;
 

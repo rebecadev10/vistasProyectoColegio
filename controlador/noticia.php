@@ -48,10 +48,22 @@ switch ($_GET["op"]) {
 
         if (empty($idNoticias)) {
             $rspta = $noticia->insertar($idNoticias, $titulo, $descripcion, $rutaImagenBD);
-            echo $rspta ? "noticia registrado" : "No se pudieron registrar todos los datos del noticia";
+            if ($rspta) {
+                echo "noticia registrado";
+            } else {
+                global $conexion;
+                $err = !empty($conexion->error) ? ": " . $conexion->error : "";
+                echo "No se pudieron registrar todos los datos del noticia" . $err;
+            }
         } else {
             $rspta = $noticia->editar($idNoticias, $titulo, $descripcion, $rutaImagenBD);
-            echo $rspta ? "noticia actualizado" : "noticia no se pudo actualizar";
+            if ($rspta) {
+                echo "noticia actualizado";
+            } else {
+                global $conexion;
+                $err = !empty($conexion->error) ? ": " . $conexion->error : "";
+                echo "noticia no se pudo actualizar" . $err;
+            }
         }
         break;
     case 'listar':

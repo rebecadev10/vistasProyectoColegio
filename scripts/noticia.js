@@ -37,11 +37,10 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {                    
-	   
-			
+				$("#btnGuardar").prop("disabled", false);
 				const respuesta = datos.trim();
 				let redireccion = "";
-		  console.log(respuesta);
+				console.log(respuesta);
 				// Configurar según tipo de operación
 				if (respuesta.includes("noticia registrado") || respuesta.includes("noticia actualizado")) {
 					redireccion = "noticiasEditar.php";
@@ -71,8 +70,16 @@ function guardaryeditar(e)
 						text: datos
 					});
 				}
-	},
-});
+		},
+		error: function(err) {
+			$("#btnGuardar").prop("disabled", false);
+			Swal.fire({
+				icon: "error",
+				title: "Error de conexión",
+				text: "No se pudo comunicar con el servidor."
+			});
+		}
+	});
 	// limpiar();
 }
 function listar() {

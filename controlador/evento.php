@@ -48,10 +48,22 @@ switch ($_GET["op"]) {
 
         if (empty($idEventos)) {
             $rspta = $evento->insertar($idEventos, $titulo, $descripcion, $rutaImagenBD, $departamento, $fechaInicio, $horaInicio, $fechaFin, $horaFin);
-            echo $rspta ? "Evento registrado" : "No se pudieron registrar todos los datos del evento";
+            if ($rspta) {
+                echo "Evento registrado";
+            } else {
+                global $conexion;
+                $err = !empty($conexion->error) ? ": " . $conexion->error : "";
+                echo "No se pudieron registrar todos los datos del evento" . $err;
+            }
         } else {
             $rspta = $evento->editar($idEventos, $titulo, $descripcion, $rutaImagenBD, $departamento, $fechaInicio, $horaInicio, $fechaFin, $horaFin);
-            echo $rspta ? "Evento actualizado" : "Evento no se pudo actualizar";
+            if ($rspta) {
+                echo "Evento actualizado";
+            } else {
+                global $conexion;
+                $err = !empty($conexion->error) ? ": " . $conexion->error : "";
+                echo "Evento no se pudo actualizar" . $err;
+            }
         }
         break;
     case 'listar':
